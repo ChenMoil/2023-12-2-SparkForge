@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -16,12 +15,14 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     void Start()
     {
+        //玩家刚体初始化
         playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //玩家的移动函数
         PlayerMove();
     }
 
