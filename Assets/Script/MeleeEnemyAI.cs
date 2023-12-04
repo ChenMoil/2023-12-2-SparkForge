@@ -5,8 +5,6 @@ using UnityEngine;
 [Serializable]
 public class MeleeEnemyBlackboard : BlockBorad
 {
-    [NonSerialized]public GameObject self; //物体自己
-
     public float speed;  //速度
 
     public float damage; //伤害
@@ -57,6 +55,8 @@ public class MeleeEnemyAI : MonoBehaviour
     {
         fsm = new FSM(blackboard);
         blackboard.self = gameObject;
+        blackboard.rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        blackboard.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         AddState();
         InitState();
     }
@@ -90,7 +90,7 @@ public class MeeleAI_Create : IState
     }
     public void OnEnter()
     {
-        float timer = 0;
+        timer = 0;
     }
 
     public void OnExit()
@@ -106,7 +106,7 @@ public class MeeleAI_Create : IState
     public void OnUpdate()
     {
         timer += Time.deltaTime;
-        blackBoard.self.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, timer / blackBoard.createTime);
+        blackBoard.spriteRenderer.color = new Color(1, 1, 1, timer / blackBoard.createTime);
         if (timer > blackBoard.createTime)
         {
             fsm.SwitchState(StateType.Attack);  //切换状态
@@ -143,6 +143,6 @@ public class MeeleAI_Attack : IState
     public void OnUpdate()
     {
         Vector2 toward = (GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position).normalized;
-        blackBoard.self.GetComponent<Rigidbody2D>().velocity = toward * blackBoard.speed;
+        blackBoard.rigidbody2D.velocity = toward * blackBoard.speed;
     }
 }

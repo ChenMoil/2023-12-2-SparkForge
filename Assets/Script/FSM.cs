@@ -21,12 +21,21 @@ public interface IState
     void OnFixedUpdate();
 }
 
+/// <summary>
+/// 所有储存数据的黑板的父类
+/// </summary>
 [Serializable]
 public class BlockBorad
 {
-
+    [NonSerialized] public GameObject self; //物体自己
+    [NonSerialized] public Rigidbody2D rigidbody2D; //物体刚体
+    [NonSerialized] public SpriteRenderer spriteRenderer; //物体精灵渲染组件
 }
-public class FSM  //有限状态机
+
+/// <summary>
+/// 有限状态机
+/// </summary>
+public class FSM
 {
     public IState curState;  //当前状态
 

@@ -7,8 +7,6 @@ using UnityEngine;
 [Serializable]
 public class RangeEnemyBlackboard : BlockBorad
 {
-    [NonSerialized] public GameObject self; //物体自己
-
     public float speed;  //速度
 
     public float damage; //伤害
@@ -61,6 +59,8 @@ public class RangeEnemyAI : MonoBehaviour
     {
         fsm = new FSM(blackboard);
         blackboard.self = gameObject;
+        blackboard.rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        blackboard.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         AddState();
         InitState();
     }
@@ -94,7 +94,7 @@ public class RangeAI_Create : IState
     }
     public void OnEnter()
     {
-        float timer = 0;
+        timer = 0;
     }
 
     public void OnExit()
@@ -110,7 +110,7 @@ public class RangeAI_Create : IState
     public void OnUpdate()
     {
         timer += Time.deltaTime;
-        blackBoard.self.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, timer / blackBoard.createTime);
+        blackBoard.spriteRenderer.color = new Color(1, 1, 1, timer / blackBoard.createTime);
         if (timer > blackBoard.createTime)
         {
             fsm.SwitchState(StateType.Attack);  //切换状态
@@ -146,11 +146,18 @@ public class RangeAI_Attack : IState
 
     public void OnUpdate()
     {
-        Vector2 toward = (GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position).normalized;
-        if ((GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position).magnitude < blackBoard.maxDistance)
+        //该单位与玩家的距离
+        Vector2 distance = GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position;
+        Vector2 toward = distance.normalized; //移动的方向
+        if (distance.sqrMagnitude > blackBoard.maxDistance * blackBoard.maxDistance * 1.05f)
         {
-            toward *= -1;
+            toward *= 1;
         }
-        blackBoard.self.GetComponent<Rigidbody2D>().velocity = toward * blackBoard.speed;
+        else if (distance.sqrMagnitude > blackBoard.maxDistance * blackBoard.maxDistance * 0.95f)
+        {
+            toward *= 0;
+        }
+        else { toward *= -1; }
+        blackBoard.rigidbody2D.velocity = toward * blackBoard.speed;
     }
 }
