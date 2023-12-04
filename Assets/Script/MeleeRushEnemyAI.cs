@@ -148,7 +148,7 @@ public class MeleeRushAI_Move : IState
     public void OnUpdate()
     {
         //该单位与玩家的距离
-        Vector2 distance = GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position;
+        Vector2 distance = PlayerControl.Instance.transform.position - blackBoard.self.transform.position;
         Vector2 toward = distance.normalized;
         if (distance.sqrMagnitude <= blackBoard.rushDistance * blackBoard.rushDistance)  //与玩家的距离小于冲锋距离
         {
@@ -202,14 +202,14 @@ public class MeleeRushAI_Attack : IState
             if (isRush == false) //整个冲锋状态只改变一次速度
             {
                 isRush = true;
-                Vector2 toward = (GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position).normalized;
+                Vector2 toward = (PlayerControl.Instance.transform.position - blackBoard.self.transform.position).normalized;
                 blackBoard.rigidbody2D.velocity = toward * blackBoard.rushSpeed;
             }
         }
         if (timer >= blackBoard.rushWaitTime + blackBoard.rushTime) //冲锋结束，重新切换状态
         {
             //该单位与玩家的距离
-            Vector2 distance = GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position;
+            Vector2 distance = PlayerControl.Instance.transform.position - blackBoard.self.transform.position;
 
             if (distance.sqrMagnitude <= blackBoard.rushDistance * blackBoard.rushDistance)  //与玩家的距离小于冲锋距离
             {

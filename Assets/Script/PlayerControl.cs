@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public static PlayerControl Instance;
+
     //Player物体控制脚本
     private PlayerInput playerInputControl;
 
@@ -15,6 +17,10 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         //玩家刚体初始化
         playerRigidbody = GetComponent<Rigidbody2D>();
     }

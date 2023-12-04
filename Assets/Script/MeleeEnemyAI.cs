@@ -142,7 +142,7 @@ public class MeeleAI_Attack : IState
 
     public void OnUpdate()
     {
-        Vector2 toward = (GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position).normalized;
+        Vector2 toward = (PlayerControl.Instance.transform.position - blackBoard.self.transform.position).normalized;
         blackBoard.rigidbody2D.velocity = toward * blackBoard.speed;
     }
 }

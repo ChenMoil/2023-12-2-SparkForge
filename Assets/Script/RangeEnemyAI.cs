@@ -147,7 +147,7 @@ public class RangeAI_Attack : IState
     public void OnUpdate()
     {
         //该单位与玩家的距离
-        Vector2 distance = GameManger.Instance.playerGameObject.transform.position - blackBoard.self.transform.position;
+        Vector2 distance = PlayerControl.Instance.transform.position - blackBoard.self.transform.position;
         Vector2 toward = distance.normalized; //移动的方向
         if (distance.sqrMagnitude > blackBoard.maxDistance * blackBoard.maxDistance * 1.05f)
         {
