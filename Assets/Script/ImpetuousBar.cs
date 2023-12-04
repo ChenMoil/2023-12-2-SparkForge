@@ -36,7 +36,7 @@ public class ImpetuousBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //玩家受击
@@ -66,7 +66,7 @@ public class ImpetuousBar : MonoBehaviour
             LevelManager.instance.EndLevel();//游戏结束
         }
 
-        impetuousSlider.value = currentImpetuousBar;//UI
+       impetuousSlider.value = currentImpetuousBar;//UI
     }
 
     //消灭敌人

@@ -77,6 +77,15 @@ public class RangeEnemyAI : MonoBehaviour
     {
         fsm.SwitchState(StateType.Create);
     }
+
+    //发生碰撞
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            ImpetuousBar.instance.TakeDamage(blackboard.damage);
+        }
+    }
 }
 
 //生成状态

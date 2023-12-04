@@ -75,7 +75,7 @@ public class MeleeEnemyAI : MonoBehaviour
     }
 
     //发生碰撞
-    private void OnCollsionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
