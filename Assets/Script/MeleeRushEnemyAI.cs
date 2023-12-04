@@ -217,7 +217,7 @@ public class MeleeRushAI_Attack : IState
             }
             if (distance.sqrMagnitude > blackBoard.rushDistance * blackBoard.rushDistance)   //与玩家的距离大于冲锋距离
             {
-                fsm.SwitchState(StateType.Move);
+                fsm.SwitchState(StateType.Move);   //回到移动状态
             }
         }
     }

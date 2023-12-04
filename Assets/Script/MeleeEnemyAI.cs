@@ -73,6 +73,15 @@ public class MeleeEnemyAI : MonoBehaviour
     {
         fsm.SwitchState(StateType.Create);
     }
+
+    //发生碰撞
+    private void OnCollsionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            ImpetuousBar.instance.TakeDamage(blackboard.damage);
+        }
+    }
 }
 
 //生成状态
@@ -127,17 +136,17 @@ public class MeeleAI_Attack : IState
     }
     public void OnEnter()
     {
-        
+
     }
 
     public void OnExit()
     {
-        
+
     }
 
     public void OnFixedUpdate()
     {
-        
+
     }
 
     public void OnUpdate()
