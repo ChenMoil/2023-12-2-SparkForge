@@ -17,10 +17,6 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
         //玩家刚体初始化
         playerRigidbody = GetComponent<Rigidbody2D>();
     }
@@ -34,6 +30,10 @@ public class PlayerControl : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         playerInputControl = new PlayerInput();
     }
     private void OnEnable()
