@@ -145,12 +145,4 @@ public class MeeleAI_Attack : IState
         Vector2 toward = (PlayerControl.Instance.transform.position - blackBoard.self.transform.position).normalized;
         blackBoard.rigidbody2D.velocity = toward * blackBoard.speed;
     }
-
-    private void OnCollsionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "Player")
-        {
-            ImpetuousBar.instance.TakeDamage(damage);
-        }
-    }
 }
