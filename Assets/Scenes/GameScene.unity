@@ -442,6 +442,7 @@ PrefabInstance:
 PrefabInstance:
   m_ObjectHideFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -534,6 +535,8 @@ Transform:
   m_GameObject: {fileID: 1784588243}
 =======
 >>>>>>> 442d4b25eed28d4f5a154ae04551c0c5af30c980
+=======
+>>>>>>> 442d4b25eed28d4f5a154ae04551c0c5af30c980
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
@@ -597,6 +600,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Radius: 0.5
 --- !u!114 &1784588249
 MonoBehaviour:
@@ -615,6 +619,8 @@ MonoBehaviour:
   timeMultipie: 0
   impetuousSlider: {fileID: 0}
 =======
+=======
+>>>>>>> 442d4b25eed28d4f5a154ae04551c0c5af30c980
   m_Modification:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
@@ -684,6 +690,9 @@ MonoBehaviour:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f9eea180bd763a4081ea19cb21a365a, type: 3}
+<<<<<<< HEAD
+>>>>>>> 442d4b25eed28d4f5a154ae04551c0c5af30c980
+=======
 >>>>>>> 442d4b25eed28d4f5a154ae04551c0c5af30c980
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
