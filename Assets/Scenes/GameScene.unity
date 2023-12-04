@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 1043392833}
   - component: {fileID: 1043392832}
   - component: {fileID: 1043392831}
-  - component: {fileID: 1043392830}
+  - component: {fileID: 1043392835}
   m_Layer: 0
   m_Name: MeleeRushEnemy
   m_TagString: Untagged
@@ -400,22 +400,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1043392830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043392829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d611bae24a9583144827cb4f8dfd008f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackboard:
-    speed: 1
-    damage: 0
-    createTime: 1
 --- !u!58 &1043392831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -545,6 +529,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1043392835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043392829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb506d0f316390441a64a557f96f1556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackboard:
+    speed: 1
+    rushSpeed: 7
+    rushDistance: 3
+    rushWaitTime: 0.5
+    rushTime: 1
+    damage: 0
+    createTime: 1
 --- !u!1 &1151695570
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf4e9856873360408319afcc8ad84d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGameObject: {fileID: 0}
 --- !u!4 &1151695572
 Transform:
   m_ObjectHideFlags: 0
