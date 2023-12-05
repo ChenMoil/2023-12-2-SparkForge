@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
         instance = this;
     }
 
-    public float impetuousMultipie;//浮躁条影响倍数
+    public float timerMultipie;//时间流逝影响倍数
 
     private bool gameActive;
     public float timer;
@@ -29,7 +29,9 @@ public class LevelManager : MonoBehaviour
     {
         gameActive = true;
 
-        impetuousMultipie = 1f;
+        timerMultipie = 5f;
+
+        timer = 0f;
     }
 
     // Update is called once per frame
@@ -38,11 +40,11 @@ public class LevelManager : MonoBehaviour
         if(gameActive == true)
         {
             //浮躁条影响时间流逝
-            timer += (Time.deltaTime * ImpetuousBar.instance.currentImpetuousBar * impetuousMultipie);
+            timer += (Time.deltaTime * ImpetuousBar.instance.impetuousMultipie);
 
             UpdateTimer(timer);
 
-            ImpetuousBar.instance.TimeLapse(timer+0.5f);//时间流逝影响浮躁条
+            ImpetuousBar.instance.TimeLapse(Time.deltaTime * timerMultipie);//时间流逝影响浮躁条
         }
     }
 
@@ -55,6 +57,7 @@ public class LevelManager : MonoBehaviour
         timeText.text = "Time:" + minutes + ":" + seconds.ToString("00");
     }
 
+    //Gameover
     public void EndLevel()
     {
         gameActive = false;
