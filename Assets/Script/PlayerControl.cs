@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,11 +23,17 @@ public class PlayerControl : MonoBehaviour
 
     //冥想时间计时器
     private float meditationTimer = 0;
+    //攻击时间计时器
+    private float attackTimer = 0;
 
     //玩家当前的浮躁阶段(0 - 6)
     private int curState = 0;
     //各阶段子弹的列表
     public List<GameObject> bulletList = new List<GameObject>();
+    //子弹的速度
+    public int[] bulletSpeed;
+    //各阶段的攻速(每次发射子弹的时间间隔)
+    public float[] attackSpeed;
     void Start()
     {
         //玩家刚体初始化
@@ -97,16 +104,27 @@ public class PlayerControl : MonoBehaviour
 
     private void Attack()
     {
-        //子弹的初始速度
-        float initialVelocity = 10;
-        //子弹的方向(朝向鼠标)
-        Vector2 towards = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - (Vector2)gameObject.transform.position).normalized;
-
         if (playerInputControl.PlayerControl.Attack.IsPressed() == true)
         {
-            GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[0]);
-            newBullet.transform.position = gameObject.transform.position;
-            newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= attackSpeed[curState])
+            {
+                //重置计时器
+                attackTimer = 0;
+
+                //子弹的初始速度
+                float initialVelocity = bulletSpeed[curState];
+
+                //子弹的方向(朝向鼠标)
+                Vector2 towards = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - (Vector2)gameObject.transform.position).normalized;
+
+                //创造子弹
+                GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[curState]);
+
+                newBullet.transform.position = (Vector2)gameObject.transform.position + (Vector2)towards;
+                newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
+            }
         }
     }
 }

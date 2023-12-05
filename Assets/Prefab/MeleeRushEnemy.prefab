@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6715009148319478054}
   m_Layer: 0
   m_Name: MeleeRushEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackboard:
+    initHp: 3
     speed: 1
     rushSpeed: 7
     rushDistance: 3
