@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ImpetuousBar : MonoBehaviour
 {
 
-    //·ÃÎÊÍæ¼ÒµÄ¸¡ÔêÌõ
+    //è®¿é—®ç©å®¶çš„æµ®èºæ¡
     public static ImpetuousBar instance;
 
     private void Awake()
@@ -16,11 +16,11 @@ public class ImpetuousBar : MonoBehaviour
     }
 
 
-    public float currentImpetuousBar, maxImpetuousBar;//µ±Ç°¸¡ÔêÌõÓë×î´ó¸¡ÔêÌõ
+    public float currentImpetuousBar, maxImpetuousBar;//å½“å‰æµ®èºæ¡ä¸æœ€å¤§æµ®èºæ¡
 
-    public float timeMultipie;//Ê±¼äÁ÷ÊÅÓ°Ïì±¶Êı
+    public float timeMultipie;//æ—¶é—´æµé€å½±å“å€æ•°
 
-    public Slider impetuousSlider;//¸¡ÔêÌõUI,Í¨¹ı»¬ÌõÖÆ×÷
+    public Slider impetuousSlider;//æµ®èºæ¡UI,é€šè¿‡æ»‘æ¡åˆ¶ä½œ
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class ImpetuousBar : MonoBehaviour
 
     }
 
-    //Íæ¼ÒÊÜ»÷
+    //ç©å®¶å—å‡»
     public void TakeDamage(float damageToTake)
     {
         currentImpetuousBar += damageToTake;
@@ -48,28 +48,28 @@ public class ImpetuousBar : MonoBehaviour
         {
             gameObject.SetActive(false);
 
-            LevelManager.instance.EndLevel();//ÓÎÏ·½áÊø
+            LevelManager.instance.EndLevel();//æ¸¸æˆç»“æŸ
         }
 
         impetuousSlider.value = currentImpetuousBar;//UI
     }
 
-    //Ê±¼äÁ÷ÊÅ
+    //æ—¶é—´æµé€
     public void TimeLapse(float timeToLapse)
     {
-        currentImpetuousBar = currentImpetuousBar * timeToLapse * timeMultipie;
+        //currentImpetuousBar = currentImpetuousBar * timeToLapse * timeMultipie;
 
         if (currentImpetuousBar >= maxImpetuousBar)
         {
             gameObject.SetActive(false);
 
-            LevelManager.instance.EndLevel();//ÓÎÏ·½áÊø
+            LevelManager.instance.EndLevel();//æ¸¸æˆç»“æŸ
         }
 
        impetuousSlider.value = currentImpetuousBar;//UI
     }
 
-    //ÏûÃğµĞÈË
+    //æ¶ˆç­æ•Œäºº
     public void  DestroyEnemy(float enemyToBeDestroy)
     {
         currentImpetuousBar -= enemyToBeDestroy;
@@ -77,7 +77,10 @@ public class ImpetuousBar : MonoBehaviour
         impetuousSlider.value = currentImpetuousBar;//UI
     }
 
-    //Ú¤Ïë
+    /// <summary>
+    /// å†¥æƒ³
+    /// </summary>
+    /// <param name="meditation">æµ®èºæ¡å‡å°‘çš„å¤§å°</param>
     public void Meditation(float meditation)
     {
         currentImpetuousBar -= meditation;

@@ -35,6 +35,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Meditation"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e4e3b7f-eeb8-4d2a-b7af-0d63eca7d9c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0309bf1-7d6e-4d5b-ab55-540e85309b50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +121,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c327437a-e25f-4195-aa20-9fc9f9e23e11"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Meditation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91d0fe2c-b850-40bb-bbeb-7d25351b12f3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +152,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // PlayerControl
         m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
         m_PlayerControl_Move = m_PlayerControl.FindAction("Move", throwIfNotFound: true);
+        m_PlayerControl_Meditation = m_PlayerControl.FindAction("Meditation", throwIfNotFound: true);
+        m_PlayerControl_Attack = m_PlayerControl.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,11 +216,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControl;
     private List<IPlayerControlActions> m_PlayerControlActionsCallbackInterfaces = new List<IPlayerControlActions>();
     private readonly InputAction m_PlayerControl_Move;
+    private readonly InputAction m_PlayerControl_Meditation;
+    private readonly InputAction m_PlayerControl_Attack;
     public struct PlayerControlActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerControl_Move;
+        public InputAction @Meditation => m_Wrapper.m_PlayerControl_Meditation;
+        public InputAction @Attack => m_Wrapper.m_PlayerControl_Attack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -191,6 +237,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Meditation.started += instance.OnMeditation;
+            @Meditation.performed += instance.OnMeditation;
+            @Meditation.canceled += instance.OnMeditation;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IPlayerControlActions instance)
@@ -198,6 +250,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Meditation.started -= instance.OnMeditation;
+            @Meditation.performed -= instance.OnMeditation;
+            @Meditation.canceled -= instance.OnMeditation;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IPlayerControlActions instance)
@@ -218,5 +276,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerControlActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnMeditation(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

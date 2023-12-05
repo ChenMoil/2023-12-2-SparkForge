@@ -5,6 +5,8 @@ using UnityEngine;
 [Serializable]
 public class MeleeRushBlackboard : BlockBorad
 {
+    public int HP;       //血量
+
     public float speed;  //速度
     public float rushSpeed;  //冲锋速度
     public float rushDistance;  //冲锋距离(距离玩家多远时发起冲锋)

@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -12,9 +14,19 @@ public class PlayerControl : MonoBehaviour
 
     //玩家的速度
     public float playerSpeed;
+    //冥想影响速度的大小， 最终速度 = playerSpeed * meditationSpeed
+    public float meditationSpeed;
 
     //刚体组件
     private Rigidbody2D playerRigidbody;
+
+    //冥想时间计时器
+    private float meditationTimer = 0;
+
+    //玩家当前的浮躁阶段(0 - 6)
+    private int curState = 0;
+    //各阶段子弹的列表
+    public List<GameObject> bulletList = new List<GameObject>();
     void Start()
     {
         //玩家刚体初始化
@@ -24,8 +36,12 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //玩家的冥想函数
+        bool isMeditation = Meditation();
         //玩家的移动函数
-        PlayerMove();
+        PlayerMove(isMeditation);
+        //玩家的攻击函数
+        Attack();
     }
 
     private void Awake()
@@ -44,11 +60,53 @@ public class PlayerControl : MonoBehaviour
     {
         playerInputControl.PlayerControl.Disable();
     }
-    private void PlayerMove()
+
+    private void PlayerMove(bool isMeditation)
     {
         //读取输入的数据
         Vector2 playMove = playerInputControl.PlayerControl.Move.ReadValue<Vector2>();
+
+        if (isMeditation) { playMove *= meditationSpeed; }
+
         //将速度赋值给刚体
         playerRigidbody.velocity = playMove * playerSpeed;
+    }
+
+    /// <summary>
+    /// 冥想函数
+    /// </summary>
+    /// <returns>是否正在冥想</returns>
+    private bool Meditation()
+    {
+        //检测到玩家正在按空格
+        if (playerInputControl.PlayerControl.Meditation.IsPressed() == true)
+        {
+            meditationTimer += Time.deltaTime;
+
+            //每0.1s减少一次浮躁值
+            if (meditationTimer >= 0.1f)
+            {
+                ImpetuousBar.instance.Meditation(1);
+                meditationTimer = 0;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    private void Attack()
+    {
+        //子弹的初始速度
+        float initialVelocity = 10;
+        //子弹的方向(朝向鼠标)
+        Vector2 towards = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - (Vector2)gameObject.transform.position).normalized;
+
+        if (playerInputControl.PlayerControl.Attack.IsPressed() == true)
+        {
+            GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[0]);
+            newBullet.transform.position = gameObject.transform.position;
+            newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
+        }
     }
 }

@@ -7,6 +7,8 @@ using UnityEngine;
 [Serializable]
 public class RangeEnemyBlackboard : BlockBorad
 {
+    public int HP;       //血量
+
     public float speed;  //速度
 
     public float damage; //伤害
