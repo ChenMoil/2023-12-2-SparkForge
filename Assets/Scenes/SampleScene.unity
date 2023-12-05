@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentImpetuousBar: 0
-  maxImpetuousBar: 100
+  maxImpetuousBar: 1600
   timeMultipie: 0
   impetuousSlider: {fileID: 53413310}
 --- !u!1 &1809588874
