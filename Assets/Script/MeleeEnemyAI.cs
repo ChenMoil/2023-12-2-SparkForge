@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [Serializable]
 public class MeleeEnemyBlackboard : BlockBorad
 {
-    public int HP;       //血量
+    public int initHp;   //初始血量
 
     public float speed;  //速度
 
@@ -17,10 +18,8 @@ public class MeleeEnemyBlackboard : BlockBorad
 /// <summary>
 /// 近战敌人的ai
 /// </summary>
-public class MeleeEnemyAI : MonoBehaviour
+public class MeleeEnemyAI : AiParent
 {
-    public FSM fsm;
-  
     //储存数据
     public MeleeEnemyBlackboard blackboard;
     
@@ -38,7 +37,8 @@ public class MeleeEnemyAI : MonoBehaviour
     //从对象池启用时
     private void OnDisable()
     {
-       
+        //血量回归初始
+        HP = blackboard.initHp;
     }
 
     // Update is called once per frame
@@ -61,6 +61,10 @@ public class MeleeEnemyAI : MonoBehaviour
         blackboard.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         AddState();
         InitState();
+
+        //初始化血量
+        HP = blackboard.initHp;
+        GameManger.Instance.GetAi.Add(gameObject, this);
     }
 
     //向FSM中添加状态

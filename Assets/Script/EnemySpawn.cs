@@ -61,6 +61,13 @@ public class EnemySpawn : MonoBehaviour
             spawnPosition.x = PlayerControl.Instance.transform.position.x + distanceX * x;
             spawnPosition.y = PlayerControl.Instance.transform.position.y + distanceY * y;
 
+            //生成在地图边界之外->重新生成
+            if (spawnPosition.x < left || spawnPosition.x > right || spawnPosition.y > up || spawnPosition.y < down)
+            {
+                i--;
+                continue;
+            }
+
             //通过对象池生成新敌人
             GameObject newEnemy = ObjectPool.Instance.RequestCacheGameObejct(enemy);
             newEnemy.transform.position = spawnPosition;
