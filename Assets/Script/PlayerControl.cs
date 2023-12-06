@@ -5,9 +5,12 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameObject handParent;
+
     public static PlayerControl Instance;
 
     //Player物体控制脚本
@@ -38,6 +41,8 @@ public class PlayerControl : MonoBehaviour
     {
         //玩家刚体初始化
         playerRigidbody = GetComponent<Rigidbody2D>();
+        handParent = GameObject.Find("HandParent");
+        playerRigidbody.freezeRotation = true;   //冻结旋转
     }
 
     // Update is called once per frame
@@ -48,7 +53,9 @@ public class PlayerControl : MonoBehaviour
         //玩家的移动函数
         PlayerMove(isMeditation);
         //玩家的攻击函数
-        Attack();
+        Attack(isMeditation);
+
+        LookAt(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) + new Vector3(0, 0, 10), handParent);
     }
 
     private void Awake()
@@ -77,6 +84,7 @@ public class PlayerControl : MonoBehaviour
 
         //将速度赋值给刚体
         playerRigidbody.velocity = playMove * playerSpeed;
+
     }
 
     /// <summary>
@@ -102,9 +110,9 @@ public class PlayerControl : MonoBehaviour
         return false;
     }
 
-    private void Attack()
+    private void Attack(bool isMeditation)
     {
-        if (playerInputControl.PlayerControl.Attack.IsPressed() == true)
+        if (!isMeditation && playerInputControl.PlayerControl.Attack.IsPressed() == true)
         {
             attackTimer += Time.deltaTime;
 
@@ -116,15 +124,27 @@ public class PlayerControl : MonoBehaviour
                 //子弹的初始速度
                 float initialVelocity = bulletSpeed[curState];
 
-                //子弹的方向(朝向鼠标)
+                //人物朝向鼠标的方向
                 Vector2 towards = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - (Vector2)gameObject.transform.position).normalized;
 
                 //创造子弹
                 GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[curState]);
 
-                newBullet.transform.position = (Vector2)gameObject.transform.position + (Vector2)towards;
+                newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
             }
         }
+    }
+
+    public static void LookAt(Vector3 target, GameObject self)    //朝向其他物体
+    {
+        Vector3 dir = target - self.transform.position;
+        dir.z = 0;
+        float angle =
+            Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);                     //利用角度得到rotation
+        self.transform.localRotation = rotation;
+        //self.transform.eulerAngles =
+        //    Vector3.Lerp(self.transform.eulerAngles, new Vector3(0, 0, angle), 0.1f);
     }
 }

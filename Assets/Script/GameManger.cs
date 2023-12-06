@@ -7,6 +7,8 @@ public class GameManger : MonoBehaviour
 {
     public static GameManger Instance;
 
+    public int enemyKill = 0; //玩家杀敌数
+
     public List<GameObject> TestEnemyGameObjects; //测试用
     public List<GameObject> TestGameObjects; //测试用
     public List<GameObject> TestGameObjects1; //测试用
