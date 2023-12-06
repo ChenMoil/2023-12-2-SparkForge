@@ -15,6 +15,7 @@ public class AiParent : MonoBehaviour
         if (HP <= 0)
         {
             ObjectPool.Instance.ReturnCacheGameObject(gameObject);
+            GameManger.Instance.enemyKill++;
         }
     }
 }
