@@ -20,7 +20,7 @@ public class ImpetuousBar : MonoBehaviour
     public float currentImpetuousBar, maxImpetuousBar;//当前浮躁条与最大浮躁条
 
     public float impetuousMultipie;//浮躁条影响倍数
-    public int impetuousLevel;//浮躁条等级
+    public int impetuousLevel;//浮躁阶段
 
     public Slider impetuousSlider;//浮躁条UI,通过滑条制作
 
@@ -30,7 +30,7 @@ public class ImpetuousBar : MonoBehaviour
         //数值初始化
         currentImpetuousBar = 0f;
         impetuousMultipie = 8f;
-        impetuousLevel = 1;
+        impetuousLevel = 0;
 
         impetuousSlider.maxValue = maxImpetuousBar;
         impetuousSlider.value = currentImpetuousBar;
@@ -55,7 +55,8 @@ public class ImpetuousBar : MonoBehaviour
             yield return new WaitForSeconds(3f);
 
             impetuousMultipie = 4f;
-            impetuousLevel = 1;
+
+            impetuousLevel = 0;//阶段一
 
         }
         else if (currentImpetuousBar >= maxImpetuousBar / 8f && currentImpetuousBar < maxImpetuousBar * 5 / 16f)
@@ -64,7 +65,8 @@ public class ImpetuousBar : MonoBehaviour
             yield return new WaitForSeconds(3f);
 
             impetuousMultipie = 2f;
-            impetuousLevel = 2;
+
+            impetuousLevel = 1;//阶段二
 
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 5 / 16f && currentImpetuousBar < maxImpetuousBar * 3 / 8f)
@@ -73,7 +75,8 @@ public class ImpetuousBar : MonoBehaviour
             yield return new WaitForSeconds(3f);
 
             impetuousMultipie = 1f;
-            impetuousLevel = 3;
+
+            impetuousLevel = 2;//阶段三
 
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 3 / 8f && currentImpetuousBar < maxImpetuousBar * 13 / 16f)
@@ -82,7 +85,8 @@ public class ImpetuousBar : MonoBehaviour
             yield return new WaitForSeconds(3f);
 
             impetuousMultipie = 0.5f;
-            impetuousLevel = 4;
+
+            impetuousLevel = 3;//阶段四
 
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 13 / 16f && currentImpetuousBar < maxImpetuousBar * 15 / 16f)
@@ -91,7 +95,8 @@ public class ImpetuousBar : MonoBehaviour
             yield return new WaitForSeconds(3f);
 
             impetuousMultipie = 0.25f;
-            impetuousLevel = 5;
+
+            impetuousLevel = 4;//阶段五
 
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 15 / 16f && currentImpetuousBar < maxImpetuousBar)
@@ -100,9 +105,11 @@ public class ImpetuousBar : MonoBehaviour
             yield return new WaitForSeconds(3f);
 
             impetuousMultipie = 0.125f;
-            impetuousLevel = 6;
+
+            impetuousLevel = 5;//阶段六
 
         }
+        //阶段七游戏结束
     }
 
     //玩家受击

@@ -64,5 +64,6 @@ public class LevelManager : MonoBehaviour
 
         //调用点数面板
         Gameover.instance.gameoverScreen.SetActive(true);
+        Gameover.instance.PointsRemain();
     }
 }
