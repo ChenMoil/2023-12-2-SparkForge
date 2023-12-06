@@ -115,19 +115,19 @@ public class PlayerControl : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer >= attackSpeed[ImpetuousBar.instance.impetuousLevel - 1])
+            if (attackTimer >= attackSpeed[ImpetuousBar.instance.impetuousLevel])
             {
                 //重置计时器
                 attackTimer = 0;
 
                 //子弹的初始速度
-                float initialVelocity = bulletSpeed[ImpetuousBar.instance.impetuousLevel - 1];
+                float initialVelocity = bulletSpeed[ImpetuousBar.instance.impetuousLevel];
 
                 //人物朝向鼠标的方向
                 Vector2 towards = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - (Vector2)gameObject.transform.position).normalized;
 
                 //创造子弹
-                GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel - 1]);
+                GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel]);
 
                 newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
