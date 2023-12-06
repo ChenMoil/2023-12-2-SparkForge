@@ -61,5 +61,8 @@ public class LevelManager : MonoBehaviour
     public void EndLevel()
     {
         gameActive = false;
+
+        //调用点数面板
+        Gameover.instance.gameoverScreen.SetActive(true);
     }
 }
