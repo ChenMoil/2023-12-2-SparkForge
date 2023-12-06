@@ -29,8 +29,6 @@ public class PlayerControl : MonoBehaviour
     //攻击时间计时器
     private float attackTimer = 0;
 
-    //玩家当前的浮躁阶段(0 - 6)
-    private int curState = 0;
     //各阶段子弹的列表
     public List<GameObject> bulletList = new List<GameObject>();
     //子弹的速度
@@ -55,7 +53,8 @@ public class PlayerControl : MonoBehaviour
         //玩家的攻击函数
         Attack(isMeditation);
 
-        LookAt(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) + new Vector3(0, 0, 10), handParent);
+        if (handParent != null)
+            LookAt(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) + new Vector3(0, 0, 10), handParent);
     }
 
     private void Awake()
@@ -116,19 +115,19 @@ public class PlayerControl : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer >= attackSpeed[curState])
+            if (attackTimer >= attackSpeed[ImpetuousBar.instance.impetuousLevel - 1])
             {
                 //重置计时器
                 attackTimer = 0;
 
                 //子弹的初始速度
-                float initialVelocity = bulletSpeed[curState];
+                float initialVelocity = bulletSpeed[ImpetuousBar.instance.impetuousLevel - 1];
 
                 //人物朝向鼠标的方向
                 Vector2 towards = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - (Vector2)gameObject.transform.position).normalized;
 
                 //创造子弹
-                GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[curState]);
+                GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel - 1]);
 
                 newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
