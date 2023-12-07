@@ -82,15 +82,6 @@ public class RangeEnemyAI : AiParent
     {
         fsm.SwitchState(StateType.Create);
     }
-
-    //发生碰撞
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            ImpetuousBar.instance.TakeDamage(blackboard.damage);
-        }
-    }
 }
 
 //生成状态
@@ -172,6 +163,6 @@ public class RangeAI_Attack : IState
             toward *= 0;
         }
         else { toward *= -1; }
-        blackBoard.rigidbody2D.velocity = toward * blackBoard.speed;
+        blackBoard.rigidbody2D.velocity = toward * blackBoard.speed * AiParent.moveSpeedMultiplier; //速度乘以倍率
     }
 }

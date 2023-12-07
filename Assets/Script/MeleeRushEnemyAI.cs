@@ -15,6 +15,10 @@ public class MeleeRushBlackboard : BlockBorad
 
     public float damage; //伤害
 
+    public float initAttackInterval; //初始攻击间隔
+
+    [NonSerialized]public float lastAttackPlayerTime = 0; //近战敌人上次攻击玩家的时间
+
     public float createTime = 1.0f; //生成过渡时间
 }
 
@@ -87,9 +91,11 @@ public class MeleeRushEnemyAI : AiParent
     //发生碰撞
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && Time.time - blackboard.lastAttackPlayerTime > attackSpeedMultiplier * blackboard.initAttackInterval) //攻速乘以倍率
         {
-            ImpetuousBar.instance.TakeDamage(blackboard.damage);
+            ImpetuousBar.instance.TakeDamage(blackboard.damage * attackDamageMultiplier); //攻击乘以倍率
+
+            blackboard.lastAttackPlayerTime = Time.time;
         }
     }
 }
@@ -169,7 +175,7 @@ public class MeleeRushAI_Move : IState
             fsm.SwitchState(StateType.Attack); //切换为冲锋状态
             return;
         }
-        blackBoard.rigidbody2D.velocity = toward * blackBoard.speed;
+        blackBoard.rigidbody2D.velocity = toward * blackBoard.speed * AiParent.moveSpeedMultiplier; //乘以速度倍率
     }
 }
 

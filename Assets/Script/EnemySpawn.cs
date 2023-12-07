@@ -15,10 +15,14 @@ public class EnemySpawn : MonoBehaviour
     //每种怪物生成的权重
     public int[] spawnWeight;
     //根据权重得到的怪物对应的随机数区间(最大值)
-    public int[] weightRange;
+    private int[] weightRange;
 
-    //怪物生成速度 个/s
-    public int spawnSpeed;
+    //各阶段怪物生成速度 个/s
+    public int[] spawnSpeed;
+    //各阶段对应的时间区间（区间的最大值）
+    public int[] spawnRange;
+    //当前阶段
+    public int curStage;
 
     //怪物会距离玩家多远刷新（X轴）
     public float distanceX;
@@ -42,11 +46,20 @@ public class EnemySpawn : MonoBehaviour
     
     void Update()
     {
-
+        
         timer += Time.deltaTime;
         if(timer >= 1) //计时器每次到达1s生成一次怪物
         {
-            StartCoroutine(SpawnEnemy(spawnSpeed));
+            for (int i = 0;i < spawnRange.Length; i++)
+            {
+                if (Time.time <= spawnRange[i])
+                {
+                    curStage = i;
+                    break;
+                }
+            }
+
+            StartCoroutine(SpawnEnemy(spawnSpeed[curStage]));
             timer = 0;
         }
     }

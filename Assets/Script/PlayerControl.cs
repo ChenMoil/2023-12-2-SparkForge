@@ -39,7 +39,8 @@ public class PlayerControl : MonoBehaviour
     {
         //玩家刚体初始化
         playerRigidbody = GetComponent<Rigidbody2D>();
-        handParent = GameObject.Find("HandParent");
+        //寻找手
+        handParent = gameObject.transform.GetChild(0).gameObject;
         playerRigidbody.freezeRotation = true;   //冻结旋转
     }
 

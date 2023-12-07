@@ -28,13 +28,17 @@ public class TestBullet : MonoBehaviour
         ObjectPool.Instance.ReturnCacheGameObject(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("击中敌人");
         //如果击中的是敌人
         if (collision.gameObject.tag == "Enemy")
         {
             GameManger.Instance.GetAi[collision.gameObject].TakeDamege(damage);
+            //结束所有协程
+            StopAllCoroutines();
+            ObjectPool.Instance.ReturnCacheGameObject(gameObject);
         }
     }
+
 }
