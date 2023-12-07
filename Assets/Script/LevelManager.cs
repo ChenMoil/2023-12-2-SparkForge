@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     public float timerMultipie;//时间流逝影响倍数
 
-    private bool gameActive;
+    public bool gameActive;
     public float timer;
 
     public TextMeshProUGUI timeText;//时间UI
@@ -41,10 +41,11 @@ public class LevelManager : MonoBehaviour
         {
             //浮躁条影响时间流逝
             timer += (Time.deltaTime * ImpetuousBar.instance.impetuousMultipie);
-
             UpdateTimer(timer);
 
-            ImpetuousBar.instance.TimeLapse(Time.deltaTime * timerMultipie);//时间流逝影响浮躁条
+
+            //时间流逝影响浮躁条
+            ImpetuousBar.instance.TimeLapse(Time.deltaTime * timerMultipie);
         }
     }
 
@@ -60,7 +61,9 @@ public class LevelManager : MonoBehaviour
     //Gameover
     public void EndLevel()
     {
+        //玩家死亡后效果
         gameActive = false;
+        ImpetuousBar.instance.gameObject.SetActive(false);
 
         //调用点数面板
         Gameover.instance.gameoverScreen.SetActive(true);

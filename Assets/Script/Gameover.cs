@@ -44,7 +44,18 @@ public class Gameover : MonoBehaviour
     //重新开始
     public void Replay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //重置浮躁条
+        ImpetuousBar.instance.gameObject.SetActive(true);
+        ImpetuousBar.instance.currentImpetuousBar = 0f;
+
+        //重置计时器
+        LevelManager.instance.gameActive = true;
+        LevelManager.instance.timer = 0f;
+
+        //关闭点数面板
+        gameoverScreen.SetActive(false);
+
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     //退出游戏

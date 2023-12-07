@@ -39,7 +39,7 @@ public class ImpetuousBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        ImpetuousMultipieChange();
     }
 
     //浮躁条的阶段性变化
@@ -119,8 +119,6 @@ public class ImpetuousBar : MonoBehaviour
 
         if(currentImpetuousBar>=maxImpetuousBar)
         {
-            gameObject.SetActive(false);
-
             LevelManager.instance.EndLevel();//游戏结束
         }
 
@@ -134,8 +132,6 @@ public class ImpetuousBar : MonoBehaviour
 
         if (currentImpetuousBar >= maxImpetuousBar)
         {
-            gameObject.SetActive(false);
-
             LevelManager.instance.EndLevel();//游戏结束
         }
 
