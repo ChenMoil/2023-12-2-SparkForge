@@ -34,7 +34,7 @@ public class EnemySpawn : MonoBehaviour
     //计时器
     private float timer;
     //启用怪物刷新的时间
-    private float enableTime = 0;
+    public float enableTime = 0;
     void Start()
     {
         //生成 怪物对应的随机数区间 数组

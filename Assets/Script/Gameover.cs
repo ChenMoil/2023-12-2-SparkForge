@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Diagnostics;
+using System.Threading;
 
 public class Gameover : MonoBehaviour
 {
@@ -54,6 +55,10 @@ public class Gameover : MonoBehaviour
 
         //关闭点数面板
         gameoverScreen.SetActive(false);
+
+        //刷怪开始
+        GetComponent<EnemySpawn>().enabled = true;
+        GetComponent<EnemySpawn>().enableTime = Time.time;
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
