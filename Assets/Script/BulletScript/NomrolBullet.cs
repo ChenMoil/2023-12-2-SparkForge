@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestBullet : MonoBehaviour
+public class NomrolBullet : MonoBehaviour
 {
     //子弹的伤害
     [SerializeField] private int damage;
-
+    //自动销毁的时间
+    [SerializeField] private float destoryTime;
+    //是否可以穿透敌人
+    [SerializeField] private bool isPenetrate;
     private void OnEnable()
     {
-        StartCoroutine(RegularDestory(5f));
+        StartCoroutine(RegularDestory(destoryTime));
     }
 
     void Update()
@@ -30,14 +33,16 @@ public class TestBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("击中敌人");
         //如果击中的是敌人
         if (collision.gameObject.tag == "Enemy")
         {
             GameManger.Instance.GetAi[collision.gameObject].TakeDamege(damage);
-            //结束所有协程
-            StopAllCoroutines();
-            ObjectPool.Instance.ReturnCacheGameObject(gameObject);
+            if (!isPenetrate)
+            {
+                //结束所有协程
+                StopAllCoroutines();
+                ObjectPool.Instance.ReturnCacheGameObject(gameObject);
+            }
         }
     }
 

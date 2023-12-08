@@ -111,7 +111,14 @@ public class ImpetuousBar : MonoBehaviour
         }
 
         impetuousSlider.value = currentImpetuousBar;//UI
+
+        //让玩家进入受伤状态
+        if (damageToTake > 0)
+        {
+            PlayerControl.Instance.EnterBeHurtState(1f);
+        }
     }
+
 
     //时间流逝
     public void TimeLapse(float timeToLapse)

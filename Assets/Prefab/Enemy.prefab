@@ -163,8 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reduceImpetuousBar: 2
   blackboard:
-    initHp: 3
-    speed: 2
-    damage: 100
+    initHp: 30
+    speed: 3.5
+    damage: 30
     createTime: 1
     initAttackInterval: 2

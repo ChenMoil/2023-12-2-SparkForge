@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -23,6 +24,8 @@ public class PlayerControl : MonoBehaviour
 
     //刚体组件
     private Rigidbody2D playerRigidbody;
+    //动画器
+    [NonSerialized]public Animator animator;
 
     //冥想时间计时器
     private float meditationTimer = 0;
@@ -41,6 +44,7 @@ public class PlayerControl : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         //寻找手
         handParent = gameObject.transform.GetChild(0).gameObject;
+        animator = GetComponent<Animator>();
         playerRigidbody.freezeRotation = true;   //冻结旋转
     }
 
@@ -54,8 +58,14 @@ public class PlayerControl : MonoBehaviour
         //玩家的攻击函数
         Attack(isMeditation);
 
+        //调整手的方向
         if (handParent != null)
             LookAt(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) + new Vector3(0, 0, 10), handParent);
+
+        //给动画机传入浮躁等级
+        animator.SetInteger("CurState", ImpetuousBar.instance.impetuousLevel);
+        //给动画机传入是否在冥想
+        animator.SetBool("IsMeditation", isMeditation);
     }
 
     private void Awake()
@@ -130,6 +140,8 @@ public class PlayerControl : MonoBehaviour
                 //创造子弹
                 GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel]);
 
+                //改变子弹的初始参数
+                newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles;
                 newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
             }
@@ -146,5 +158,18 @@ public class PlayerControl : MonoBehaviour
         self.transform.localRotation = rotation;
         //self.transform.eulerAngles =
         //    Vector3.Lerp(self.transform.eulerAngles, new Vector3(0, 0, angle), 0.1f);
+    }
+
+    IEnumerator HurtPlayerTimer(float time)
+    {
+        PlayerControl.Instance.animator.SetBool("IsHurt", true);
+        yield return new WaitForSeconds(time);
+        PlayerControl.Instance.animator.SetBool("IsHurt", false);
+    }
+
+    public void EnterBeHurtState(float time)
+    {
+        StopAllCoroutines();
+        StartCoroutine(HurtPlayerTimer(time));
     }
 }

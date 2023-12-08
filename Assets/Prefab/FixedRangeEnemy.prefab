@@ -194,18 +194,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852d0b4d543827f48bbc7d73e90ae08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeedMultiplier: 1
-  attackDamageMultiplier: 0
   reduceImpetuousBar: 2
   blackboard:
-    initHp: 2
-    speed: 0
-    damage: 1
+    initHp: 10
+    damage: 10
     createTime: 1
-    handParent: {fileID: 0}
     Bullet: {fileID: 954591438704356076, guid: 2d179df3b1eb63b4d9928f34b4945ec5, type: 3}
-    BulletSpeed: 1
-    attackInterval: 1
+    BulletSpeed: 2
+    attackInterval: 5
 --- !u!1 &8895394939335487854
 GameObject:
   m_ObjectHideFlags: 0
