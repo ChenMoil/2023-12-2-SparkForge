@@ -818,6 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerMultipie: 0
+  gameActive: 0
   timer: 0
   timeText: {fileID: 2062455710}
 --- !u!4 &662175786
@@ -998,7 +999,8 @@ MonoBehaviour:
   - {fileID: 1174231332618142273, guid: 544735ac596fa7541855ff4a1e1763c2, type: 3}
   - {fileID: 7195097053950299569, guid: e25c2cf1e089a274b8794ae66d4f0ce4, type: 3}
   - {fileID: 7269644269466416841, guid: e927e928fef5b18438db0ec141c1c49d, type: 3}
-  spawnWeight: 010000000000000000000000
+  - {fileID: 7269644269466416841, guid: f94bb14138fd40e4a9f78d092f4b45a6, type: 3}
+  spawnWeight: 01000000010000000100000000000000
   spawnSpeed: 040000000800000010000000200000004000000080000000
   spawnRange: 1e0000005a00000096000000f000000068010000e0010000
   curStage: 0
