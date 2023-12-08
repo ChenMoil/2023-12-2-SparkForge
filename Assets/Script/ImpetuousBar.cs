@@ -16,13 +16,19 @@ public class ImpetuousBar : MonoBehaviour
         instance = this;
     }
 
+    //当前浮躁条与最大浮躁条
+    public float currentImpetuousBar, maxImpetuousBar;
+    
+    //浮躁条影响倍数
+    public float impetuousMultipie;
+    //浮躁阶段
+    public int impetuousLevel;
 
-    public float currentImpetuousBar, maxImpetuousBar;//当前浮躁条与最大浮躁条
+    //浮躁条UI,通过滑条制作
+    public Slider impetuousSlider;
 
-    public float impetuousMultipie;//浮躁条影响倍数
-    public int impetuousLevel;//浮躁阶段
-
-    public Slider impetuousSlider;//浮躁条UI,通过滑条制作
+    //阶段变化间隙时长
+    public float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -40,76 +46,58 @@ public class ImpetuousBar : MonoBehaviour
     void Update()
     {
         ImpetuousMultipieChange();
+
+        timer += Time.deltaTime;
     }
 
     //浮躁条的阶段性变化
     public void ImpetuousMultipieChange()
-    {
-        StartCoroutine(ImpetuousMultipie_Change());
-    }
-    IEnumerator ImpetuousMultipie_Change()
-    {
-        if (currentImpetuousBar < maxImpetuousBar / 8f)
+    {      
+        if (currentImpetuousBar < maxImpetuousBar / 8f && timer > 3f)
         {
 
-            yield return new WaitForSeconds(3f);
+            timer = 0f;//重置计时
 
             impetuousMultipie = 4f;
-
             impetuousLevel = 0;//阶段一
-
         }
-        else if (currentImpetuousBar >= maxImpetuousBar / 8f && currentImpetuousBar < maxImpetuousBar * 5 / 16f)
+        else if (currentImpetuousBar >= maxImpetuousBar / 8f && currentImpetuousBar < maxImpetuousBar * 5 / 16f && timer > 3f)
         {
-
-            yield return new WaitForSeconds(3f);
+            timer = 0f;//重置计时
 
             impetuousMultipie = 2f;
-
             impetuousLevel = 1;//阶段二
-
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 5 / 16f && currentImpetuousBar < maxImpetuousBar * 3 / 8f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 5 / 16f && currentImpetuousBar < maxImpetuousBar * 3 / 8f && timer > 3f)
         {
-
-            yield return new WaitForSeconds(3f);
+            timer = 0f;//重置计时
 
             impetuousMultipie = 1f;
-
             impetuousLevel = 2;//阶段三
-
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 3 / 8f && currentImpetuousBar < maxImpetuousBar * 13 / 16f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 3 / 8f && currentImpetuousBar < maxImpetuousBar * 13 / 16f && timer > 3f)
         {
-
-            yield return new WaitForSeconds(3f);
+            timer = 0f;//重置计时
 
             impetuousMultipie = 0.5f;
-
             impetuousLevel = 3;//阶段四
-
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 13 / 16f && currentImpetuousBar < maxImpetuousBar * 15 / 16f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 13 / 16f && currentImpetuousBar < maxImpetuousBar * 15 / 16f && timer > 3f)
         {
-
-            yield return new WaitForSeconds(3f);
+            timer = 0f;//重置计时
 
             impetuousMultipie = 0.25f;
-
             impetuousLevel = 4;//阶段五
-
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 15 / 16f && currentImpetuousBar < maxImpetuousBar)
+        else if (currentImpetuousBar >= maxImpetuousBar * 15 / 16f && currentImpetuousBar < maxImpetuousBar && timer > 3f)
         {
-
-            yield return new WaitForSeconds(3f);
+            timer = 0f;//重置计时
 
             impetuousMultipie = 0.125f;
-
             impetuousLevel = 5;//阶段六
-
         }
         //阶段七游戏结束
+
     }
 
     //玩家受击
