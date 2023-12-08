@@ -54,7 +54,7 @@ public class EnemySpawn : MonoBehaviour
         {
             for (int i = 0;i < spawnRange.Length; i++)
             {
-                if (Time.time <= spawnRange[i])
+                if (Time.time - enableTime <= spawnRange[i])
                 {
                     curStage = i;
                     break;
