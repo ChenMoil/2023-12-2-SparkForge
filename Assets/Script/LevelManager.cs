@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
         //浮躁条停用
         ImpetuousBar.instance.gameObject.SetActive(false);
         //刷怪停止
-        GetComponent<EnemySpawn>().enabled = false;
+        //GetComponent<EnemySpawn>().enabled = false;
 
         //调用点数面板
         Gameover.instance.gameoverScreen.SetActive(true);
