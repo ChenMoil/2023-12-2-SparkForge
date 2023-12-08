@@ -61,9 +61,12 @@ public class LevelManager : MonoBehaviour
     //Gameover
     public void EndLevel()
     {
-        //玩家死亡后效果
+        //计时暂停
         gameActive = false;
+        //浮躁条停用
         ImpetuousBar.instance.gameObject.SetActive(false);
+        //刷怪停止
+        //GetComponent<EnemySpawn>().enabled = false;
 
         //调用点数面板
         Gameover.instance.gameoverScreen.SetActive(true);
