@@ -36,6 +36,8 @@ public class ImpetuousBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxImpetuousBar = maxImpetuousBar * (1 + Gameover.instance.impetuousLevel * 0.2f);
+
         //数值初始化
         currentImpetuousBar = 0f;
         impetuousMultipie = 8f;
@@ -57,44 +59,49 @@ public class ImpetuousBar : MonoBehaviour
     //浮躁条的阶段性变化
     public void ImpetuousMultipieChange()
     {      
-        if (currentImpetuousBar < maxImpetuousBar / 8f && timer > 3f)
+        if (currentImpetuousBar < maxImpetuousBar / 8f && timer > 3f && impetuousLevel != 0)
         {
-
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
             impetuousMultipie = 4f;
             impetuousLevel = 0;//阶段一
         }
-        else if (currentImpetuousBar >= maxImpetuousBar / 8f && currentImpetuousBar < maxImpetuousBar * 5 / 16f && timer > 3f)
+        else if (currentImpetuousBar >= maxImpetuousBar / 8f && currentImpetuousBar < maxImpetuousBar * 5 / 16f && timer > 3f && impetuousLevel != 1)
         {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
             impetuousMultipie = 2f;
             impetuousLevel = 1;//阶段二
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 5 / 16f && currentImpetuousBar < maxImpetuousBar * 3 / 8f && timer > 3f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 5 / 16f && currentImpetuousBar < maxImpetuousBar * 3 / 8f && timer > 3f && impetuousLevel != 2)
         {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
             impetuousMultipie = 1f;
             impetuousLevel = 2;//阶段三
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 3 / 8f && currentImpetuousBar < maxImpetuousBar * 13 / 16f && timer > 3f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 3 / 8f && currentImpetuousBar < maxImpetuousBar * 13 / 16f && timer > 3f && impetuousLevel != 3)
         {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
             impetuousMultipie = 0.5f;
             impetuousLevel = 3;//阶段四
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 13 / 16f && currentImpetuousBar < maxImpetuousBar * 15 / 16f && timer > 3f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 13 / 16f && currentImpetuousBar < maxImpetuousBar * 15 / 16f && timer > 3f && impetuousLevel != 4)
         {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
             impetuousMultipie = 0.25f;
             impetuousLevel = 4;//阶段五
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 15 / 16f && currentImpetuousBar < maxImpetuousBar && timer > 3f)
+        else if (currentImpetuousBar >= maxImpetuousBar * 15 / 16f && currentImpetuousBar < maxImpetuousBar && timer > 3f && impetuousLevel != 5)
         {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
             impetuousMultipie = 0.125f;
@@ -109,6 +116,11 @@ public class ImpetuousBar : MonoBehaviour
     {
         //显示伤害数字
         PopupText.Create(PlayerControl.Instance.transform.position, damageToTake < 0 ? (int)-damageToTake : (int)damageToTake, damageToTake < 0 ? 2 : 1);
+        //播放受伤音效
+        if (damageToTake > 0) 
+        {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[4], 0.3f, 0, 1);
+        }
 
         currentImpetuousBar += damageToTake;
 
@@ -141,7 +153,7 @@ public class ImpetuousBar : MonoBehaviour
     }
 
     //消灭敌人
-    public void  DestroyEnemy(float enemyToBeDestroy)
+    public void DestroyEnemy(float enemyToBeDestroy)
     {
         currentImpetuousBar -= enemyToBeDestroy;
 

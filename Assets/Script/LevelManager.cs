@@ -64,6 +64,8 @@ public class LevelManager : MonoBehaviour
     //Gameover
     public void EndLevel()
     {
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[8], 0.7f, 0, 1);
+
         //计时暂停
         gameActive = false;
         //浮躁条停用

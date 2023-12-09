@@ -43,6 +43,7 @@ public class EnemySpawn : MonoBehaviour
     }
     void Start()
     {
+        enableTime = Time.time;
         //生成 怪物对应的随机数区间 数组
         weightRange = new int[spawnWeight.Length];
         for (int i = 0; i < spawnWeight.Length; i++)

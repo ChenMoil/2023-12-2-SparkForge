@@ -17,10 +17,14 @@ public class DeathScene : MonoBehaviour
     }
     public void Exit()
     {
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
         SceneManager.LoadScene(0);
     }
     public void Restart()
     {
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
         SceneManager.LoadScene(1);
     }
 }

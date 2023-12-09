@@ -36,6 +36,7 @@ public class NomrolBullet : MonoBehaviour
         //如果击中的是敌人
         if (collision.gameObject.tag == "Enemy")
         {
+            AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[6], 1f, 0, 1f);
             GameManger.Instance.GetAi[collision.gameObject].TakeDamege(damage);
             Vector2 towards = (collision.gameObject.transform.position - gameObject.transform.position).normalized;
 

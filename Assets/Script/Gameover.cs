@@ -62,6 +62,9 @@ public class Gameover : MonoBehaviour
     //重新开始
     public void Replay()
     {
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
+
         //重置浮躁条
         ImpetuousBar.instance.gameObject.SetActive(true);
         ImpetuousBar.instance.currentImpetuousBar = 0f;
@@ -82,6 +85,9 @@ public class Gameover : MonoBehaviour
 
     public void Exit(string sceneName)
     {
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
@@ -103,8 +109,8 @@ public class Gameover : MonoBehaviour
     //强化浮躁条上限
     public void ImpetuousButton()
     {
-
-        UnityEngine.Debug.Log("1111");
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
         if (pointsRemain >= impetuousButtonSpend && impetuousButtonSpend<=1600f)
         {
             pointsRemain -= impetuousButtonSpend;
@@ -123,7 +129,8 @@ public class Gameover : MonoBehaviour
     //强化攻击力
     public void AttackspeedButton()
     {
-        UnityEngine.Debug.Log("1111");
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
         if (pointsRemain >= attackspeedButtonSpend && attackspeedButtonSpend<=1600f)
         {
             pointsRemain -= attackspeedButtonSpend;
@@ -145,7 +152,8 @@ public class Gameover : MonoBehaviour
     //强化移动速度
     public void MovespeedButton()
     {
-        UnityEngine.Debug.Log("1111");
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
         if (pointsRemain >= movespeedButtonSpend && movespeedButtonSpend<=1600f)
         {
             pointsRemain -= movespeedButtonSpend;
@@ -164,7 +172,8 @@ public class Gameover : MonoBehaviour
     //强化冥想收益
     public void MeditationButton()
     {
-        UnityEngine.Debug.Log("1111");
+        //播放点击按钮音效
+        AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
         if (pointsRemain >= meditationButtonSpend && meditationButtonSpend<=1600f)
         {
             pointsRemain -= meditationButtonSpend;

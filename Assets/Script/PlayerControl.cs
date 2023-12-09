@@ -95,7 +95,7 @@ public class PlayerControl : MonoBehaviour
         if (isMeditation) { playMove *= meditationSpeed; }
 
         //将速度赋值给刚体
-        playerRigidbody.velocity = playMove * playerSpeed;
+        playerRigidbody.velocity = playMove * playerSpeed * (1 + 0.1f * Gameover.instance.movespeedLevel);
 
     }
 
@@ -111,9 +111,10 @@ public class PlayerControl : MonoBehaviour
             meditationTimer += Time.deltaTime;
 
             //每0.5s减少一次浮躁值
-            if (meditationTimer >= 1f)
+            if (meditationTimer >= 0.5f)
             {
-                ImpetuousBar.instance.Meditation(meditation / 2);
+                AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[5], 0.6f, 0, 2.5f);
+                ImpetuousBar.instance.Meditation(meditation * (1 + Gameover.instance.meditationLevel * 0.25f) / 2);
                 meditationTimer = 0;
             }
 
@@ -128,8 +129,11 @@ public class PlayerControl : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer >= attackSpeed[ImpetuousBar.instance.impetuousLevel])
+            if (attackTimer * (1 + 0.1f * Gameover.instance.attackspeedLevel) >= attackSpeed[ImpetuousBar.instance.impetuousLevel])
             {
+                //播放攻击音效
+                AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 0.5f, 0, 1);
+
                 //重置计时器
                 attackTimer = 0;
 

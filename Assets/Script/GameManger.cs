@@ -23,7 +23,8 @@ public class GameManger : MonoBehaviour
     }
     private void Start() 
     {
-        Gameover.instance.gameoverScreen.SetActive(false);
+        if(Gameover.instance != null)
+            Gameover.instance.gameoverScreen.SetActive(false);
     }
     // Update is called once per frame
     void Update()
