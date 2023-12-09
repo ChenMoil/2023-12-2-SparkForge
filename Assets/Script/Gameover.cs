@@ -88,7 +88,7 @@ public class Gameover : MonoBehaviour
     //点数结算
     public void PointsRemain()
     {
-        pointsRemain = LevelManager.instance.timer*100 + GameManger.Instance.enemyKill;
+        pointsRemain = LevelManager.instance.timer + GameManger.Instance.enemyKill;
 
         pointsRemainText.text = ":" + pointsRemain.ToString("00");
         DataStorage.instance.obtainPoints = pointsRemain;
