@@ -9,7 +9,7 @@ using System.Threading;
 
 public class Gameover : MonoBehaviour
 {
-    //访问
+    //����
     public static Gameover instance;
 
     private void Awake()
@@ -21,7 +21,7 @@ public class Gameover : MonoBehaviour
     public GameObject gameoverScreen;
 
     public TextMeshProUGUI pointsRemainText;
-    //各项强化等级文本
+    //����ǿ���ȼ��ı�
     public TextMeshProUGUI impetuousLevelText;
     public TextMeshProUGUI attackspeedLevelText;
     public TextMeshProUGUI movespeedLevelText;
@@ -31,12 +31,12 @@ public class Gameover : MonoBehaviour
 
     //public TextMeshProUGUI pointsSpendText;
 
-    //各项强化花费
+    //����ǿ������
     private float impetuousButtonSpend = 100f;
     private float attackspeedButtonSpend = 100f;
     private float movespeedButtonSpend = 100f;
     private float meditationButtonSpend = 100f;
-    //各项强化等级
+    //����ǿ���ȼ�
     public int impetuousLevel = 1;
     public int attackspeedLevel = 1;
     public int movespeedLevel = 1;
@@ -55,21 +55,21 @@ public class Gameover : MonoBehaviour
         //PointsRemain();
     }
 
-    //重新开始
+    //���¿�ʼ
     public void Replay()
     {
-        //重置浮躁条
+        //���ø�����
         ImpetuousBar.instance.gameObject.SetActive(true);
         ImpetuousBar.instance.currentImpetuousBar = 0f;
 
-        //重置计时器
+        //���ü�ʱ��
         LevelManager.instance.gameActive = true;
         LevelManager.instance.timer = 0f;
 
-        //关闭点数面板
+        //�رյ������
         gameoverScreen.SetActive(false);
 
-        //刷怪开始
+        //ˢ�ֿ�ʼ
         //GetComponent<EnemySpawn>().enabled = true;
         //GetComponent<EnemySpawn>().enableTime = Time.time;
 
@@ -77,9 +77,9 @@ public class Gameover : MonoBehaviour
     }
 
     //退出游戏
-    public void Exit()
+    public void Exit(string sceneName)
     {
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     //点数结算
@@ -96,7 +96,7 @@ public class Gameover : MonoBehaviour
         pointsRemainText.text = ":" + pointsRemain.ToString("00");
     }
 
-    //强化浮躁条上限
+    //ǿ������������
     public void ImpetuousButton()
     {
 
@@ -110,13 +110,13 @@ public class Gameover : MonoBehaviour
             impetuousButtonSpend *= 2;
             impetuousLevel += 1;
 
-            //更新文本
+            //�����ı�
             PointsNew();
-            impetuousLevelText.text = "LEVEL：" + impetuousLevel.ToString("0");
+            impetuousLevelText.text = "LEVEL:" + impetuousLevel.ToString("0");
         }
     }
 
-    //强化攻击力
+    //ǿ��������
     public void AttackspeedButton()
     {
         UnityEngine.Debug.Log("1111");
@@ -132,13 +132,13 @@ public class Gameover : MonoBehaviour
             attackspeedButtonSpend *= 2;
             attackspeedLevel += 1;
 
-            //更新文本
+            //�����ı�
             PointsNew();
-            attackspeedLevelText.text = "LEVEL：" + attackspeedLevel.ToString("0");
+            attackspeedLevelText.text = "LEVEL:" + attackspeedLevel.ToString("0");
         }
     }
 
-    //强化移动速度
+    //ǿ���ƶ��ٶ�
     public void MovespeedButton()
     {
         UnityEngine.Debug.Log("1111");
@@ -151,13 +151,13 @@ public class Gameover : MonoBehaviour
             movespeedButtonSpend *= 2;
             movespeedLevel += 1;
             
-            //更新文本
+            //�����ı�
             PointsNew();
-            movespeedLevelText.text = "LEVEL：" + movespeedLevel.ToString("0");
+            movespeedLevelText.text = "LEVEL:" + movespeedLevel.ToString("0");
         }
     }
 
-    //强化冥想收益
+    //ǿ��ڤ������
     public void MeditationButton()
     {
         UnityEngine.Debug.Log("1111");
@@ -170,9 +170,9 @@ public class Gameover : MonoBehaviour
             meditationButtonSpend *= 2;
             meditationLevel += 1;
 
-            //更新文本
+            //�����ı�
             PointsNew();
-            meditationLevelText.text = "LEVEL：" + meditationLevel.ToString("0");
+            meditationLevelText.text = "LEVEL:" + meditationLevel.ToString("0");
         }
     }
 }
