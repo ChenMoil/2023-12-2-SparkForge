@@ -20,6 +20,12 @@ public class Gameover : MonoBehaviour
     public GameObject gameoverScreen;
 
     public TextMeshProUGUI pointsRemainText;
+    //各项强化等级文本
+    public TextMeshProUGUI impetuousLevelText;
+    public TextMeshProUGUI attackspeedLevelText;
+    public TextMeshProUGUI movespeedLevelText;
+    public TextMeshProUGUI meditationLevelText;
+
     public float pointsRemain;
 
     //public TextMeshProUGUI pointsSpendText;
@@ -29,6 +35,11 @@ public class Gameover : MonoBehaviour
     private float attackspeedButtonSpend = 100f;
     private float movespeedButtonSpend = 100f;
     private float meditationButtonSpend = 100f;
+    //各项强化等级
+    public int impetuousLevel = 1;
+    public int attackspeedLevel = 1;
+    public int movespeedLevel = 1;
+    public int meditationLevel = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -57,8 +68,8 @@ public class Gameover : MonoBehaviour
         gameoverScreen.SetActive(false);
 
         //刷怪开始
-        GetComponent<EnemySpawn>().enabled = true;
-        GetComponent<EnemySpawn>().enableTime = Time.time;
+        //GetComponent<EnemySpawn>().enabled = true;
+        //GetComponent<EnemySpawn>().enableTime = Time.time;
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -72,15 +83,15 @@ public class Gameover : MonoBehaviour
     //点数结算
     public void PointsRemain()
     {
-        pointsRemain = LevelManager.instance.timer + GameManger.Instance.enemyKill;
+        pointsRemain = LevelManager.instance.timer*100 + GameManger.Instance.enemyKill;
 
-        pointsRemainText.text = "Points:" + pointsRemain.ToString("00");
+        pointsRemainText.text = ":" + pointsRemain.ToString("00");
     }
 
     //点数刷新
     public void PointsNew()
     {
-        pointsRemainText.text = "Points:" + pointsRemain.ToString("00");
+        pointsRemainText.text = ":" + pointsRemain.ToString("00");
     }
 
     //强化浮躁条上限
@@ -93,8 +104,11 @@ public class Gameover : MonoBehaviour
             ImpetuousBar.instance.maxImpetuousBar *= 1.2f;
 
             impetuousButtonSpend *= 2;
+            impetuousLevel += 1;
 
-            PointsNew();//更新文本
+            //更新文本
+            PointsNew();
+            impetuousLevelText.text = "LEVEL：" + impetuousLevel.ToString("0");
         }
     }
 
@@ -111,8 +125,11 @@ public class Gameover : MonoBehaviour
             }
 
             attackspeedButtonSpend *= 2;
+            attackspeedLevel += 1;
 
-            PointsNew();//更新文本
+            //更新文本
+            PointsNew();
+            attackspeedLevelText.text = "LEVEL：" + attackspeedLevel.ToString("0");
         }
     }
 
@@ -126,8 +143,11 @@ public class Gameover : MonoBehaviour
             PlayerControl.Instance.playerSpeed *= 1.1f;
 
             movespeedButtonSpend *= 2;
-
-            PointsNew();//更新文本
+            movespeedLevel += 1;
+            
+            //更新文本
+            PointsNew();
+            movespeedLevelText.text = "LEVEL：" + movespeedLevel.ToString("0");
         }
     }
 
@@ -140,9 +160,12 @@ public class Gameover : MonoBehaviour
 
             PlayerControl.Instance.meditationSpeed *= 1.25f;
 
-           meditationButtonSpend *= 2;
+            meditationButtonSpend *= 2;
+            meditationLevel += 1;
 
-            PointsNew();//更新文本
+            //更新文本
+            PointsNew();
+            meditationLevelText.text = "LEVEL：" + meditationLevel.ToString("0");
         }
     }
 }
