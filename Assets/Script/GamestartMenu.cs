@@ -19,15 +19,19 @@ public class GamestartMenu : MonoBehaviour
 
     public void GameStartButton()
     {
-        Debug.Log("1");
+        SceneManager.LoadScene(1);
         //转到下一个场景
         //SceneManager.loadScene(SceneManager.GetActiveScene().buildIndex + 1);
     } 
 
     public void ExitButton()
     {
-        Debug.Log("2");
+
         //退出游戏
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

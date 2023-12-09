@@ -9,6 +9,8 @@ using UnityEngine;
 /// </summary>
 public class EnemySpawn : MonoBehaviour
 {
+    public static EnemySpawn instance;
+
     //敌人预制体列表
     public List<GameObject> enemyList = new List<GameObject>();
 
@@ -35,6 +37,10 @@ public class EnemySpawn : MonoBehaviour
     private float timer;
     //启用怪物刷新的时间
     public float enableTime = 0;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         //生成 怪物对应的随机数区间 数组

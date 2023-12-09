@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class ImpetuousBar : MonoBehaviour
 {
+    public Image fixImgae;
+
+    public Text killText;
 
     //访问玩家的浮躁条
     public static ImpetuousBar instance;
@@ -45,6 +48,7 @@ public class ImpetuousBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ChangeFixAndKillText();
         ImpetuousMultipieChange();
 
         timer += Time.deltaTime;
@@ -154,5 +158,11 @@ public class ImpetuousBar : MonoBehaviour
         currentImpetuousBar -= meditation;
 
         impetuousSlider.value = currentImpetuousBar;//UI
+    }
+
+    public void ChangeFixAndKillText()
+    {
+        fixImgae.color = new Color(currentImpetuousBar / maxImpetuousBar, 1 - currentImpetuousBar / maxImpetuousBar, 0, 1);
+        killText.text = GameManger.Instance.enemyKill.ToString();
     }
 }

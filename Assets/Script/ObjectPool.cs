@@ -112,4 +112,11 @@ public class ObjectPool : MonoBehaviour
             Debug.LogError(obj.name + " 未被标记");
         }
     }
+    public void ClearAll()
+    {
+        foreach (Transform transform in GetComponentsInChildren<Transform>())
+        {
+            gameObject.gameObject.SetActive(false);
+        }
+    }
 }

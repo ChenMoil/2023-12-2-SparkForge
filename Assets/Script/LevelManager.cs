@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,7 @@ using TMPro;
 public class LevelManager : MonoBehaviour
 {
 
-    //·ÃÎÊÓÎÏ·Ê±¼ä
+    //è®¿é—®æ¸¸æˆæ—¶é—´
     public static LevelManager instance;
 
     private void Awake()
@@ -16,12 +16,14 @@ public class LevelManager : MonoBehaviour
         instance = this;
     }
 
-    public float timerMultipie;//Ê±¼äÁ÷ÊÅÓ°Ïì±¶Êı
+    public float timerMultipie;//æ—¶é—´æµé€å½±å“å€æ•°
 
     public bool gameActive;
-    public float timer;
 
-    public TextMeshProUGUI timeText;//Ê±¼äUI
+    public float timer; //æ¸¸æˆæ—¶é—´
+    public float realTimer; //ç°å®æ—¶é—´
+
+    public TextMeshProUGUI timeText;//æ—¶é—´UI
 
 
     // Start is called before the first frame update
@@ -39,17 +41,18 @@ public class LevelManager : MonoBehaviour
     {
         if(gameActive == true)
         {
-            //¸¡ÔêÌõÓ°ÏìÊ±¼äÁ÷ÊÅ
+            //æµ®èºæ¡å½±å“æ—¶é—´æµé€
             timer += (Time.deltaTime * ImpetuousBar.instance.impetuousMultipie);
+            realTimer += Time.deltaTime;
             UpdateTimer(timer);
 
 
-            //Ê±¼äÁ÷ÊÅÓ°Ïì¸¡ÔêÌõ
+            //æ—¶é—´æµé€å½±å“æµ®èºæ¡
             ImpetuousBar.instance.TimeLapse(Time.deltaTime * timerMultipie);
         }
     }
 
-    //Ê±¼äÏÔÊ¾
+    //æ—¶é—´æ˜¾ç¤º
     public void UpdateTimer(float time)
     {
         float minutes = Mathf.FloorToInt(time / 60f);
@@ -61,14 +64,15 @@ public class LevelManager : MonoBehaviour
     //Gameover
     public void EndLevel()
     {
-        //¼ÆÊ±ÔİÍ£
+        //è®¡æ—¶æš‚åœ
         gameActive = false;
-        //¸¡ÔêÌõÍ£ÓÃ
+        //æµ®èºæ¡åœç”¨
         ImpetuousBar.instance.gameObject.SetActive(false);
-        //Ë¢¹ÖÍ£Ö¹
-        //GetComponent<EnemySpawn>().enabled = false;
+        
+        EnemySpawn.instance.gameObject.SetActive(false);
+        ObjectPool.Instance.ClearAll();
 
-        //µ÷ÓÃµãÊıÃæ°å
+        //è°ƒç”¨ç‚¹æ•°é¢æ¿
         Gameover.instance.gameoverScreen.SetActive(true);
         Gameover.instance.PointsRemain();
     }
