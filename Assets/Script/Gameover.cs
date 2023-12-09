@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -9,18 +9,19 @@ using System.Threading;
 
 public class Gameover : MonoBehaviour
 {
-    //·ÃÎÊ
+    //è®¿é—®
     public static Gameover instance;
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     public GameObject gameoverScreen;
 
     public TextMeshProUGUI pointsRemainText;
-    //¸÷ÏîÇ¿»¯µÈ¼¶ÎÄ±¾
+    //å„é¡¹å¼ºåŒ–ç­‰çº§æ–‡æœ¬
     public TextMeshProUGUI impetuousLevelText;
     public TextMeshProUGUI attackspeedLevelText;
     public TextMeshProUGUI movespeedLevelText;
@@ -30,12 +31,12 @@ public class Gameover : MonoBehaviour
 
     //public TextMeshProUGUI pointsSpendText;
 
-    //¸÷ÏîÇ¿»¯»¨·Ñ
+    //å„é¡¹å¼ºåŒ–èŠ±è´¹
     private float impetuousButtonSpend = 100f;
     private float attackspeedButtonSpend = 100f;
     private float movespeedButtonSpend = 100f;
     private float meditationButtonSpend = 100f;
-    //¸÷ÏîÇ¿»¯µÈ¼¶
+    //å„é¡¹å¼ºåŒ–ç­‰çº§
     public int impetuousLevel = 1;
     public int attackspeedLevel = 1;
     public int movespeedLevel = 1;
@@ -44,6 +45,7 @@ public class Gameover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         gameoverScreen.SetActive(false);
     }
 
@@ -53,34 +55,34 @@ public class Gameover : MonoBehaviour
         //PointsRemain();
     }
 
-    //ÖØĞÂ¿ªÊ¼
+    //é‡æ–°å¼€å§‹
     public void Replay()
     {
-        //ÖØÖÃ¸¡ÔêÌõ
+        //é‡ç½®æµ®èºæ¡
         ImpetuousBar.instance.gameObject.SetActive(true);
         ImpetuousBar.instance.currentImpetuousBar = 0f;
 
-        //ÖØÖÃ¼ÆÊ±Æ÷
+        //é‡ç½®è®¡æ—¶å™¨
         LevelManager.instance.gameActive = true;
         LevelManager.instance.timer = 0f;
 
-        //¹Ø±ÕµãÊıÃæ°å
+        //å…³é—­ç‚¹æ•°é¢æ¿
         gameoverScreen.SetActive(false);
 
-        //Ë¢¹Ö¿ªÊ¼
+        //åˆ·æ€ªå¼€å§‹
         //GetComponent<EnemySpawn>().enabled = true;
         //GetComponent<EnemySpawn>().enableTime = Time.time;
 
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    //ÍË³öÓÎÏ·
+    //é€€å‡ºæ¸¸æˆ
     public void Exit()
     {
 
     }
 
-    //µãÊı½áËã
+    //ç‚¹æ•°ç»“ç®—
     public void PointsRemain()
     {
         pointsRemain = LevelManager.instance.timer*100 + GameManger.Instance.enemyKill;
@@ -88,15 +90,17 @@ public class Gameover : MonoBehaviour
         pointsRemainText.text = ":" + pointsRemain.ToString("00");
     }
 
-    //µãÊıË¢ĞÂ
+    //ç‚¹æ•°åˆ·æ–°
     public void PointsNew()
     {
         pointsRemainText.text = ":" + pointsRemain.ToString("00");
     }
 
-    //Ç¿»¯¸¡ÔêÌõÉÏÏŞ
+    //å¼ºåŒ–æµ®èºæ¡ä¸Šé™
     public void ImpetuousButton()
     {
+
+        UnityEngine.Debug.Log("1111");
         if (pointsRemain >= impetuousButtonSpend && impetuousButtonSpend<=1600f)
         {
             pointsRemain -= impetuousButtonSpend;
@@ -106,15 +110,16 @@ public class Gameover : MonoBehaviour
             impetuousButtonSpend *= 2;
             impetuousLevel += 1;
 
-            //¸üĞÂÎÄ±¾
+            //æ›´æ–°æ–‡æœ¬
             PointsNew();
-            impetuousLevelText.text = "LEVEL£º" + impetuousLevel.ToString("0");
+            impetuousLevelText.text = "LEVELï¼š" + impetuousLevel.ToString("0");
         }
     }
 
-    //Ç¿»¯¹¥»÷Á¦
+    //å¼ºåŒ–æ”»å‡»åŠ›
     public void AttackspeedButton()
     {
+        UnityEngine.Debug.Log("1111");
         if (pointsRemain >= attackspeedButtonSpend && attackspeedButtonSpend<=1600f)
         {
             pointsRemain -= attackspeedButtonSpend;
@@ -127,15 +132,16 @@ public class Gameover : MonoBehaviour
             attackspeedButtonSpend *= 2;
             attackspeedLevel += 1;
 
-            //¸üĞÂÎÄ±¾
+            //æ›´æ–°æ–‡æœ¬
             PointsNew();
-            attackspeedLevelText.text = "LEVEL£º" + attackspeedLevel.ToString("0");
+            attackspeedLevelText.text = "LEVELï¼š" + attackspeedLevel.ToString("0");
         }
     }
 
-    //Ç¿»¯ÒÆ¶¯ËÙ¶È
+    //å¼ºåŒ–ç§»åŠ¨é€Ÿåº¦
     public void MovespeedButton()
     {
+        UnityEngine.Debug.Log("1111");
         if (pointsRemain >= movespeedButtonSpend && movespeedButtonSpend<=1600f)
         {
             pointsRemain -= movespeedButtonSpend;
@@ -145,15 +151,16 @@ public class Gameover : MonoBehaviour
             movespeedButtonSpend *= 2;
             movespeedLevel += 1;
             
-            //¸üĞÂÎÄ±¾
+            //æ›´æ–°æ–‡æœ¬
             PointsNew();
-            movespeedLevelText.text = "LEVEL£º" + movespeedLevel.ToString("0");
+            movespeedLevelText.text = "LEVELï¼š" + movespeedLevel.ToString("0");
         }
     }
 
-    //Ç¿»¯Ú¤ÏëÊÕÒæ
+    //å¼ºåŒ–å†¥æƒ³æ”¶ç›Š
     public void MeditationButton()
     {
+        UnityEngine.Debug.Log("1111");
         if (pointsRemain >= meditationButtonSpend && meditationButtonSpend<=1600f)
         {
             pointsRemain -= meditationButtonSpend;
@@ -163,9 +170,9 @@ public class Gameover : MonoBehaviour
             meditationButtonSpend *= 2;
             meditationLevel += 1;
 
-            //¸üĞÂÎÄ±¾
+            //æ›´æ–°æ–‡æœ¬
             PointsNew();
-            meditationLevelText.text = "LEVEL£º" + meditationLevel.ToString("0");
+            meditationLevelText.text = "LEVELï¼š" + meditationLevel.ToString("0");
         }
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,13 +19,15 @@ public class GamestartMenu : MonoBehaviour
 
     public void GameStartButton()
     {
-        //×ªµ½ÏÂÒ»¸ö³¡¾°
+        Debug.Log("1");
+        //è½¬åˆ°ä¸‹ä¸€ä¸ªåœºæ™¯
         //SceneManager.loadScene(SceneManager.GetActiveScene().buildIndex + 1);
     } 
 
     public void ExitButton()
     {
-        //ÍË³öÓÎÏ·
+        Debug.Log("2");
+        //é€€å‡ºæ¸¸æˆ
         Application.Quit();
     }
 }

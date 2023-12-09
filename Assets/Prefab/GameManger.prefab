@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf4e9856873360408319afcc8ad84d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyKill: 0
+  PopupPrefab: {fileID: 918292656546070432, guid: d314a6391ff87eb43970a75336ede7a6, type: 3}

@@ -235,13 +235,17 @@ MonoBehaviour:
   enemyList:
   - {fileID: 1174231332618142273, guid: 544735ac596fa7541855ff4a1e1763c2, type: 3}
   - {fileID: 1174231332618142273, guid: 544735ac596fa7541855ff4a1e1763c2, type: 3}
-  spawnSpeed: 1
+  spawnWeight: 
+  spawnSpeed: 
+  spawnRange: 
+  curStage: 0
   distanceX: 20
   distanceY: 10
   up: 0
   down: 0
   right: 0
   left: 0
+  enableTime: 0
 --- !u!1001 &886243821
 PrefabInstance:
   m_ObjectHideFlags: 0
