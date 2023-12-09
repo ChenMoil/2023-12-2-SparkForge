@@ -75,9 +75,9 @@ public class Gameover : MonoBehaviour
     }
 
     //退出游戏
-    public void Exit()
+    public void Exit(string sceneName)
     {
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     //点数结算

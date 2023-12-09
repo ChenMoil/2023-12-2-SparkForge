@@ -17,10 +17,9 @@ public class GamestartMenu : MonoBehaviour
         
     }
 
-    public void GameStartButton()
+    public void GameStartButton(string sceneName)
     {
-        //转到下一个场景
-        //SceneManager.loadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     } 
 
     public void ExitButton()
