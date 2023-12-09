@@ -21,6 +21,8 @@ public class PlayerControl : MonoBehaviour
     public float playerSpeed;
     //冥想影响速度的大小， 最终速度 = playerSpeed * meditationSpeed
     public float meditationSpeed;
+    //冥想每秒减少的数值
+    public float meditation;
 
     //刚体组件
     private Rigidbody2D playerRigidbody;
@@ -108,10 +110,10 @@ public class PlayerControl : MonoBehaviour
         {
             meditationTimer += Time.deltaTime;
 
-            //每0.1s减少一次浮躁值
-            if (meditationTimer >= 0.1f)
+            //每0.5s减少一次浮躁值
+            if (meditationTimer >= 1f)
             {
-                ImpetuousBar.instance.Meditation(1);
+                ImpetuousBar.instance.Meditation(meditation / 2);
                 meditationTimer = 0;
             }
 

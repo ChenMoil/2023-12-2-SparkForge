@@ -37,6 +37,10 @@ public class NomrolBullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             GameManger.Instance.GetAi[collision.gameObject].TakeDamege(damage);
+            Vector2 towards = (collision.gameObject.transform.position - gameObject.transform.position).normalized;
+
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(towards * 500f);
+
             if (!isPenetrate)
             {
                 //结束所有协程

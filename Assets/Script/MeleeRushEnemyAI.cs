@@ -215,7 +215,7 @@ public class MeleeRushAI_Attack : IState
         timer += Time.deltaTime;
         if (timer <= blackBoard.rushWaitTime)  //蓄力阶段
         {
-
+            blackBoard.rigidbody2D.velocity = Vector2.zero;
         }
         if (timer > blackBoard.rushWaitTime && timer < blackBoard.rushWaitTime + blackBoard.rushTime) //冲锋阶段
         {

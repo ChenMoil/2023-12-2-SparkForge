@@ -103,6 +103,9 @@ public class ImpetuousBar : MonoBehaviour
     //玩家受击
     public void TakeDamage(float damageToTake)
     {
+        //显示伤害数字
+        PopupText.Create(PlayerControl.Instance.transform.position, damageToTake < 0 ? (int)-damageToTake : (int)damageToTake, damageToTake < 0 ? 2 : 1);
+
         currentImpetuousBar += damageToTake;
 
         if(currentImpetuousBar>=maxImpetuousBar)
@@ -147,6 +150,7 @@ public class ImpetuousBar : MonoBehaviour
     /// <param name="meditation">浮躁条减少的大小</param>
     public void Meditation(float meditation)
     {
+        PopupText.Create(PlayerControl.Instance.transform.position, (int)meditation, 2);
         currentImpetuousBar -= meditation;
 
         impetuousSlider.value = currentImpetuousBar;//UI
