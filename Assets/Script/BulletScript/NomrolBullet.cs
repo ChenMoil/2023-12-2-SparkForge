@@ -33,6 +33,7 @@ public class NomrolBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("hello");
         //如果击中的是敌人
         if (collision.gameObject.tag == "Enemy")
         {

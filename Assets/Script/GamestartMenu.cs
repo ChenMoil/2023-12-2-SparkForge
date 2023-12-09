@@ -8,13 +8,13 @@ public class GamestartMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void GameStartButton()
@@ -24,7 +24,7 @@ public class GamestartMenu : MonoBehaviour
         SceneManager.LoadScene(1);
         //转到下一个场景
         //SceneManager.loadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    } 
+    }
 
     public void ExitButton()
     {
@@ -32,7 +32,7 @@ public class GamestartMenu : MonoBehaviour
 
         //退出游戏
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #else
             Application.Quit();
         #endif
