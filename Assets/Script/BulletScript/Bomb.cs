@@ -6,6 +6,7 @@ public class Bomb : MonoBehaviour
 {
     //伤害
     private int damage;
+
     void Start()
     {
         damage = BombBullet.Damage;
@@ -22,6 +23,9 @@ public class Bomb : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             GameManger.Instance.GetAi[collision.gameObject].TakeDamege(damage);
+            Vector2 towards = (collision.gameObject.transform.position - gameObject.transform.position).normalized;
+
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(towards * 500f);
         }
     }
     IEnumerator Bombing(float time)

@@ -16,6 +16,13 @@ public class RangeEnemyBlackboard : BlockBorad
     public float createTime = 1.0f; //生成过渡时间
 
     public int maxDistance;  //与玩家的最大距离(超过这个距离会逃跑)
+
+    public float attackInterval; //攻击间隔
+
+    public GameObject Bullet; //发射的子弹
+    public float BulletSpeed; //发射的子弹速度
+
+    [NonSerialized]public GameObject handParent;
 }
 
 /// <summary>
@@ -29,6 +36,7 @@ public class RangeEnemyAI : AiParent
     void Start()
     {
         Init();
+        blackboard.handParent = transform.GetChild(0).gameObject;
     }
 
     //禁用回到对象池时
@@ -129,6 +137,8 @@ public class RangeAI_Attack : IState
     public RangeEnemyBlackboard blackBoard;
 
     private FSM fsm;
+
+    public float timer; //攻击计时器
     public RangeAI_Attack(FSM fsm)
     {
         this.fsm = fsm;
@@ -164,5 +174,24 @@ public class RangeAI_Attack : IState
         }
         else { toward *= -1; }
         blackBoard.rigidbody2D.velocity = toward * blackBoard.speed * AiParent.moveSpeedMultiplier; //速度乘以倍率
+
+
+        //攻击部分
+        //让手对着玩家
+        PlayerControl.LookAt(PlayerControl.Instance.gameObject.transform.position, blackBoard.handParent);
+        timer += Time.deltaTime;
+        if (timer > blackBoard.attackInterval)
+        {
+            timer = 0;
+
+            //生成子弹
+            GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(blackBoard.Bullet);
+            //改变位置
+            newBullet.transform.position = blackBoard.handParent.transform.GetChild(0).position;
+            //改变速度
+            Vector2 towards = ((Vector2)PlayerControl.Instance.gameObject.transform.position - (Vector2)blackBoard.handParent.transform.position).normalized;
+            newBullet.GetComponent<Rigidbody2D>().velocity = blackBoard.BulletSpeed * towards;
+
+        }
     }
 }

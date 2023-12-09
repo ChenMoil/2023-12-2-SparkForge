@@ -11,6 +11,8 @@ public class GameManger : MonoBehaviour
     public int enemyKill = 0; //玩家杀敌数
     
     public Dictionary<GameObject, AiParent> GetAi;
+
+    public GameObject PopupPrefab; 
     void Awake()
     {
         if (Instance == null)

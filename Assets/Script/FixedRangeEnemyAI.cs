@@ -158,6 +158,8 @@ public class FixedRangeAI_Attack : IState
 
     public void OnUpdate()
     {
+        blackBoard.rigidbody2D.velocity = Vector3.zero;
+
         //让手对着玩家
         PlayerControl.LookAt(PlayerControl.Instance.gameObject.transform.position, blackBoard.handParent);
 
