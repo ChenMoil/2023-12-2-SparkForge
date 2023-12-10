@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "JoyStickAttack",
+                    "type": "Value",
+                    "id": "010c4deb-18de-481b-80b1-3d9b58d7c0be",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Meditation",
                     "type": "Button",
                     "id": "2e4e3b7f-eeb8-4d2a-b7af-0d63eca7d9c2",
@@ -119,6 +128,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "650c95ff-6fa3-49a0-ab8c-b95770fbf47a",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoyStickAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

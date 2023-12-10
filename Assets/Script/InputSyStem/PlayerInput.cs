@@ -37,6 +37,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""JoyStickAttack"",
+                    ""type"": ""Value"",
+                    ""id"": ""010c4deb-18de-481b-80b1-3d9b58d7c0be"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Meditation"",
                     ""type"": ""Button"",
                     ""id"": ""2e4e3b7f-eeb8-4d2a-b7af-0d63eca7d9c2"",
@@ -143,6 +152,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""650c95ff-6fa3-49a0-ab8c-b95770fbf47a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoyStickAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -152,6 +172,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // PlayerControl
         m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
         m_PlayerControl_Move = m_PlayerControl.FindAction("Move", throwIfNotFound: true);
+        m_PlayerControl_JoyStickAttack = m_PlayerControl.FindAction("JoyStickAttack", throwIfNotFound: true);
         m_PlayerControl_Meditation = m_PlayerControl.FindAction("Meditation", throwIfNotFound: true);
         m_PlayerControl_Attack = m_PlayerControl.FindAction("Attack", throwIfNotFound: true);
     }
@@ -216,6 +237,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControl;
     private List<IPlayerControlActions> m_PlayerControlActionsCallbackInterfaces = new List<IPlayerControlActions>();
     private readonly InputAction m_PlayerControl_Move;
+    private readonly InputAction m_PlayerControl_JoyStickAttack;
     private readonly InputAction m_PlayerControl_Meditation;
     private readonly InputAction m_PlayerControl_Attack;
     public struct PlayerControlActions
@@ -223,6 +245,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         private @PlayerInput m_Wrapper;
         public PlayerControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerControl_Move;
+        public InputAction @JoyStickAttack => m_Wrapper.m_PlayerControl_JoyStickAttack;
         public InputAction @Meditation => m_Wrapper.m_PlayerControl_Meditation;
         public InputAction @Attack => m_Wrapper.m_PlayerControl_Attack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
@@ -237,6 +260,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @JoyStickAttack.started += instance.OnJoyStickAttack;
+            @JoyStickAttack.performed += instance.OnJoyStickAttack;
+            @JoyStickAttack.canceled += instance.OnJoyStickAttack;
             @Meditation.started += instance.OnMeditation;
             @Meditation.performed += instance.OnMeditation;
             @Meditation.canceled += instance.OnMeditation;
@@ -250,6 +276,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @JoyStickAttack.started -= instance.OnJoyStickAttack;
+            @JoyStickAttack.performed -= instance.OnJoyStickAttack;
+            @JoyStickAttack.canceled -= instance.OnJoyStickAttack;
             @Meditation.started -= instance.OnMeditation;
             @Meditation.performed -= instance.OnMeditation;
             @Meditation.canceled -= instance.OnMeditation;
@@ -276,6 +305,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerControlActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnJoyStickAttack(InputAction.CallbackContext context);
         void OnMeditation(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }

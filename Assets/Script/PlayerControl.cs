@@ -2,11 +2,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -61,7 +65,7 @@ public class PlayerControl : MonoBehaviour
         Attack(isMeditation);
 
         //调整手的方向
-        if (handParent != null)
+        if (handParent != null /*&& playerInputControl.PlayerControl.JoyStickAttack.ReadValue<Vector2>() != Vector2.zero*/)
             LookAt(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) + new Vector3(0, 0, 10), handParent);
 
         //给动画机传入浮躁等级
@@ -150,6 +154,36 @@ public class PlayerControl : MonoBehaviour
                 newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles;
                 newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
+            }
+        }
+
+        //读取输入的数据(手机端)
+        Vector2 joyStickAttack = playerInputControl.PlayerControl.JoyStickAttack.ReadValue<Vector2>();
+        if (joyStickAttack != Vector2.zero && !isMeditation)
+        {
+            //改变手的位置
+            float angle = Mathf.Atan2(joyStickAttack.x, joyStickAttack.y) * Mathf.Rad2Deg;
+            handParent.transform.localEulerAngles = new Vector3(0, 0, -1 * angle + 90);
+
+            attackTimer += Time.deltaTime;
+            if (attackTimer * (1 + 0.1f * Gameover.instance.attackspeedLevel) >= attackSpeed[ImpetuousBar.instance.impetuousLevel])
+            {
+                //播放攻击音效
+                AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 0.5f, 0, 1);
+
+                //重置计时器
+                attackTimer = 0;
+
+                //子弹的初始速度
+                float initialVelocity = bulletSpeed[ImpetuousBar.instance.impetuousLevel];
+
+                //创造子弹
+                GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel]);
+
+                //改变子弹的初始参数
+                newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles;
+                newBullet.transform.position = handParent.transform.GetChild(0).position;
+                newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * joyStickAttack;
             }
         }
     }
