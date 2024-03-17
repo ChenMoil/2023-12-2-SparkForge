@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
         gameActive = false;
         //浮躁条停用
         ImpetuousBar.instance.gameObject.SetActive(false);
-        
+        //刷怪停止
         EnemySpawn.instance.gameObject.SetActive(false);
         ObjectPool.Instance.ClearAll();
 
