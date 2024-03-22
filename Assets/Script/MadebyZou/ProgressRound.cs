@@ -9,7 +9,7 @@ public class ProgressRound : MonoBehaviour
     public float timer;
     //敌人生成阶段
     public int enemyProgress;
-    //敌人生成阶段显示指针
+    //敌人生成阶段显示计时器指针
     public Transform progressPointer;
     //阶段倒计时指针
     public Transform countdownPointer;
@@ -17,7 +17,14 @@ public class ProgressRound : MonoBehaviour
     public float timepassMultiple = 1f;
     //总时长
     public float totalTime=180f;
+    //访问
+    public static ProgressRound instance;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +40,7 @@ public class ProgressRound : MonoBehaviour
         Progress(timer);
     }
 
-    //阶段倒计时指针函数
+    //阶段倒计时计时器函数
     public void Countdown(float timer)
     {
         //指针旋转
@@ -43,7 +50,7 @@ public class ProgressRound : MonoBehaviour
       
     }
 
-    //敌人生成阶段显示指针函数
+    //敌人生成阶段显示计时器函数
     public void Progress(float timer)
     {
         //敌人生成阶段

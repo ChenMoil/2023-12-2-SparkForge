@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 public class GamePauseManager : MonoBehaviour
 {
 
     public GameObject gamePauseCanvas;
+    //游戏进行状态
     public static bool gameisPause = false;
 
     // Start is called before the first frame update
@@ -51,16 +53,6 @@ public class GamePauseManager : MonoBehaviour
         gameisPause = true;
     }
 
-
-    /// <summary>
-    /// 游戏存档函数
-    /// </summary>
-    public void GameSaveButton()
-    {
-
-    }
-
-
     //退出游戏
     public void GameExitButton()
     {
@@ -70,7 +62,14 @@ public class GamePauseManager : MonoBehaviour
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else
-            Application.Quit();
+        Application.Quit();
         #endif
     }
+
+    //保存游戏
+    public void GameSaveButton()
+    {
+
+    }
+
 }
