@@ -8,6 +8,8 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class SaveAndLoad : MonoBehaviour
 {
+    public GameObject canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +70,7 @@ public class SaveAndLoad : MonoBehaviour
             fs.Close();
 
             //¸³Öµ
+            ImpetuousBar.instance.currentImpetuousBar = save.currentImpetuousBarValue;
         }
         else
         {
