@@ -37,4 +37,10 @@ public class GamestartMenu : MonoBehaviour
             Application.Quit();
         #endif
     }
+
+    public void GameLoadButton()
+    {
+        PlayerPrefs.SetInt("isLoad", 1);
+        SceneManager.LoadScene(1);
+    }
 }
