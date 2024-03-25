@@ -28,6 +28,12 @@ public class Bomb : MonoBehaviour
 
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(towards * 500f);
         }
+        if (collision.gameObject.tag == "EnemyField")
+        {
+            //AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[6], 1f, 0, 1f);
+            collision.gameObject.GetComponent<EnemyField>().TakeDamegeToField(damage);
+
+        }
     }
     IEnumerator Bombing(float time)
     {

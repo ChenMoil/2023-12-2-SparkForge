@@ -19,6 +19,8 @@ public class FixedRangeEnemyBlackboard : BlockBorad
     public GameObject Bullet; //发射的子弹
     public float BulletSpeed; //发射子弹的初始速度
 
+    public float idleTime;   //休息时间
+    public float attackBombNumber;   //攻击状态子弹发射数量
     public float attackInterval;   //攻击间隔
 }
 
@@ -80,6 +82,7 @@ public class FixedRangeEnemyAI : AiParent
     {
         fsm.AddState(StateType.Create, new FixedRangeAI_Create(fsm));
         fsm.AddState(StateType.Attack, new FixedRangeAI_Attack(fsm));
+        fsm.AddState(StateType.Idle, new FixedRangeAI_Idle(fsm));
     }
 
     //切换初始状态
@@ -135,6 +138,7 @@ public class FixedRangeAI_Attack : IState
 
     private FSM fsm;
 
+    private int bulletNumber; //子弹发射数量
     private float timer; //攻击计时器
     public FixedRangeAI_Attack(FSM fsm)
     {
@@ -143,7 +147,7 @@ public class FixedRangeAI_Attack : IState
     }
     public void OnEnter()
     {
-
+        bulletNumber = 0;
     }
 
     public void OnExit()
@@ -167,6 +171,8 @@ public class FixedRangeAI_Attack : IState
         {
             timer = 0;
 
+
+            bulletNumber++;
             //生成子弹
             GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(blackBoard.Bullet);
             //改变位置
@@ -176,5 +182,49 @@ public class FixedRangeAI_Attack : IState
             newBullet.GetComponent<Rigidbody2D>().velocity = blackBoard.BulletSpeed * towards;
 
         }
+        //子弹发射完毕，进入站立状态
+        if (bulletNumber >= blackBoard.attackBombNumber) 
+        {
+            fsm.SwitchState(StateType.Idle);
+        }
+    }
+}
+
+//站立休息状态状态
+public class FixedRangeAI_Idle : IState
+{
+    public FixedRangeEnemyBlackboard blackBoard;
+
+    private FSM fsm;
+
+    private float timer; //计时器
+    public FixedRangeAI_Idle(FSM fsm)
+    {
+        this.fsm = fsm;
+        this.blackBoard = fsm.blockBorad as FixedRangeEnemyBlackboard;
+    }
+    public void OnEnter()
+    {
+        timer = 0;
+    }
+
+    public void OnExit()
+    {
+
+    }
+
+    public void OnFixedUpdate()
+    {
+        timer += Time.deltaTime;
+        //站立时间到，切换至攻击状态
+        if (timer > blackBoard.idleTime)
+        {
+            fsm.SwitchState(StateType.Attack);
+        }
+    }
+
+    public void OnUpdate()
+    {
+        
     }
 }

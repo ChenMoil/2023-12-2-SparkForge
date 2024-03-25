@@ -28,7 +28,7 @@ public class ObjectPool : MonoBehaviour
     {
         if(obj == null) {  return; }
 
-        obj.transform.parent = gameObject.transform;
+        obj.transform.SetParent(gameObject.transform);
         obj.SetActive(false);
 
         if (tags.ContainsKey(obj))
@@ -59,7 +59,7 @@ public class ObjectPool : MonoBehaviour
             obj = GameObject.Instantiate(prefab);
 
 
-            obj.transform.parent = gameObject.transform;
+            obj.transform.SetParent(gameObject.transform);
 
             obj.name = prefab.name + Time.time;
         }

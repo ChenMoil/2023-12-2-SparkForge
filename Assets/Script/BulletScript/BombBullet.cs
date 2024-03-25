@@ -43,7 +43,7 @@ public class BombBullet : MonoBehaviour
     {
         Debug.Log("击中敌人");
         //如果击中的是敌人
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && collision.gameObject.tag == "EnemyField")
         {
             //生成爆炸
             GameObject bomb = Instantiate(bombGameObject);

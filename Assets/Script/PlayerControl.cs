@@ -27,6 +27,8 @@ public class PlayerControl : MonoBehaviour
     public float meditationSpeed;
     //冥想每秒减少的数值
     public float meditation;
+    //每秒冥想触发几次
+    public int meditationTimes;
 
     //刚体组件
     private Rigidbody2D playerRigidbody;
@@ -115,10 +117,11 @@ public class PlayerControl : MonoBehaviour
             meditationTimer += Time.deltaTime;
 
             //每0.5s减少一次浮躁值
-            if (meditationTimer >= 0.5f)
+            if (meditationTimer >= 1f / meditationTimes)
             {
                 AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[5], 0.6f, 0, 2.5f);
-                ImpetuousBar.instance.Meditation(meditation * (1 + Gameover.instance.meditationLevel * 0.25f) / 2);
+                //ImpetuousBar.instance.Meditation(meditation * (1 + Gameover.instance.meditationLevel * 0.25f) / 2);
+                ImpetuousBar.instance.Meditation(meditation / meditationTimes * (float)Math.Pow(1.2f, ImpetuousBar.instance.impetuousLevel));
                 meditationTimer = 0;
             }
 

@@ -33,7 +33,6 @@ public class NomrolBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hello");
         //如果击中的是敌人
         if (collision.gameObject.tag == "Enemy")
         {
@@ -42,6 +41,18 @@ public class NomrolBullet : MonoBehaviour
             Vector2 towards = (collision.gameObject.transform.position - gameObject.transform.position).normalized;
 
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(towards * 500f);
+
+            if (!isPenetrate)
+            {
+                //结束所有协程
+                StopAllCoroutines();
+                ObjectPool.Instance.ReturnCacheGameObject(gameObject);
+            }
+        }
+        if (collision.gameObject.tag == "EnemyField")
+        {
+            //AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[6], 1f, 0, 1f);
+            collision.gameObject.GetComponent<EnemyField>().TakeDamegeToField(damage);
 
             if (!isPenetrate)
             {
