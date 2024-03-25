@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//音频管理器
+//音频管理器  //饿汉单例
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;

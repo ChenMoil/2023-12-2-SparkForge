@@ -11,7 +11,7 @@ public class ObjectPool : MonoBehaviour
     // 单例
     public static ObjectPool Instance;
 
-    //根据不同对象分配不同的列表
+    //根据不同对象分配不同的队列
     private Dictionary<string, Queue<GameObject>> pool = new Dictionary<string, Queue<GameObject>>();
 
     private Dictionary<GameObject, string> tags = new Dictionary<GameObject, string>();

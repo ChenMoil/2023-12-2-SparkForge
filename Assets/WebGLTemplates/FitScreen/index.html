@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>%UNITY_WEB_NAME%</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+	<script type="text/javascript">
+	function FitScreen() {
+			console.log = console.info = console.warn = function() {};
+			var w = %UNITY_WIDTH%;
+			var h = %UNITY_HEIGHT%;
+			var availWidth = window.innerWidth;
+			var availHeight = window.innerHeight;
+
+			var canvas = document.getElementById("#canvas");
+			/**
+			//按比例调节
+			if (availWidth / availHeight > w / h) {
+				height = availHeight;
+				width = (height * w / h);
+			 } else {
+				width = availWidth;
+				height = width * h / w;
+			}
+			*/
+			height = availHeight;
+			width = availWidth;
+			document.getElementById("unityContainer").style.width = width + "px";
+			document.getElementById("unityContainer").style.height = height + "px";
+
+			canvas.style.width = "100%";
+			canvas.style.height = "100%";
+			if (window.WEBAudioMute) {
+				window.WEBAudioMute(false);
+			}
+		}
+		function mute() {
+			if (window.WEBAudioMute) {
+				window.WEBAudioMute(true);
+			}
+		}
+	</script>
+    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body onFocus="FitScreen();" onLoad="FitScreen();" onResize="FitScreen();" onblur="mute();">
+    <div class="webgl-content" id="unityContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px" ></div>
+  </body>
+</html>
