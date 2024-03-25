@@ -29,10 +29,10 @@ public class PopupText : MonoBehaviour
     private float _disappearTimer;
 
     [Header("Damage Color")]
-    public Color normalColor;  //HurtType == 1
-    public Color beHurtColor;  //HurtType == 2
-    public Color HealBackColor;     //HurtType == 3
-
+    public Color normalColor;  //HurtType == 0
+    public Color beHurtColor;  //HurtType == 1
+    public Color HealBackColor;     //HurtType == 2
+    public Color FieldHurtColor;     //HurtType == 3
     private void OnEnable()
     {
         moveUpVector = Vector3.up;
@@ -61,6 +61,11 @@ public class PopupText : MonoBehaviour
         {
             _textMeshPro.fontSize = 6;
             _textColor = HealBackColor;
+        }
+        else if (HurtType == 3)
+        {
+            _textMeshPro.fontSize = 5;
+            _textColor = FieldHurtColor;
         }
 
         _textMeshPro.color = _textColor;

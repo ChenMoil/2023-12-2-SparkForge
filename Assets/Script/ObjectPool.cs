@@ -11,7 +11,7 @@ public class ObjectPool : MonoBehaviour
     // 单例
     public static ObjectPool Instance;
 
-    //根据不同对象分配不同的列表
+    //根据不同对象分配不同的队列
     private Dictionary<string, Queue<GameObject>> pool = new Dictionary<string, Queue<GameObject>>();
 
     private Dictionary<GameObject, string> tags = new Dictionary<GameObject, string>();
@@ -28,7 +28,7 @@ public class ObjectPool : MonoBehaviour
     {
         if(obj == null) {  return; }
 
-        obj.transform.parent = gameObject.transform;
+        obj.transform.SetParent(gameObject.transform);
         obj.SetActive(false);
 
         if (tags.ContainsKey(obj))
@@ -59,7 +59,7 @@ public class ObjectPool : MonoBehaviour
             obj = GameObject.Instantiate(prefab);
 
 
-            obj.transform.parent = gameObject.transform;
+            obj.transform.SetParent(gameObject.transform);
 
             obj.name = prefab.name + Time.time;
         }

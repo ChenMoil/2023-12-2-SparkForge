@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb506d0f316390441a64a557f96f1556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reduceImpetuousBar: 2
+  reduceImpetuousBar: 0
   blackboard:
     initHp: 30
     speed: 1

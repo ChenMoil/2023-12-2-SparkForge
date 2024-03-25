@@ -1,11 +1,23 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-//音频管理器
+//音频管理器  //单例
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    private static AudioManager Instance;
+    public static AudioManager instance 
+    {
+        get
+        {
+            if (Instance == null)
+            {
+                GameObject newGameobject = new GameObject("AudioManager");
+                Instance = newGameobject.AddComponent<AudioManager>();
+            }
+            return Instance;
+        }
+    }
     public List<AudioClip> AudioClip;
 
     // 整个游戏中，总的音源数量
@@ -25,7 +37,15 @@ public class AudioManager : MonoBehaviour
             m_channels[i].channel = gameObject.AddComponent<AudioSource>();
             m_channels[i].keyOnTime = 0;
         }
-        instance = this;
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     private void Start()

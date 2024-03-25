@@ -1,17 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+ï»¿
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Threading;
-using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
+
 
 public class GamePauseManager : MonoBehaviour
 {
 
     public GameObject gamePauseCanvas;
-    //ÓÎÏ·½øĞĞ×´Ì¬
+    //æ¸¸æˆè¿›è¡ŒçŠ¶æ€
     public static bool gameisPause = false;
 
     // Start is called before the first frame update
@@ -37,7 +32,7 @@ public class GamePauseManager : MonoBehaviour
         }
     }
 
-    //»Øµ½ÓÎÏ·
+    //å›åˆ°æ¸¸æˆ
     public void Resume()
     {
         gamePauseCanvas.SetActive(false);
@@ -45,7 +40,7 @@ public class GamePauseManager : MonoBehaviour
         gameisPause = false;
     }
 
-    //ÔİÍ£ÓÎÏ·
+    //æš‚åœæ¸¸æˆ
     private void Pause()
     {
         gamePauseCanvas.SetActive(true);
@@ -53,12 +48,12 @@ public class GamePauseManager : MonoBehaviour
         gameisPause = true;
     }
 
-    //ÍË³öÓÎÏ·
+    //é€€å‡ºæ¸¸æˆ
     public void GameExitButton()
     {
         AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
 
-        //ÍË³öÓÎÏ·
+        //é€€å‡ºæ¸¸æˆ
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else
@@ -66,7 +61,7 @@ public class GamePauseManager : MonoBehaviour
         #endif
     }
 
-    //±£´æÓÎÏ·
+    //ä¿å­˜æ¸¸æˆ
     public void GameSaveButton()
     {
 

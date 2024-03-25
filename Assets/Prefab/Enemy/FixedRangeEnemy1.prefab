@@ -160,14 +160,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852d0b4d543827f48bbc7d73e90ae08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reduceImpetuousBar: 2
+  reduceImpetuousBar: 0
   blackboard:
-    initHp: 10
-    damage: 10
+    initHp: 300
+    damage: 20
     createTime: 1
     Bullet: {fileID: 7921606149699312095, guid: b3cce8325b643ab4397fbecbefa10e10, type: 3}
-    BulletSpeed: 2.5
-    attackInterval: 8
+    BulletSpeed: 5
+    idleTime: 1
+    attackBombNumber: 24
+    attackInterval: 1
 --- !u!95 &729221734411254693
 Animator:
   serializedVersion: 5

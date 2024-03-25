@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef6a62825ddb114ab6172f3f5e75435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reduceImpetuousBar: 2
+  reduceImpetuousBar: 0
   blackboard:
     initHp: 15
     speed: 2
@@ -169,7 +169,7 @@ MonoBehaviour:
     maxDistance: 3
     attackInterval: 10
     Bullet: {fileID: 7921606149699312095, guid: e9e5f3c8bf91e5044a7a3bd5aa5a167f, type: 3}
-    BulletSpeed: 2.5
+    BulletSpeed: 5
 --- !u!95 &4055696419174102702
 Animator:
   serializedVersion: 5

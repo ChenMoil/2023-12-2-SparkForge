@@ -10,7 +10,6 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public static EnemySpawn instance;
-
     //敌人预制体列表
     public List<GameObject> enemyList = new List<GameObject>();
 
@@ -37,6 +36,9 @@ public class EnemySpawn : MonoBehaviour
     private float timer;
     //启用怪物刷新的时间
     public float enableTime = 0;
+
+    //是否开始怪物刷新
+    public bool isStartEnemySpawn;
     private void Awake()
     {
         instance = this;
@@ -57,7 +59,7 @@ public class EnemySpawn : MonoBehaviour
     {
         
         timer += Time.deltaTime;
-        if(timer >= 1) //计时器每次到达1s生成一次怪物
+        if(timer >= 1 && isStartEnemySpawn == true) //计时器每次到达1s生成一次怪物
         {
             for (int i = 0;i < spawnRange.Length; i++)
             {
