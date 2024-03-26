@@ -96,7 +96,10 @@ public class Gameover : MonoBehaviour
     {
         pointsRemain = LevelManager.instance.timer + GameManger.Instance.enemyKill;
 
-        pointsRemainText.text = ":" + pointsRemain.ToString("00");
+        //跳转场景
+        SceneManager.LoadScene(2);
+
+        //pointsRemainText.text = ":" + pointsRemain.ToString("00");
         DataStorage.instance.obtainPoints = pointsRemain;
     }
 
