@@ -25,6 +25,9 @@ public class DeathScene : MonoBehaviour
     {
         //播放点击按钮音效
         AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
+
+        //调出排行榜面板
+        RankingsCanvas.instance.rankingsCanvasObject.SetActive(true);
     }
 }

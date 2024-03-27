@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.SceneManagement;
 
 public class SaveAndLoad : MonoBehaviour
 {
@@ -60,7 +61,6 @@ public class SaveAndLoad : MonoBehaviour
         //判断文件是否创建
         if (File.Exists(UnityEngine.Application.persistentDataPath + "/Data.MoodBlast"))
         {
-
             //反序列化并将数据储存至save
             BinaryFormatter moodblast = new BinaryFormatter();
             FileStream fs = File.Open(UnityEngine.Application.persistentDataPath + "/Data.MoodBlast", FileMode.Open);//打开文件
@@ -71,6 +71,10 @@ public class SaveAndLoad : MonoBehaviour
 
             //赋值
             ImpetuousBar.instance.currentImpetuousBar = save.currentImpetuousBarValue;
+            ProgressRound.instance.timer = save.currentTime;
+
+            //关闭加载游戏面板
+            GameLoad.instance.gameLoadCanvas.SetActive(false);
         }
         else
         {
