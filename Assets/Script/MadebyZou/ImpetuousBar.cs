@@ -20,9 +20,12 @@ public class ImpetuousBar : MonoBehaviour
     }
 
     //当前浮躁条与最大浮躁条
-    public float currentImpetuousBar, maxImpetuousBar;
+    [Header("当前浮躁条")]
+    public float currentImpetuousBar;
+    [Header("最高浮躁条")]
+    public float maxImpetuousBar;
     
-    //浮躁条影响倍数
+    //时间对于浮躁条影响倍数
     public float impetuousMultipie;
     //浮躁阶段
     public int impetuousLevel;

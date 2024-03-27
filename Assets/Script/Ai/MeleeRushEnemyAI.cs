@@ -5,16 +5,21 @@ using UnityEngine;
 [Serializable]
 public class MeleeRushBlackboard : BlockBorad
 {
+    [Header("初始血量")]
     public int initHp;   //初始血量
-
+    [Header("速度")]
     public float speed;  //速度
+    [Header("冲锋速度")]
     public float rushSpeed;  //冲锋速度
+    [Header("冲锋距离(距离玩家多远时发起冲锋)")]
     public float rushDistance;  //冲锋距离(距离玩家多远时发起冲锋)
+    [Header("冲锋的蓄力时间")]
     public float rushWaitTime;  //冲锋的蓄力时间
+    [Header("冲锋持续时间")]
     public float rushTime;      //冲锋持续时间
-
+    [Header("伤害")]
     public float damage; //伤害
-
+    [Header("初始攻击间隔")]
     public float initAttackInterval; //初始攻击间隔
 
     [NonSerialized]public float lastAttackPlayerTime = 0; //近战敌人上次攻击玩家的时间

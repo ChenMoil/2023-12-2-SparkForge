@@ -14,7 +14,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameObject handParent;
+    private GameObject handParent;
 
     public static PlayerControl Instance;
 
@@ -22,12 +22,16 @@ public class PlayerControl : MonoBehaviour
     private PlayerInput playerInputControl;
 
     //玩家的速度
+    [Header("玩家的速度")]
     public float playerSpeed;
     //冥想影响速度的大小， 最终速度 = playerSpeed * meditationSpeed
+    [Header("冥想影响速度的大小， 最终速度 = playerSpeed * meditationSpeed")]
     public float meditationSpeed;
     //冥想每秒减少的数值
+    [Header("冥想每秒减少的数值")]
     public float meditation;
     //每秒冥想触发几次
+    [Header("每秒冥想触发几次")]
     public int meditationTimes;
 
     //刚体组件
@@ -41,10 +45,13 @@ public class PlayerControl : MonoBehaviour
     private float attackTimer = 0;
 
     //各阶段子弹的列表
+    [Header("各阶段子弹的列表")]
     public List<GameObject> bulletList = new List<GameObject>();
     //子弹的速度
+    [Header("各阶段子弹的速度")]
     public int[] bulletSpeed;
     //各阶段的攻速(每次发射子弹的时间间隔)
+    [Header("各阶段的攻速(每次发射子弹的时间间隔)")]
     public float[] attackSpeed;
     void Start()
     {

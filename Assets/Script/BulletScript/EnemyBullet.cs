@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
     //子弹的伤害
-    [SerializeField] private int damage;
+    [NonSerialized] public int damage;
     //自动销毁的时间
     [SerializeField] private float destoryTime;
     //是否可以穿透敌人

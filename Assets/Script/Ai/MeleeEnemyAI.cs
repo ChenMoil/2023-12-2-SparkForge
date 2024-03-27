@@ -6,14 +6,15 @@ using UnityEngine;
 [Serializable]
 public class MeleeEnemyBlackboard : BlockBorad
 {
+    [Header("初始血量")]
     public int initHp;   //初始血量
-
+    [Header("速度")]
     public float speed;  //速度
-
+    [Header("伤害")]
     public float damage; //伤害
 
     public float createTime = 1.0f; //生成过渡时间
-
+    [Header("初始攻击间隔")]
     public float initAttackInterval; //初始攻击间隔
 
     [NonSerialized] public float lastAttackPlayerTime = 0; //近战敌人上次攻击玩家的时间

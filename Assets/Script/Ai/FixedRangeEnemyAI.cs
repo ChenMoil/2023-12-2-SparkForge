@@ -8,19 +8,24 @@ using UnityEngine.InputSystem;
 [Serializable]
 public class FixedRangeEnemyBlackboard : BlockBorad
 {
+    [Header("初始血量")]
     public int initHp;   //初始血量
 
-    public float damage; //伤害
+    [Header("伤害")]
+    public int damage; //伤害
 
     public float createTime = 1.0f; //生成过渡时间
 
     [NonSerialized]public GameObject handParent; //手
 
     public GameObject Bullet; //发射的子弹
+    [Header("发射子弹的初始速度")]
     public float BulletSpeed; //发射子弹的初始速度
-
+    [Header("休息时间")]
     public float idleTime;   //休息时间
+    [Header("攻击状态子弹发射总数量")]
     public float attackBombNumber;   //攻击状态子弹发射数量
+    [Header("攻击间隔")]
     public float attackInterval;   //攻击间隔
 }
 
@@ -177,6 +182,8 @@ public class FixedRangeAI_Attack : IState
             GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(blackBoard.Bullet);
             //改变位置
             newBullet.transform.position = blackBoard.handParent.transform.GetChild(0).position;
+            //改变子弹伤害
+            newBullet.GetComponent<EnemyBullet>().damage = blackBoard.damage;
             //改变速度
             Vector2 towards = ((Vector2)PlayerControl.Instance.gameObject.transform.position - (Vector2)blackBoard.handParent.transform.position).normalized;
             newBullet.GetComponent<Rigidbody2D>().velocity = blackBoard.BulletSpeed * towards;

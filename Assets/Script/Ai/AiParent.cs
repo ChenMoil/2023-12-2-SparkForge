@@ -20,7 +20,7 @@ public class AiParent : MonoBehaviour
     public void TakeDamege(int damege)
     {
         HP -= damege;
-        //怪物受伤 0
+        //怪物受伤 颜色0
         PopupText.Create(transform.position, damege, 0);
         if (HP <= 0)
         {

@@ -11,16 +11,20 @@ public class EnemySpawn : MonoBehaviour
 {
     public static EnemySpawn instance;
     //敌人预制体列表
+    [Header("敌人预制体列表")]
     public List<GameObject> enemyList = new List<GameObject>();
 
     //每种怪物生成的权重
+    [Header("每种怪物生成的权重")]
     public int[] spawnWeight;
     //根据权重得到的怪物对应的随机数区间(最大值)
     private int[] weightRange;
 
     //各阶段怪物生成速度 个/s
+    [Header("各阶段怪物生成速度 个/s")]
     public int[] spawnSpeed;
     //各阶段对应的时间区间（区间的最大值）
+    [Header("各阶段对应的时间区间（区间的最大值）")]
     public int[] spawnRange;
     //当前阶段
     public int curStage;
@@ -38,6 +42,7 @@ public class EnemySpawn : MonoBehaviour
     public float enableTime = 0;
 
     //是否开始怪物刷新
+    [Header("是否开始怪物刷新")]
     public bool isStartEnemySpawn;
     private void Awake()
     {
