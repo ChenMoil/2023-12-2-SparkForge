@@ -5664,6 +5664,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7260e386f1c20f240a9f521fb13824ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerMultipie: 0
+  gameActive: 0
+  timer: 0
+  realTimer: 0
+  timeText: {fileID: 0}
 --- !u!114 &1833866955 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8470478097640883241, guid: d7e7893d942021741a55e10768c40997, type: 3}
@@ -7064,7 +7069,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 16971985127154090, guid: 98276f11fcb166a428cd05737a6e1e16, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7900004
+      value: 0.7900002
       objectReference: {fileID: 0}
     - target: {fileID: 16971985127154090, guid: 98276f11fcb166a428cd05737a6e1e16, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7171,6 +7176,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 6836714958240377309, guid: dc1ea2fb1308ed94a91fa0603c5c51e7, type: 3}
+      propertyPath: spawnWeight.Array.data[0]
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7186,7 +7195,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3617072138256760032, guid: b87fb5ce4065f344db22a7ca054051a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7900004
+      value: 0.7900002
       objectReference: {fileID: 0}
     - target: {fileID: 3617072138256760032, guid: b87fb5ce4065f344db22a7ca054051a3, type: 3}
       propertyPath: m_LocalPosition.y
