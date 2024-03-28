@@ -44,6 +44,9 @@ public class EnemySpawn : MonoBehaviour
     //是否开始怪物刷新
     [Header("是否开始怪物刷新")]
     public bool isStartEnemySpawn;
+
+    //从gameManger那得到的怪物生成倍率
+    public float enemySpawnSpeed;
     private void Awake()
     {
         instance = this;
@@ -75,7 +78,7 @@ public class EnemySpawn : MonoBehaviour
                 }
             }
 
-            StartCoroutine(SpawnEnemy(spawnSpeed[curStage]));
+            StartCoroutine(SpawnEnemy((int)(spawnSpeed[curStage]  * enemySpawnSpeed)));
             timer = 0;
         }
     }

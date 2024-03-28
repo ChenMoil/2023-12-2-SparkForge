@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class GameManger : MonoBehaviour
 {
+    [Header("攻击速度倍率，怪物攻击间隔会除与该数值(每个浮躁阶段都会除一次)")]
+    public float attackSpeedMultiplier;
+    [Header("怪物移动倍率，怪物速度会乘该数值(每个浮躁阶段都会乘一次)")]
+    public float moveSpeedMultiplier;
+    [Header("敌人生成速度倍率（大于1生成速度加快）")]
+    public float enemySpawnSpeed;
+
     public static GameManger Instance;
 
     public int enemyKill = 0; //玩家杀敌数
@@ -29,7 +36,8 @@ public class GameManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AiParent.attackSpeedMultiplier = math.pow(1 / 1.2f, ImpetuousBar.instance.impetuousLevel);
-        AiParent.moveSpeedMultiplier = math.pow(1.2f, ImpetuousBar.instance.impetuousLevel);
+        AiParent.attackSpeedMultiplier = math.pow(1 / attackSpeedMultiplier, ImpetuousBar.instance.impetuousLevel);
+        AiParent.moveSpeedMultiplier = math.pow(moveSpeedMultiplier, ImpetuousBar.instance.impetuousLevel);
+        EnemySpawn.instance.enemySpawnSpeed = math.pow(enemySpawnSpeed, ImpetuousBar.instance.impetuousLevel);
     }
 }

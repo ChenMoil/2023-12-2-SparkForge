@@ -160,9 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852d0b4d543827f48bbc7d73e90ae08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initHp: 500
   reduceImpetuousBar: 0
   blackboard:
-    initHp: 300
     damage: 20
     createTime: 1
     Bullet: {fileID: 7921606149699312095, guid: b3cce8325b643ab4397fbecbefa10e10, type: 3}

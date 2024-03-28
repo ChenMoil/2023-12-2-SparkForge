@@ -10,6 +10,7 @@ public enum StateType
     Move,
     Attack,
     Dead,
+    Heal,
 }
 
 //各个状态所执行的函数

@@ -5,8 +5,6 @@ using UnityEngine;
 [Serializable]
 public class MeleeRushBlackboard : BlockBorad
 {
-    [Header("初始血量")]
-    public int initHp;   //初始血量
     [Header("速度")]
     public float speed;  //速度
     [Header("冲锋速度")]
@@ -50,7 +48,7 @@ public class MeleeRushEnemyAI : AiParent
     private void OnDisable()
     {
         //血量回归初始
-        HP = blackboard.initHp;
+        HP = initHp;
     }
 
     // Update is called once per frame
@@ -75,7 +73,7 @@ public class MeleeRushEnemyAI : AiParent
         InitState();
 
         //初始化血量
-        HP = blackboard.initHp;
+        HP = initHp;
         GameManger.Instance.GetAi.Add(gameObject, this);
     }
 

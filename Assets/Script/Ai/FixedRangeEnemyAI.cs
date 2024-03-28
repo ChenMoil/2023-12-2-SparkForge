@@ -8,9 +8,6 @@ using UnityEngine.InputSystem;
 [Serializable]
 public class FixedRangeEnemyBlackboard : BlockBorad
 {
-    [Header("初始血量")]
-    public int initHp;   //初始血量
-
     [Header("伤害")]
     public int damage; //伤害
 
@@ -52,7 +49,7 @@ public class FixedRangeEnemyAI : AiParent
     private void OnDisable()
     {
         //血量回归初始
-        HP = blackboard.initHp;
+        HP = initHp;
     }
 
     // Update is called once per frame
@@ -77,7 +74,7 @@ public class FixedRangeEnemyAI : AiParent
         InitState();
 
         //初始化血量
-        HP = blackboard.initHp;
+        HP = initHp;
         GameManger.Instance.GetAi.Add(gameObject, this);
         blackboard.handParent = gameObject.transform.GetChild(0).gameObject;
     }
@@ -172,7 +169,7 @@ public class FixedRangeAI_Attack : IState
         //让手对着玩家
         PlayerControl.LookAt(PlayerControl.Instance.gameObject.transform.position, blackBoard.handParent);
 
-        if (timer > blackBoard.attackInterval)
+        if (timer > blackBoard.attackInterval * AiParent.attackSpeedMultiplier)
         {
             timer = 0;
 

@@ -192,3 +192,4 @@ MonoBehaviour:
   beHurtColor: {r: 0.7735849, g: 0.23718406, b: 0.23718406, a: 1}
   HealBackColor: {r: 0.39042553, g: 0.8113208, b: 0.13394445, a: 1}
   FieldHurtColor: {r: 0.23584908, g: 0.22806162, b: 0.22806162, a: 1}
+  EnemyHealColor: {r: 0.9529412, g: 0.7044349, b: 0.18431373, a: 1}

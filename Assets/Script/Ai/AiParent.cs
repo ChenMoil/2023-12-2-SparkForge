@@ -7,18 +7,38 @@ public class AiParent : MonoBehaviour
 {
     //怪物攻速倍率（根据浮躁条变化）(与黑板中的攻击间隔相乘) / 1.2
     public static float attackSpeedMultiplier = 1; 
-    //怪物攻击倍率（根据浮躁条变化）* 1.2
-    public static float attackDamageMultiplier = 1;
     //怪物速度倍率（根据浮躁条变化）* 1.2
     public static float moveSpeedMultiplier = 1;
+    //怪物攻击倍率（根据浮躁条变化）* 1.2
+    public static float attackDamageMultiplier = 1;
 
     //当前血量
     [NonSerialized] public int HP;
+    [Header("初始血量")]
+    public int initHp; //初始血量
     //怪物死亡降低的浮躁条
     public int reduceImpetuousBar = 0;
     public FSM fsm;
     public void TakeDamege(int damege)
     {
+        //如果是HealEnemy
+        if (this is HealEnemyAI)
+        {
+            Debug.Log(1);
+            //正处于移动无敌状态
+            if (fsm.curState is HealEnemyAI_Move)
+            {
+                Debug.Log(2);
+                PopupText.Create(transform.position, 0, 0);
+                //反伤
+                ImpetuousBar.instance.TakeDamage(damege * (this as HealEnemyAI).blackboard.reboundProportion);
+
+                return;
+            }
+            
+            
+        }
+
         HP -= damege;
         //怪物受伤 颜色0
         PopupText.Create(transform.position, damege, 0);
@@ -29,6 +49,20 @@ public class AiParent : MonoBehaviour
 
             //浮躁条数值减少
             ImpetuousBar.instance.Meditation(reduceImpetuousBar);
+        }
+    }
+
+    /// <summary>
+    /// 怪物回血
+    /// </summary>
+    /// <param name="heal"></param>
+    public void TakeHeal(int heal)
+    {
+        if (HP < initHp)
+        {
+            HP += heal;
+            //怪物回血 颜色4
+            PopupText.Create(transform.position, heal, 4);
         }
     }
 }

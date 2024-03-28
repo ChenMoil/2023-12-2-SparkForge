@@ -33,6 +33,7 @@ public class PopupText : MonoBehaviour
     public Color beHurtColor;  //HurtType == 1
     public Color HealBackColor;     //HurtType == 2
     public Color FieldHurtColor;     //HurtType == 3
+    public Color EnemyHealColor;     //HurtType == 4
     private void OnEnable()
     {
         moveUpVector = Vector3.up;
@@ -66,6 +67,11 @@ public class PopupText : MonoBehaviour
         {
             _textMeshPro.fontSize = 5;
             _textColor = FieldHurtColor;
+        }
+        else if (HurtType == 4)
+        {
+            _textMeshPro.fontSize = 5;
+            _textColor = EnemyHealColor;
         }
 
         _textMeshPro.color = _textColor;

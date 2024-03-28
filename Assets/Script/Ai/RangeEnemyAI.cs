@@ -7,8 +7,6 @@ using UnityEngine;
 [Serializable]
 public class RangeEnemyBlackboard : BlockBorad
 {
-    [Header("初始血量")]
-    public int initHp;   //初始血量
     [Header("速度")]
     public int speed;  //速度
     [Header("伤害")]
@@ -51,7 +49,7 @@ public class RangeEnemyAI : AiParent
     private void OnDisable()
     {
         //血量回归初始
-        HP = blackboard.initHp;
+        HP = initHp;
     }
 
     // Update is called once per frame
@@ -76,7 +74,7 @@ public class RangeEnemyAI : AiParent
         InitState();
 
         //初始化血量
-        HP = blackboard.initHp;
+        HP = initHp;
         GameManger.Instance.GetAi.Add(gameObject, this);
     }
 
@@ -182,7 +180,7 @@ public class RangeAI_Attack : IState
         //让手对着玩家
         PlayerControl.LookAt(PlayerControl.Instance.gameObject.transform.position, blackBoard.handParent);
         timer += Time.deltaTime;
-        if (timer > blackBoard.attackInterval)
+        if (timer > blackBoard.attackInterval * AiParent.attackSpeedMultiplier)
         {
             timer = 0;
 
