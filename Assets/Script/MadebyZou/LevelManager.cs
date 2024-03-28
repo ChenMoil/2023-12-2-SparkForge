@@ -58,7 +58,7 @@ public class LevelManager : MonoBehaviour
         float minutes = Mathf.FloorToInt(time / 60f);
         float seconds = Mathf.FloorToInt(time % 60);
 
-        timeText.text = "Time:" + minutes + ":" + seconds.ToString("00");
+        //timeText.text = "Time:" + minutes + ":" + seconds.ToString("00");
     }
 
     //Gameover
