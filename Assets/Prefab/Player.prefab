@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa23482f9755d344ebe9e1b1ff5257ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handParent: {fileID: 0}
   playerSpeed: 7
   meditationSpeed: 0.5
   meditation: 40
+  meditationTimes: 0
   bulletList:
   - {fileID: 954591438704356076, guid: dbbeb797bc6d4fe4ebb5ec0b20018312, type: 3}
   - {fileID: 954591438704356076, guid: bc5d2751076316a4599db05a14f26b1f, type: 3}
@@ -204,6 +204,7 @@ MonoBehaviour:
   - 0.4
   - 0.02
   - 0.15
+  handXRotation: 60
 --- !u!50 &3699875455885091764
 Rigidbody2D:
   serializedVersion: 4
@@ -321,11 +322,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7804511384990038078}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4345143491490753252}
   m_Father: {fileID: 2453125876665787629}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}

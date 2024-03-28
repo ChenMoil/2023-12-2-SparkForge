@@ -53,6 +53,9 @@ public class PlayerControl : MonoBehaviour
     //各阶段的攻速(每次发射子弹的时间间隔)
     [Header("各阶段的攻速(每次发射子弹的时间间隔)")]
     public float[] attackSpeed;
+
+    //手的x旋转
+    public int handXRotation;
     void Start()
     {
         //玩家刚体初始化
@@ -161,7 +164,7 @@ public class PlayerControl : MonoBehaviour
                 GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel]);
 
                 //改变子弹的初始参数
-                newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles;
+                newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles - new Vector3(handXRotation, 0, 0);
                 newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * towards;
             }
@@ -173,7 +176,7 @@ public class PlayerControl : MonoBehaviour
         {
             //改变手的位置
             float angle = Mathf.Atan2(joyStickAttack.x, joyStickAttack.y) * Mathf.Rad2Deg;
-            handParent.transform.localEulerAngles = new Vector3(0, 0, -1 * angle + 90);
+            handParent.transform.localEulerAngles = new Vector3(handXRotation, 0, -1 * angle + 90);
 
             attackTimer += Time.deltaTime;
             if (attackTimer * (1 + 0.1f * Gameover.instance.attackspeedLevel) >= attackSpeed[ImpetuousBar.instance.impetuousLevel])
@@ -191,7 +194,7 @@ public class PlayerControl : MonoBehaviour
                 GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(bulletList[ImpetuousBar.instance.impetuousLevel]);
 
                 //改变子弹的初始参数
-                newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles;
+                newBullet.transform.localEulerAngles = handParent.transform.localEulerAngles - new Vector3(handXRotation, 0, 0); 
                 newBullet.transform.position = handParent.transform.GetChild(0).position;
                 newBullet.GetComponent<Rigidbody2D>().velocity = initialVelocity * joyStickAttack;
             }
@@ -204,7 +207,7 @@ public class PlayerControl : MonoBehaviour
         dir.z = 0;
         float angle =
             Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);                     //利用角度得到rotation
+        Quaternion rotation = Quaternion.Euler(PlayerControl.Instance.handXRotation, 0, angle);                     //利用角度得到rotation
         self.transform.localRotation = rotation;
         //self.transform.eulerAngles =
         //    Vector3.Lerp(self.transform.eulerAngles, new Vector3(0, 0, angle), 0.1f);

@@ -24,11 +24,9 @@ public class AiParent : MonoBehaviour
         //如果是HealEnemy
         if (this is HealEnemyAI)
         {
-            Debug.Log(1);
             //正处于移动无敌状态
             if (fsm.curState is HealEnemyAI_Move)
             {
-                Debug.Log(2);
                 PopupText.Create(transform.position, 0, 0);
                 //反伤
                 ImpetuousBar.instance.TakeDamage(damege * (this as HealEnemyAI).blackboard.reboundProportion);
