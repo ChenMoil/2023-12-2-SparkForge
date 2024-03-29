@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 504475579594446016}
   - component: {fileID: 5790000007109279670}
   - component: {fileID: 7803143768876350647}
+  - component: {fileID: -1388210031088007210}
   m_Layer: 0
   m_Name: EnemyBeHurtParcitle
   m_TagString: Untagged
@@ -4830,3 +4831,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-1388210031088007210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78493739100582296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05472dc36e3c5b14fb15677c5af60179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestoryTime: 0.6

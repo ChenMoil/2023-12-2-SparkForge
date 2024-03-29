@@ -37,7 +37,8 @@ public class AiParent : MonoBehaviour
             
         }
 
-
+        //生成粒子效果
+        ParticleManger.instance.ShowParticle(0, this.gameObject);
         HP -= damege;
         //怪物受伤 颜色0
         PopupText.Create(transform.position, damege, 0);
