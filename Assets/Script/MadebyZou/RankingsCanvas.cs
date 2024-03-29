@@ -29,9 +29,11 @@ public class RankingsCanvas : MonoBehaviour
         rankingsCanvasObject.SetActive(false);
 
         //赋值
+        //历史值
         points = DataStorage.instance.obtainPoints;
         ProcessingDate();
-        currentPoints.text = DataStorage.instance.obtainPoints.ToString();
+        //当前值
+        currentPoints.text = "CurrentPoints:  " + DataStorage.instance.obtainPoints.ToString();
     }
 
     // Update is called once per frame
@@ -74,7 +76,7 @@ public class RankingsCanvas : MonoBehaviour
         //给榜赋值
         for(int i = 0; i < 6; i++)
         {
-            rankText[i].text = pointsTable[6-i].ToString();
+            rankText[i].text = $"TOP{i+1}:  " + pointsTable[6 - i].ToString();
         }
     }
 }
