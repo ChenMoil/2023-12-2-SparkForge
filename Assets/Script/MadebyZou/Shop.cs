@@ -7,7 +7,9 @@ using System;
 
 public class Shop : MonoBehaviour
 {
+
     public GameObject shopCanvasObject;
+    
     //各项强化等级
     public Text decreaseImpetuousLevel;
     public Text shieldLevel;//护盾等级
@@ -15,12 +17,14 @@ public class Shop : MonoBehaviour
     public Text fullScreenDamageLevel;
     //特殊效果
     public Text calmdownSkillLevel;
+    
     //强化所需点数
-    public float decreaseImpetuousCost = 1f;
-    public float shieldCost = 1f;
-    public float moveSpeedCost = 1f;
-    public float fullScreenDamageCost = 1f;
-    public float calmdownCost = 1f;
+    public float decreaseImpetuousCost;
+    public float shieldCost;
+    public float moveSpeedCost;
+    public float fullScreenDamageCost;
+    public float calmdownCost;
+    
     //当前剩余点数
     public Text PointsRemainText;
     public float PointsRemain;
@@ -37,6 +41,14 @@ public class Shop : MonoBehaviour
     void Start()
     {
         shopCanvasObject.SetActive(false);
+
+
+        //各项强化花费点数初始花费
+        decreaseImpetuousCost = 150f * (PlayerPrefs.GetInt("decreaseImpetuousLevel") + 1);
+        shieldCost = 100f * (PlayerPrefs.GetInt("shieldLevel") + 1);
+        moveSpeedCost = 125f * (PlayerPrefs.GetInt("moveSpeedLevel") + 1);
+        fullScreenDamageCost = 200 * (PlayerPrefs.GetInt("fullScreenDamageLevel") + 1);
+        calmdownCost = 2500f;
 
         //显示等级
         decreaseImpetuousLevel.text = PlayerPrefs.GetInt("decreaseImpetuousLevel").ToString();
@@ -66,6 +78,16 @@ public class Shop : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(1);
+    }
+
+    //退出游戏
+    public void Exit()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 
     //击败敌人降低少量情绪值能力
