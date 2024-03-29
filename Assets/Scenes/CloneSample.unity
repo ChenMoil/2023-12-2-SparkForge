@@ -594,6 +594,10 @@ PrefabInstance:
       propertyPath: PopupPrefab
       value: 
       objectReference: {fileID: 918292656546070432, guid: d314a6391ff87eb43970a75336ede7a6, type: 3}
+    - target: {fileID: 345562518823146667, guid: 1f9eea180bd763a4081ea19cb21a365a, type: 3}
+      propertyPath: enemySpawnSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401451096616528005, guid: 1f9eea180bd763a4081ea19cb21a365a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.21304989
