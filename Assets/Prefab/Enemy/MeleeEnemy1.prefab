@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initHp: 500
-  reduceImpetuousBar: 0
+  reduceImpetuousBar: 2
   blackboard:
     speed: 0.5
     damage: 0
