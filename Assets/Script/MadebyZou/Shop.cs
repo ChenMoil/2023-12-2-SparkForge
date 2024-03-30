@@ -81,13 +81,9 @@ public class Shop : MonoBehaviour
     }
 
     //退出游戏
-    public void Exit()
+    public void BackButton()
     {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
+        SceneManager.LoadScene(0);
     }
 
     //击败敌人降低少量情绪值能力
