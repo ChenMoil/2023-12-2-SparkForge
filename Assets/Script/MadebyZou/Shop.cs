@@ -135,7 +135,7 @@ public class Shop : MonoBehaviour
             currentLevel++;
             PlayerPrefs.SetInt("fullScreenDamageLevel", currentLevel);
         }
-        moveSpeedLevel.text = currentLevel.ToString();
+        fullScreenDamageLevel.text = currentLevel.ToString();
     }
 
     //强制冷静能力
