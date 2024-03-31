@@ -62,7 +62,7 @@ public class ImpetuousBar : MonoBehaviour
     //浮躁条的阶段性变化
     public void ImpetuousMultipieChange()
     {      
-        if (currentImpetuousBar < maxImpetuousBar / 8f && timer > 3f && impetuousLevel != 0)
+        if (currentImpetuousBar < maxImpetuousBar / 6f && timer > 3f && impetuousLevel != 0)
         {
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
@@ -70,7 +70,7 @@ public class ImpetuousBar : MonoBehaviour
             impetuousMultipie = 4f;
             impetuousLevel = 0;//阶段一
         }
-        else if (currentImpetuousBar >= maxImpetuousBar / 8f && currentImpetuousBar < maxImpetuousBar * 5 / 16f && timer > 3f && impetuousLevel != 1)
+        else if (currentImpetuousBar >= maxImpetuousBar / 6f && currentImpetuousBar < maxImpetuousBar * 1 / 3f && timer > 3f && impetuousLevel != 1)
         {
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
@@ -78,7 +78,7 @@ public class ImpetuousBar : MonoBehaviour
             impetuousMultipie = 2f;
             impetuousLevel = 1;//阶段二
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 5 / 16f && currentImpetuousBar < maxImpetuousBar * 3 / 8f && timer > 3f && impetuousLevel != 2)
+        else if (currentImpetuousBar >= maxImpetuousBar * 1 / 3f && currentImpetuousBar < maxImpetuousBar * 1 /2f && timer > 3f && impetuousLevel != 2)
         {
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
@@ -86,7 +86,7 @@ public class ImpetuousBar : MonoBehaviour
             impetuousMultipie = 1f;
             impetuousLevel = 2;//阶段三
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 3 / 8f && currentImpetuousBar < maxImpetuousBar * 13 / 16f && timer > 3f && impetuousLevel != 3)
+        else if (currentImpetuousBar >= maxImpetuousBar * 1 / 2f && currentImpetuousBar < maxImpetuousBar * 2 / 3f && timer > 3f && impetuousLevel != 3)
         {
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
@@ -94,7 +94,7 @@ public class ImpetuousBar : MonoBehaviour
             impetuousMultipie = 0.5f;
             impetuousLevel = 3;//阶段四
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 13 / 16f && currentImpetuousBar < maxImpetuousBar * 15 / 16f && timer > 3f && impetuousLevel != 4)
+        else if (currentImpetuousBar >= maxImpetuousBar * 2 / 3f && currentImpetuousBar < maxImpetuousBar * 5 / 6f && timer > 3f && impetuousLevel != 4)
         {
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
@@ -102,7 +102,7 @@ public class ImpetuousBar : MonoBehaviour
             impetuousMultipie = 0.25f;
             impetuousLevel = 4;//阶段五
         }
-        else if (currentImpetuousBar >= maxImpetuousBar * 15 / 16f && currentImpetuousBar < maxImpetuousBar && timer > 3f && impetuousLevel != 5)
+        else if (currentImpetuousBar >= maxImpetuousBar * 5 / 6f && currentImpetuousBar < maxImpetuousBar && timer > 3f && impetuousLevel != 5)
         {
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
