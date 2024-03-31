@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2700fd6d88537bd47b391b90f7518791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initHp: 0
+  initHp: 10000
   reduceImpetuousBar: 0
   blackboard:
     createTime: 1
@@ -178,8 +178,9 @@ MonoBehaviour:
     skillTwoDamage: 100
     skillTwoCooldown: 5
     concussionTime: 2
+    concussionSpeed: 0
     castTime: 2
-    castSpeed: 1
+    castSpeed: 5
     skillTwoScale: 10
     bombGameObject: {fileID: 3290554349890696073, guid: 05e4032a6ed0187438bc2d6356591b3a, type: 3}
 --- !u!212 &1866685926374590721
