@@ -176,7 +176,7 @@ MonoBehaviour:
     BulletSpeed: 5
     Bullet: {fileID: 7921606149699312095, guid: 7e5e9a73fc8913c46b9432d3a9c575f7, type: 3}
     skillTwoDamage: 100
-    skillTwoCooldown: 5
+    skillTwoCooldown: 4
     concussionTime: 2
     concussionSpeed: 0
     castTime: 2

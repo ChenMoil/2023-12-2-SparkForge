@@ -131,7 +131,7 @@ MonoBehaviour:
   reduceImpetuousBar: 2
   blackboard:
     speed: 4.8
-    rushSpeed: 10.8
+    rushSpeed: 12
     rushDistance: 3
     rushWaitTime: 0.8
     rushTime: 2

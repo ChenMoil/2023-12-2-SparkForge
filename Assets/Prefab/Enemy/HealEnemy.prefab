@@ -322,7 +322,7 @@ MonoBehaviour:
     healRange: 3
     createTime: 1
     initHealInterval: 1
-    MoveTime: 5
+    MoveTime: 3
     HealTime: 5
     maxDistance: 4
-    reboundProportion: 0.1
+    reboundProportion: 0.08

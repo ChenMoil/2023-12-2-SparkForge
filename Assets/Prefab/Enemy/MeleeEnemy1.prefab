@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d611bae24a9583144827cb4f8dfd008f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initHp: 500
+  initHp: 400
   reduceImpetuousBar: 2
   blackboard:
     speed: 0.5
-    damage: 0
+    damage: 30
     createTime: 1
     initAttackInterval: 2
 --- !u!95 &3836205710847588303
