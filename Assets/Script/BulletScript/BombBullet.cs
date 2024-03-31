@@ -10,14 +10,8 @@ public class BombBullet : MonoBehaviour
     [SerializeField] private float destoryTime;
 
 
-    public static int Damage;
-
     //爆炸子物体
     public GameObject bombGameObject;
-    private void Start()
-    {
-        Damage = damage;
-    }
     private void OnEnable()
     {
         StartCoroutine(RegularDestory(destoryTime));
@@ -48,7 +42,7 @@ public class BombBullet : MonoBehaviour
             //生成爆炸
             GameObject bomb = Instantiate(bombGameObject);
             bomb.transform.position = gameObject.transform.position;
-
+            bomb.GetComponent<Bomb>().damage = damage;
             //停止协程，返回导弹
             StopAllCoroutines();
             ObjectPool.Instance.ReturnCacheGameObject(gameObject);

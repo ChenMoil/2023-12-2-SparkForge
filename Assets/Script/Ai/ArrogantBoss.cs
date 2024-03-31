@@ -7,28 +7,48 @@ using UnityEngine;
 [Serializable]
 public class ArrogantBossBlackboard : BlockBorad
 {
+    public float createTime = 1.0f; //生成过渡时间
     [Header("速度")]
     public int speed;  //速度
-    [Header("伤害")]
-    public int damage; //伤害
+    [Header("技能一和技能二切换距离")]
+    public int maxDistance;  
 
-    public float createTime = 1.0f; //生成过渡时间
-    [Header("与玩家的最大距离(超过这个距离会逃跑)")]
-    public int maxDistance;  //与玩家的最大距离(超过这个距离会逃跑)
+    [Header("技能一")]
+    [Header("伤害1伤害")]
+    public int skillOneDamage; //伤害
     [Header("攻击间隔")]
     public float attackInterval; //攻击间隔
-
-    public GameObject Bullet; //发射的子弹
     [Header("发射的子弹速度")]
     public float BulletSpeed; //发射的子弹速度
+    public GameObject Bullet; //发射的子弹
 
+    [Header("技能二")]
+    [Header("伤害2伤害")]
+    public int skillTwoDamage; //伤害
+    [Header("技能二冷却时间")]
+    public float skillTwoCooldown; //攻击间隔
+    [Header("震荡时长")]
+    public float concussionTime;
+    [Header("震荡速度比例( <1 )")]
+    public float concussionSpeed;
+    [Header("施法时间")]
+    public float castTime;
+    [Header("施法时的速度")]
+    public float castSpeed;
+    [Header("技能范围")]
+    public float skillTwoScale;
+
+    //爆炸子物体
+    public GameObject bombGameObject;
     [NonSerialized]public GameObject handParent;
+    [NonSerialized]public bool isSkillTwo; //是否可以释放第二个技能
+    [NonSerialized] public Animator animator;
 }
 
 /// <summary>
-/// 远程躲闪型敌人的ai
+/// 傲慢BOSS
 /// </summary>
-public class ArrogantBossAI : AiParent
+public class ArrogantBoss : AiParent
 {
     //储存数据
     public ArrogantBossBlackboard blackboard;
@@ -72,6 +92,7 @@ public class ArrogantBossAI : AiParent
         blackboard.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         AddState();
         InitState();
+        blackboard.animator = GetComponent<Animator>();
 
         //初始化血量
         HP = initHp;
@@ -81,8 +102,9 @@ public class ArrogantBossAI : AiParent
     //向FSM中添加状态
     private void AddState()
     {
-        fsm.AddState(StateType.Create, new RangeAI_Create(fsm));
-        fsm.AddState(StateType.Attack, new RangeAI_Attack(fsm));
+        fsm.AddState(StateType.Create, new ArrogantBossAI_Create(fsm));
+        fsm.AddState(StateType.Attack, new ArrogantBossAI_Attack(fsm));
+        fsm.AddState(StateType.SkillTwo, new ArrogantBossAI_SkillTwo(fsm));
     }
 
     //切换初始状态
@@ -131,14 +153,15 @@ public class ArrogantBossAI_Create : IState
     }
 }
 
-//攻击状态
+//技能一攻击状态
 public class ArrogantBossAI_Attack : IState
 {
     public ArrogantBossBlackboard blackBoard;
 
     private FSM fsm;
 
-    public float timer; //攻击计时器
+    public float skillTwoTimer; //技能二冷却时间计时器
+    public float attackTimer; //发射子弹计时器
     public ArrogantBossAI_Attack(FSM fsm)
     {
         this.fsm = fsm;
@@ -146,7 +169,9 @@ public class ArrogantBossAI_Attack : IState
     }
     public void OnEnter()
     {
-
+        blackBoard.animator.SetInteger("CurState", 1);
+        blackBoard.isSkillTwo = false;
+        skillTwoTimer = 0;
     }
 
     public void OnExit()
@@ -156,7 +181,13 @@ public class ArrogantBossAI_Attack : IState
 
     public void OnFixedUpdate()
     {
-
+        //计算技能二冷却
+        skillTwoTimer += Time.deltaTime;
+        if (skillTwoTimer > blackBoard.skillTwoCooldown)
+        {
+            blackBoard.isSkillTwo = true;
+            skillTwoTimer = 0;
+        }
     }
 
     public void OnUpdate()
@@ -164,36 +195,89 @@ public class ArrogantBossAI_Attack : IState
         //该单位与玩家的距离
         Vector2 distance = PlayerControl.Instance.transform.position - blackBoard.self.transform.position;
         Vector2 toward = distance.normalized; //移动的方向
-        if (distance.sqrMagnitude > blackBoard.maxDistance * blackBoard.maxDistance * 1.05f)
+        if (distance.sqrMagnitude < blackBoard.maxDistance * blackBoard.maxDistance) //进入释放技能范围
         {
-            toward *= 1;
+            if (blackBoard.isSkillTwo == true) //可以释放技能
+            {
+                //释放技能2
+                fsm.SwitchState(StateType.SkillTwo);
+            }
         }
-        else if (distance.sqrMagnitude > blackBoard.maxDistance * blackBoard.maxDistance * 0.95f)
+        if (distance.sqrMagnitude < blackBoard.maxDistance * blackBoard.maxDistance * 0.3f) //离得过近
         {
             toward *= 0;
         }
-        else { toward *= -1; }
         blackBoard.rigidbody2D.velocity = toward * blackBoard.speed * AiParent.moveSpeedMultiplier; //速度乘以倍率
 
 
         //攻击部分
         //让手对着玩家
         PlayerControl.LookAt(PlayerControl.Instance.gameObject.transform.position, blackBoard.handParent);
-        timer += Time.deltaTime;
-        if (timer > blackBoard.attackInterval * AiParent.attackSpeedMultiplier)
+        attackTimer += Time.deltaTime;
+        if (attackTimer > blackBoard.attackInterval * AiParent.attackSpeedMultiplier)
         {
-            timer = 0;
+            attackTimer = 0;
 
             //生成子弹
             GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(blackBoard.Bullet);
             //改变位置
             newBullet.transform.position = blackBoard.handParent.transform.GetChild(0).position;
             //改变子弹伤害
-            newBullet.GetComponent<EnemyBullet>().damage = blackBoard.damage;
+            newBullet.GetComponent<EnemyBullet>().damage = blackBoard.skillOneDamage;
             //改变速度
             Vector2 towards = ((Vector2)PlayerControl.Instance.gameObject.transform.position - (Vector2)blackBoard.handParent.transform.position).normalized;
             newBullet.GetComponent<Rigidbody2D>().velocity = blackBoard.BulletSpeed * towards;
 
         }
+    }
+}
+
+//技能二状态
+public class ArrogantBossAI_SkillTwo : IState
+{
+    public ArrogantBossBlackboard blackBoard;
+
+    private FSM fsm;
+
+    public float timer; //技能二计时器
+    public ArrogantBossAI_SkillTwo(FSM fsm)
+    {
+        this.fsm = fsm;
+        this.blackBoard = fsm.blockBorad as ArrogantBossBlackboard;
+    }
+    public void OnEnter()
+    {
+        blackBoard.animator.SetInteger("CurState", 2);
+        timer = 0;
+    }
+
+    public void OnExit()
+    {
+
+    }
+
+    public void OnFixedUpdate()
+    {
+        timer += Time.deltaTime;
+        if (timer > blackBoard.castTime) //施法完毕
+        {
+            //生成爆炸
+            GameObject bomb = GameObject.Instantiate(blackBoard.bombGameObject);
+            bomb.transform.position = blackBoard.self.transform.position;
+            bomb.GetComponent<Bomb>().damage = blackBoard.skillTwoDamage;
+            bomb.GetComponent<Bomb>().scale = blackBoard.skillTwoScale;
+
+
+            fsm.SwitchState(StateType.Attack);
+        }
+    }
+
+    public void OnUpdate()
+    {
+        //该单位与玩家的距离
+        Vector2 distance = PlayerControl.Instance.transform.position - blackBoard.self.transform.position;
+        Vector2 toward = distance.normalized; //移动的方向
+        blackBoard.rigidbody2D.velocity = toward * blackBoard.castSpeed * AiParent.moveSpeedMultiplier; //速度乘以倍率
+
     }
 }

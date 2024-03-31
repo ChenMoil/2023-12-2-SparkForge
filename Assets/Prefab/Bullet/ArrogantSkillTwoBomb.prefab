@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7182685266436965034}
   - component: {fileID: 2021212054994785}
-  - component: {fileID: 5230874491119490323}
   - component: {fileID: 8378957104974455093}
+  - component: {fileID: 7234944770008653893}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: ArrogantSkillTwoBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9716981, g: 0.64627093, b: 0.64627093, a: 0.7019608}
+  m_Sprite: {fileID: 21300000, guid: 0be87c139e51a7540b945cb082531c3b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -86,8 +86,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &5230874491119490323
-CircleCollider2D:
+--- !u!114 &8378957104974455093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290554349890696073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f72e332ef903f4298e809d740124dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
+  bombType: 1
+  bombTime: 0.3
+  destoryTime: 0.2
+--- !u!61 &7234944770008653893
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,21 +135,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8623158, y: 0.56}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &8378957104974455093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290554349890696073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60f72e332ef903f4298e809d740124dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 3
-  bombType: 0
-  bombTime: 0.3
-  destoryTime: 0.2
+  m_Size: {x: 0.8623158, y: 0.56}
+  m_EdgeRadius: 0

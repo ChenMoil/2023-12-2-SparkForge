@@ -13,10 +13,25 @@ public class EnemySpawn : MonoBehaviour
     //敌人预制体列表
     [Header("敌人预制体列表")]
     public List<GameObject> enemyList = new List<GameObject>();
+    [Header("BOSS预制体列表")]
+    public List<GameObject> BossList = new List<GameObject>();
+
+    [Header("突袭波怪物生成的权重")]
+    public List<int> spawnWeight0;
+    [Header("拉扯波怪物生成的权重")]
+    public List<int> spawnWeight1;
+    [Header("平缓波怪物生成的权重")]
+    public List<int> spawnWeight2;
+    [Header("弹幕波怪物生成的权重")]
+    public List<int> spawnWeight3;
+    [Header("攻击波怪物生成的权重")]
+    public List<int> spawnWeight4;
 
     //每种怪物生成的权重
-    [Header("每种怪物生成的权重")]
-    public int[] spawnWeight;
+    private List<List<int>> spawnWeight;
+    //当前波次
+    public int curWaveState;
+
     //根据权重得到的怪物对应的随机数区间(最大值)
     private int[] weightRange;
 
@@ -47,19 +62,18 @@ public class EnemySpawn : MonoBehaviour
 
     //从gameManger那得到的怪物生成倍率
     public float enemySpawnSpeed;
+    [Header("需要生成的怪物数量（别动）")]
+    public int enemyNumber;
+
+    private int curBoss = 0;
     private void Awake()
     {
         instance = this;
     }
     void Start()
     {
-        enableTime = Time.time;
-        //生成 怪物对应的随机数区间 数组
-        weightRange = new int[spawnWeight.Length];
-        for (int i = 0; i < spawnWeight.Length; i++)
-        {
-            weightRange[i] += spawnWeight[i] + (i == 0 ? 0 : weightRange[i - 1]);
-        }
+        AddToSpawnWeight();
+        RefreshWaveStateAndSpawnBoss(0);
     }
 
     
@@ -83,6 +97,38 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 随机进入一个新的刷怪阶段
+    /// 生成 当前波次 怪物对应的随机数区间 数组
+    /// </summary>
+    public void RefreshWaveStateAndSpawnBoss(int newLevel)
+    {
+        int newWaveState = UnityEngine.Random.Range(0, spawnWeight.Count);
+        curWaveState = newWaveState;
+        enableTime = Time.time;
+        //生成 怪物对应的随机数区间 数组
+        weightRange = new int[enemyNumber];
+        for (int i = 0; i < enemyNumber; i++)
+        {
+            weightRange[i] += spawnWeight[newWaveState][i] + (i == 0 ? 0 : weightRange[i - 1]);
+        }
+
+
+
+        //Boss生成
+        if (newLevel == 4)
+        {
+            LevelManager.instance.curLevel %= 4;
+
+            //通过对象池生成新敌人
+            GameObject newEnemy = ObjectPool.Instance.RequestCacheGameObejct(BossList[curBoss]);
+            curBoss += 1;
+            curBoss %= BossList.Count;
+
+            Vector3 spawnPosition = new Vector3(0, 0, 0);
+            newEnemy.transform.position = spawnPosition;
+        }
+    }
 
     /// <summary>
     /// 生成怪物的协程
@@ -127,5 +173,16 @@ public class EnemySpawn : MonoBehaviour
             }
             yield return 0;
         }
+    }
+
+    //添加各波次信息到spawnWeight
+    public void AddToSpawnWeight()
+    {
+        spawnWeight = new List<List<int>>();
+        spawnWeight.Add(spawnWeight0);
+        spawnWeight.Add(spawnWeight1);
+        spawnWeight.Add(spawnWeight2);
+        spawnWeight.Add(spawnWeight3);
+        spawnWeight.Add(spawnWeight4);
     }
 }

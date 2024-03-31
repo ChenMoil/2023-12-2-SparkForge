@@ -11,6 +11,7 @@ public enum StateType
     Attack,
     Dead,
     Heal,
+    SkillTwo,
 }
 
 //各个状态所执行的函数
