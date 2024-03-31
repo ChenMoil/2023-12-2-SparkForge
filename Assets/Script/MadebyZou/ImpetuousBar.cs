@@ -177,7 +177,9 @@ public class ImpetuousBar : MonoBehaviour
 
     public void ChangeFixAndKillText()
     {
-        fixImgae.color = new Color(currentImpetuousBar / maxImpetuousBar, 1 - currentImpetuousBar / maxImpetuousBar, 0, 1);
+        float currentLevel = impetuousLevel;
+        float level = 5f;
+        fixImgae.color = new Color(impetuousLevel / level, 1 - impetuousLevel / level, 0, 1);
         killText.text = GameManger.Instance.enemyKill.ToString();
     }
 }

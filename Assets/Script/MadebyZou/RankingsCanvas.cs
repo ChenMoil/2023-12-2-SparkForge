@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class RankingsCanvas : MonoBehaviour
 {
@@ -45,8 +46,10 @@ public class RankingsCanvas : MonoBehaviour
     //转到商店面板
     public void ShopButton()
     {
-        rankingsCanvasObject.SetActive(false);
-        Shop.instance.shopCanvasObject.SetActive(true);
+        //rankingsCanvasObject.SetActive(false);
+        //Shop.instance.shopCanvasObject.SetActive(true);
+        SceneManager.LoadScene(0);
+
     }
 
     //生成新的排行榜
