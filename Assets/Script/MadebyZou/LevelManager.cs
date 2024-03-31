@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour
         if(gameActive == true)
         {
             //浮躁条影响时间流逝
-            timer += (Time.deltaTime * ImpetuousBar.instance.impetuousMultipie);
+            //timer += (Time.deltaTime * ImpetuousBar.instance.impetuousMultipie);
             realTimer += Time.deltaTime;
             UpdateTimer(timer);
 
