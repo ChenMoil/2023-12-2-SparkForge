@@ -39,6 +39,8 @@ public class SaveAndLoad : MonoBehaviour
     //储存数据
     public void SaveBySerialization()
     {
+        //已有存档
+        PlayerPrefs.SetInt("isLoad", 1);
         //获取当前的游戏数据存在Save对象里
         Save save = CreateSave();
 

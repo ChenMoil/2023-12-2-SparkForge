@@ -46,10 +46,8 @@ public class RankingsCanvas : MonoBehaviour
     //转到商店面板
     public void ShopButton()
     {
-        //rankingsCanvasObject.SetActive(false);
-        //Shop.instance.shopCanvasObject.SetActive(true);
-        SceneManager.LoadScene(0);
-
+        rankingsCanvasObject.SetActive(false);
+        Shop.instance.shopCanvasObject.SetActive(true);     
     }
 
     //生成新的排行榜
