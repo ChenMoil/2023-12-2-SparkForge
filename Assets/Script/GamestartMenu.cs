@@ -21,7 +21,10 @@ public class GamestartMenu : MonoBehaviour
     {
         AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[2], 1f, 0, 1);
 
-        SceneManager.LoadScene(1);
+        //按钮按下
+        PlayerPrefs.SetInt("GameStartButtonIsPush", 1);
+
+        //SceneManager.LoadScene(1);
         //转到下一个场景
         //SceneManager.loadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
