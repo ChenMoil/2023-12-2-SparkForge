@@ -77,13 +77,16 @@ public class Shop : MonoBehaviour
     //重新开始游戏
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        PlayerPrefs.SetInt("RestartButtonIsPush", 1);
+        PlayerPrefs.SetInt("TransitionButtonIsPush", 1);
+        //SceneManager.LoadScene(1);
     }
 
-    //退出游戏
+    //返回菜单
     public void BackButton()
     {
-        SceneManager.LoadScene(0);
+        PlayerPrefs.SetInt("TransitionButtonIsPush", 1);
+        //SceneManager.LoadScene(0);
     }
 
     //击败敌人降低少量情绪值能力

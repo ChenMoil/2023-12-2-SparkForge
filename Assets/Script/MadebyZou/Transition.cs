@@ -12,18 +12,29 @@ public class Transition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerPrefs.GetInt("GameStartButtonIsPush")==1)
+        //场景间转场
+        if(PlayerPrefs.GetInt("TransitionButtonIsPush")==1)
         {
-            PlayerPrefs.SetInt("GameStartButtonIsPush", 0);
+            PlayerPrefs.SetInt("TransitionButtonIsPush", 0);
             LoadNextLevel();
         }
     }
 
+    /// <summary>
+    /// 场景间转场方法
+    /// </summary>
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        if(SceneManager.GetActiveScene().buildIndex<=1)
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        else if (PlayerPrefs.GetInt("RestartButtonIsPush") == 1)
+        {
+            PlayerPrefs.SetInt("RestartButtonIsPush", 0);
+            StartCoroutine(LoadLevel(1));
+        }
+        else
+            StartCoroutine(LoadLevel(0));
     }
-
     IEnumerator LoadLevel(int LevelIndex)
     {
         transition.SetTrigger("Start");

@@ -92,6 +92,7 @@ public class Gameover : MonoBehaviour
     }
 
     //点数结算
+    //角色死亡场景跳转
     public void PointsRemain()
     {
         pointsRemain = LevelManager.instance.timer + GameManger.Instance.enemyKill;
