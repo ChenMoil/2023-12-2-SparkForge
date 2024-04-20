@@ -12,8 +12,9 @@ public class Transition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //场景间转场
-        if(PlayerPrefs.GetInt("TransitionButtonIsPush")==1)
+        if (PlayerPrefs.GetInt("TransitionButtonIsPush")==1)
         {
             PlayerPrefs.SetInt("TransitionButtonIsPush", 0);
             LoadNextLevel();
@@ -43,5 +44,4 @@ public class Transition : MonoBehaviour
 
         SceneManager.LoadScene(LevelIndex);
     }
-
 }
