@@ -6667,6 +6667,10 @@ PrefabInstance:
       propertyPath: transition
       value: 
       objectReference: {fileID: 2111004748}
+    - target: {fileID: 4542742401391070370, guid: 788f9ca3d028b1147b160d5f7e22d150, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6375563895344340370, guid: 788f9ca3d028b1147b160d5f7e22d150, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +13,7 @@ public class Transition : MonoBehaviour
     void Update()
     {
 
-        //³¡¾°¼ä×ª³¡
+        //åœºæ™¯é—´è½¬åœº
         if (PlayerPrefs.GetInt("TransitionButtonIsPush")==1)
         {
             PlayerPrefs.SetInt("TransitionButtonIsPush", 0);
@@ -22,7 +22,7 @@ public class Transition : MonoBehaviour
     }
 
     /// <summary>
-    /// ³¡¾°¼ä×ª³¡·½·¨
+    /// åœºæ™¯é—´è½¬åœºæ–¹æ³•
     /// </summary>
     public void LoadNextLevel()
     {
