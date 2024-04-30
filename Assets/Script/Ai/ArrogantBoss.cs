@@ -157,11 +157,16 @@ public class ArrogantBossAI_Create : IState
 public class ArrogantBossAI_Attack : IState
 {
     public ArrogantBossBlackboard blackBoard;
-
+    public bool isIdle = true;
     private FSM fsm;
 
     public float skillTwoTimer; //技能二冷却时间计时器
     public float attackTimer; //发射子弹计时器
+    public float idleTimer;
+    public float idleTime = 2;
+    public float moveTimer;
+    public float moveTime = 2;
+    private Vector2 toward;
     public ArrogantBossAI_Attack(FSM fsm)
     {
         this.fsm = fsm;
@@ -192,9 +197,32 @@ public class ArrogantBossAI_Attack : IState
 
     public void OnUpdate()
     {
+        if (isIdle)
+        {
+            toward = new Vector2(0, 0);
+            idleTimer += Time.deltaTime;
+            if (idleTimer > idleTime)
+            {
+                idleTimer = 0;
+                isIdle = false;
+                float x = UnityEngine.Random.Range(-1f, 1f);
+                float y = UnityEngine.Random.Range(-1f, 1f);
+                toward = new Vector2(x, y).normalized;
+            }
+        }
+        else
+        {
+            moveTimer += Time.deltaTime;
+            if (moveTimer > moveTime)
+            {
+                moveTimer = 0;
+                isIdle = true;
+                toward = Vector2.zero;
+            }
+        }
+
         //该单位与玩家的距离
         Vector2 distance = PlayerControl.Instance.transform.position - blackBoard.self.transform.position;
-        Vector2 toward = distance.normalized; //移动的方向
         if (distance.sqrMagnitude < blackBoard.maxDistance * blackBoard.maxDistance) //进入释放技能范围
         {
             if (blackBoard.isSkillTwo == true) //可以释放技能
@@ -202,10 +230,6 @@ public class ArrogantBossAI_Attack : IState
                 //释放技能2
                 fsm.SwitchState(StateType.SkillTwo);
             }
-        }
-        if (distance.sqrMagnitude < blackBoard.maxDistance * blackBoard.maxDistance * 0.3f) //离得过近
-        {
-            toward *= 0;
         }
         blackBoard.rigidbody2D.velocity = toward * blackBoard.speed * AiParent.moveSpeedMultiplier; //速度乘以倍率
 

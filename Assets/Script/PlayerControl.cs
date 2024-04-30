@@ -206,8 +206,8 @@ public class PlayerControl : MonoBehaviour
         Vector3 dir = target - self.transform.position;
         dir.z = 0;
         float angle =
-            Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-        Quaternion rotation = Quaternion.Euler(PlayerControl.Instance.handXRotation, 0, angle);                     //利用角度得到rotation
+            Vector2.SignedAngle(Vector2.right, dir);
+        Quaternion rotation = Quaternion.Euler(PlayerControl.Instance.handXRotation, 0, angle);                  //利用角度得到rotation
         self.transform.localRotation = rotation;
         //self.transform.eulerAngles =
         //    Vector3.Lerp(self.transform.eulerAngles, new Vector3(0, 0, angle), 0.1f);

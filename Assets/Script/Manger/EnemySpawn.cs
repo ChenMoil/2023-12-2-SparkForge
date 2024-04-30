@@ -27,13 +27,15 @@ public class EnemySpawn : MonoBehaviour
     [Header("攻击波怪物生成的权重")]
     public List<int> spawnWeight4;
 
-    //每种怪物生成的权重
+    //当前生成怪物波次列表
+    public List<List<int>> curSpawnList;
+    //抽取几个波次
+    public int ListTimes;
+    //每个波次怪物生成的权重
     private List<List<int>> spawnWeight;
-    //当前波次
-    public int curWaveState;
 
     //根据权重得到的怪物对应的随机数区间(最大值)
-    private int[] weightRange;
+    public int[] weightRange;
 
     //各阶段怪物生成速度 个/s
     [Header("各阶段怪物生成速度 个/s")]
@@ -69,6 +71,7 @@ public class EnemySpawn : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        curSpawnList = new List<List<int>>();
     }
     void Start()
     {
@@ -103,16 +106,21 @@ public class EnemySpawn : MonoBehaviour
     /// </summary>
     public void RefreshWaveStateAndSpawnBoss(int newLevel)
     {
-        int newWaveState = UnityEngine.Random.Range(0, spawnWeight.Count);
-        curWaveState = newWaveState;
         enableTime = Time.time;
-        //生成 怪物对应的随机数区间 数组
-        weightRange = new int[enemyNumber];
-        for (int i = 0; i < enemyNumber; i++)
+        for (int i = 0; i < ListTimes; i++)
         {
-            weightRange[i] += spawnWeight[newWaveState][i] + (i == 0 ? 0 : weightRange[i - 1]);
-        }
 
+            int random = UnityEngine.Random.Range(0, spawnWeight.Count);
+            curSpawnList.Add(spawnWeight[random]);
+        }
+        weightRange = new int[enemyNumber];
+        foreach (List<int> list in curSpawnList)
+        {
+            for(int i = 0; i < list.Count; i++)
+            {
+                weightRange[i] = list[i] + (i == 0 ? weightRange[0] : weightRange[i - 1]);
+            }   
+        }
 
 
         //Boss生成
