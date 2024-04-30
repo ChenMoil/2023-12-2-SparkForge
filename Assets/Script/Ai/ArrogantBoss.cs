@@ -20,7 +20,7 @@ public class ArrogantBossBlackboard : BlockBorad
     public float attackInterval; //攻击间隔
     [Header("发射的子弹速度")]
     public float BulletSpeed; //发射的子弹速度
-    public GameObject Bullet; //发射的子弹
+    public GameObject[] Bullet; //发射的子弹列表
 
     [Header("技能二")]
     [Header("伤害2伤害")]
@@ -43,6 +43,7 @@ public class ArrogantBossBlackboard : BlockBorad
     [NonSerialized]public GameObject handParent;
     [NonSerialized]public bool isSkillTwo; //是否可以释放第二个技能
     [NonSerialized] public Animator animator;
+    [NonSerialized] public int BossID;
 }
 
 /// <summary>
@@ -105,12 +106,26 @@ public class ArrogantBoss : AiParent
         fsm.AddState(StateType.Create, new ArrogantBossAI_Create(fsm));
         fsm.AddState(StateType.Attack, new ArrogantBossAI_Attack(fsm));
         fsm.AddState(StateType.SkillTwo, new ArrogantBossAI_SkillTwo(fsm));
+        fsm.AddState(StateType.Dead, new ArrogantBossAI_Dead(fsm));
     }
 
     //切换初始状态
     private void InitState()
     {
         fsm.SwitchState(StateType.Create);
+    }
+
+    public override void TakeDamege(int damege)
+    {
+        //生成粒子效果
+        ParticleManger.instance.ShowParticle(0, this.gameObject);
+        HP -= damege;
+        //怪物受伤 颜色0
+        PopupText.Create(transform.position, damege, 0);
+        if (HP <= 0)
+        {
+            fsm.SwitchState(StateType.Dead);
+        }
     }
 }
 
@@ -243,7 +258,8 @@ public class ArrogantBossAI_Attack : IState
             attackTimer = 0;
 
             //生成子弹
-            GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(blackBoard.Bullet);
+            int temp = UnityEngine.Random.Range(0, blackBoard.Bullet.Length);
+            GameObject newBullet = ObjectPool.Instance.RequestCacheGameObejct(blackBoard.Bullet[temp]);
             //改变位置
             newBullet.transform.position = blackBoard.handParent.transform.GetChild(0).position;
             //改变子弹伤害
@@ -303,5 +319,46 @@ public class ArrogantBossAI_SkillTwo : IState
         Vector2 toward = distance.normalized; //移动的方向
         blackBoard.rigidbody2D.velocity = toward * blackBoard.castSpeed * AiParent.moveSpeedMultiplier; //速度乘以倍率
 
+    }
+}
+
+//生成状态
+public class ArrogantBossAI_Dead : IState
+{
+    private ArrogantBossBlackboard blackBoard;
+
+    private FSM fsm;
+    private float timer; //计时器
+    private float deadTime = 1.2f;
+    public ArrogantBossAI_Dead(FSM fsm)
+    {
+        this.fsm = fsm;
+        this.blackBoard = fsm.blockBorad as ArrogantBossBlackboard;
+    }
+    public void OnEnter()
+    {
+        dialogue.instance.BossDeadSign(blackBoard.BossID, 3f);
+        blackBoard.animator.SetInteger("CurState", 3);
+        timer = 0;
+    }
+
+    public void OnExit()
+    {
+
+    }
+
+    public void OnFixedUpdate()
+    {
+
+    }
+
+    public void OnUpdate()
+    {
+        timer += Time.deltaTime;
+        if (timer > deadTime)
+        {
+            fsm.SwitchState(StateType.Create);  //切换状态
+            ObjectPool.Instance.ReturnCacheGameObject(blackBoard.self);
+        }
     }
 }

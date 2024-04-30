@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2424574542346531064
 Transform:
   m_ObjectHideFlags: 0
@@ -173,13 +173,17 @@ MonoBehaviour:
     maxDistance: 5
     skillOneDamage: 10
     attackInterval: 3
-    BulletSpeed: 5
-    Bullet: {fileID: 7921606149699312095, guid: 7e5e9a73fc8913c46b9432d3a9c575f7, type: 3}
+    BulletSpeed: 3
+    Bullet:
+    - {fileID: 7921606149699312095, guid: 335f03fb9514a3443a29f7c35a1eb06b, type: 3}
+    - {fileID: 7921606149699312095, guid: 5fee479c49bbc9c44b0dd4f2a9215bb7, type: 3}
+    - {fileID: 7921606149699312095, guid: 7e45924106e4ebc42abe44adb7d5f2f7, type: 3}
+    - {fileID: 7921606149699312095, guid: 80269b19089335147a7696e62946eb83, type: 3}
     skillTwoDamage: 100
     skillTwoCooldown: 4
     concussionTime: 2
     concussionSpeed: 0
-    castTime: 2
+    castTime: 1.2
     castSpeed: 5
     skillTwoScale: 10
     bombGameObject: {fileID: 3290554349890696073, guid: 05e4032a6ed0187438bc2d6356591b3a, type: 3}
@@ -224,7 +228,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 860c18b222733fa408aaa28a1ca38cdf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b46c04d7e485744082b88ae468cb440, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -315,16 +319,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0015724301, y: -0.10848001}
+  m_Offset: {x: -0.0075047016, y: 0.00044989586}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.91200006, y: 1.5160521}
+    oldSize: {x: 1.1648617, y: 2.2233334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9070815, y: 1.3070905}
+  m_Size: {x: 1.0160117, y: 2.2148404}
   m_EdgeRadius: 0

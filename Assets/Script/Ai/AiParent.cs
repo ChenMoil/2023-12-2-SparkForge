@@ -19,24 +19,8 @@ public class AiParent : MonoBehaviour
     //怪物死亡降低的浮躁条
     public int reduceImpetuousBar = 0;
     public FSM fsm;
-    public void TakeDamege(int damege)
+    public virtual void TakeDamege(int damege)
     {
-        //如果是HealEnemy
-        if (this is HealEnemyAI)
-        {
-            //正处于移动无敌状态
-            if (fsm.curState is HealEnemyAI_Move)
-            {
-                PopupText.Create(transform.position, 0, 0);
-                //反伤
-                ImpetuousBar.instance.TakeDamage(damege * (this as HealEnemyAI).blackboard.reboundProportion);
-
-                return;
-            }
-            
-            
-        }
-
         //生成粒子效果
         ParticleManger.instance.ShowParticle(0, this.gameObject);
         HP -= damege;

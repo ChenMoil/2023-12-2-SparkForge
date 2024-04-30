@@ -126,15 +126,8 @@ public class EnemySpawn : MonoBehaviour
         //Boss生成
         if (newLevel == 4)
         {
-            LevelManager.instance.curLevel %= 4;
-
-            //通过对象池生成新敌人
-            GameObject newEnemy = ObjectPool.Instance.RequestCacheGameObejct(BossList[curBoss]);
-            curBoss += 1;
-            curBoss %= BossList.Count;
-
-            Vector3 spawnPosition = new Vector3(0, 0, 0);
-            newEnemy.transform.position = spawnPosition;
+            dialogue.instance.BossSpawnSign(curBoss, 3f, 12f);
+            StartCoroutine(SpawnBoss(15f));
         }
     }
 
@@ -182,15 +175,30 @@ public class EnemySpawn : MonoBehaviour
             yield return 0;
         }
     }
+    IEnumerator SpawnBoss(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        LevelManager.instance.curLevel %= 4;
+
+        //通过对象池生成新敌人
+        GameObject newEnemy = ObjectPool.Instance.RequestCacheGameObejct(BossList[curBoss]);
+        curBoss += 1;
+        curBoss %= BossList.Count;
+
+        Vector3 spawnPosition = new Vector3(0, 0, 0);
+        newEnemy.transform.position = spawnPosition;
+    }
 
     //添加各波次信息到spawnWeight
     public void AddToSpawnWeight()
     {
-        spawnWeight = new List<List<int>>();
-        spawnWeight.Add(spawnWeight0);
-        spawnWeight.Add(spawnWeight1);
-        spawnWeight.Add(spawnWeight2);
-        spawnWeight.Add(spawnWeight3);
-        spawnWeight.Add(spawnWeight4);
+        spawnWeight = new List<List<int>>
+        {
+            spawnWeight0,
+            spawnWeight1,
+            spawnWeight2,
+            spawnWeight3,
+            spawnWeight4
+        };
     }
 }

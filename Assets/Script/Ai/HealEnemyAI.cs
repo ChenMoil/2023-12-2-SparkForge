@@ -115,6 +115,32 @@ public class HealEnemyAI : AiParent
             blackboard.healAIList.Remove(collision.gameObject.GetComponent<AiParent>());
         }
     }
+    public override void TakeDamege(int damege)
+    {
+        //正处于移动无敌状态
+        if (fsm.curState is HealEnemyAI_Move)
+            {
+                PopupText.Create(transform.position, 0, 0);
+                //反伤
+                ImpetuousBar.instance.TakeDamage(damege * (this as HealEnemyAI).blackboard.reboundProportion);
+
+                return;
+        }
+
+        //生成粒子效果
+        ParticleManger.instance.ShowParticle(0, this.gameObject);
+        HP -= damege;
+        //怪物受伤 颜色0
+        PopupText.Create(transform.position, damege, 0);
+        if (HP <= 0)
+        {
+            ObjectPool.Instance.ReturnCacheGameObject(gameObject);
+            GameManger.Instance.enemyKill++;
+
+            //浮躁条数值减少
+            ImpetuousBar.instance.Meditation(reduceImpetuousBar);
+        }
+    }
 }
 
 //生成状态

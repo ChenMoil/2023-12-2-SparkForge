@@ -137,7 +137,7 @@ public class ImpetuousBar : MonoBehaviour
         //让玩家进入受伤状态
         if (damageToTake > 0)
         {
-            PlayerControl.Instance.EnterBeHurtState(1f);
+            PlayerControl.Instance.EnterBeHurtState(0.3f);
         }
     }
 

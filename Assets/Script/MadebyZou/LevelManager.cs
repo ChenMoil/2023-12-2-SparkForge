@@ -43,10 +43,11 @@ public class LevelManager : MonoBehaviour
     private void FixedUpdate()
     {
         secondTimer60 += Time.deltaTime;
-        if (secondTimer60 >= 60)
+        if (secondTimer60 >= 20)
         {
             secondTimer60 = 0;
             curLevel += 1;
+            curLevel %= 5;
             levelChange(curLevel);
         }
     }
