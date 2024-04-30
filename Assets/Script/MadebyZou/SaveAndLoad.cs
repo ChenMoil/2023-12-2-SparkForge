@@ -30,7 +30,7 @@ public class SaveAndLoad : MonoBehaviour
 
         //储存的数据
         save.currentImpetuousBarValue = ImpetuousBar.instance.currentImpetuousBar;
-        save.currentTime = ProgressRound.instance.timer;
+        //save.currentTime = ProgressRound.instance.timer;
         save.currentPoints = LevelManager.instance.timer + GameManger.Instance.enemyKill;
 
         return save;
@@ -39,6 +39,8 @@ public class SaveAndLoad : MonoBehaviour
     //储存数据
     public void SaveBySerialization()
     {
+        //已有存档
+        PlayerPrefs.SetInt("isLoad", 1);
         //获取当前的游戏数据存在Save对象里
         Save save = CreateSave();
 
@@ -71,7 +73,7 @@ public class SaveAndLoad : MonoBehaviour
 
             //赋值
             ImpetuousBar.instance.currentImpetuousBar = save.currentImpetuousBarValue;
-            ProgressRound.instance.timer = save.currentTime;
+            //ProgressRound.instance.timer = save.currentTime;
 
             //关闭加载游戏面板
             GameLoad.instance.gameLoadCanvas.SetActive(false);
