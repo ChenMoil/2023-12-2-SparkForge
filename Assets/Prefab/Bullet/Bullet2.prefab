@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457c1cae83b79354496b0a851199cf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  destoryTime: 5
+  damage: 120
+  destoryTime: 3
   isPenetrate: 0
 --- !u!58 &7393881707667414625
 CircleCollider2D:
