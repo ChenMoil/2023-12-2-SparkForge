@@ -27,6 +27,7 @@ public class DataStorage : MonoBehaviour
         if (LevelManager.instance != null)
         {
             survivalTime = LevelManager.instance.realTimer;
+            obtainPoints = LevelManager.instance.timer + GameManger.Instance.enemyKill;
         }
     }
 }

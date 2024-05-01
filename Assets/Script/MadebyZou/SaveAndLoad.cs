@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -25,57 +25,61 @@ public class SaveAndLoad : MonoBehaviour
 
     public Save CreateSave()
     {
-        //´´½¨Ò»¸öSave¶ÔÏó´æ´¢µ±Ç°ÓÎÏ·Êı¾İ
+        //åˆ›å»ºä¸€ä¸ªSaveå¯¹è±¡å­˜å‚¨å½“å‰æ¸¸æˆæ•°æ®
         Save save = new Save();
 
-        //´¢´æµÄÊı¾İ
+        //å‚¨å­˜çš„æ•°æ®
         save.currentImpetuousBarValue = ImpetuousBar.instance.currentImpetuousBar;
-        //save.currentTime = ProgressRound.instance.timer;
-        save.currentPoints = LevelManager.instance.timer + GameManger.Instance.enemyKill;
+        save.currentTime = ProgressRound.instance.timer;
+        save.enemyKill = GameManger.Instance.enemyKill;
+        save.gameTime = LevelManager.instance.timer;
 
         return save;
     }
 
-    //´¢´æÊı¾İ
+    //å‚¨å­˜æ•°æ®
     public void SaveBySerialization()
     {
-        //ÒÑÓĞ´æµµ
+        //å·²æœ‰å­˜æ¡£
         PlayerPrefs.SetInt("isLoad", 1);
-        //»ñÈ¡µ±Ç°µÄÓÎÏ·Êı¾İ´æÔÚSave¶ÔÏóÀï
+        //è·å–å½“å‰çš„æ¸¸æˆæ•°æ®å­˜åœ¨Saveå¯¹è±¡é‡Œ
         Save save = CreateSave();
 
-        //´´½¨Ò»¸ö¶ş½øÖÆĞÎÊ½
+        //åˆ›å»ºä¸€ä¸ªäºŒè¿›åˆ¶å½¢å¼
         BinaryFormatter moodblast = new BinaryFormatter();
 
-        //´¢´æÔÚÎÄ¼şÖĞ
+        //å‚¨å­˜åœ¨æ–‡ä»¶ä¸­
         FileStream fs = File.Create(UnityEngine.Application.persistentDataPath + "/Data.MoodBlast");
 
-        //½«Save¶ÔÏó×ª»¯Îª×Ö½Ú
+        //å°†Saveå¯¹è±¡è½¬åŒ–ä¸ºå­—èŠ‚
         moodblast.Serialize(fs, save);
 
-        //¹Ø±ÕÎÄ¼şÁ÷
+        //å…³é—­æ–‡ä»¶æµ
         fs.Close();
     }
 
-    //¶ÁÈ¡Êı¾İ
+    //è¯»å–æ•°æ®
     public void LoadByDeserialization()
     {
-        //ÅĞ¶ÏÎÄ¼şÊÇ·ñ´´½¨
+        //åˆ¤æ–­æ–‡ä»¶æ˜¯å¦åˆ›å»º
         if (File.Exists(UnityEngine.Application.persistentDataPath + "/Data.MoodBlast"))
         {
-            //·´ĞòÁĞ»¯²¢½«Êı¾İ´¢´æÖÁsave
+            //ååºåˆ—åŒ–å¹¶å°†æ•°æ®å‚¨å­˜è‡³save
             BinaryFormatter moodblast = new BinaryFormatter();
-            FileStream fs = File.Open(UnityEngine.Application.persistentDataPath + "/Data.MoodBlast", FileMode.Open);//´ò¿ªÎÄ¼ş
+            FileStream fs = File.Open(UnityEngine.Application.persistentDataPath + "/Data.MoodBlast", FileMode.Open);//æ‰“å¼€æ–‡ä»¶
             Save save = moodblast.Deserialize(fs) as Save;
 
-            //¹ØÎÄ¼şÁ÷       
+            //å…³æ–‡ä»¶æµ       
             fs.Close();
 
-            //¸³Öµ
+            //èµ‹å€¼
             ImpetuousBar.instance.currentImpetuousBar = save.currentImpetuousBarValue;
-            //ProgressRound.instance.timer = save.currentTime;
+            ProgressRound.instance.timer = save.currentTime;
+            GameManger.Instance.enemyKill = save.enemyKill;
+            LevelManager.instance.timer = save.gameTime;
 
-            //¹Ø±Õ¼ÓÔØÓÎÏ·Ãæ°å
+
+            //å…³é—­åŠ è½½æ¸¸æˆé¢æ¿
             GameLoad.instance.gameLoadCanvas.SetActive(false);
         }
         else
