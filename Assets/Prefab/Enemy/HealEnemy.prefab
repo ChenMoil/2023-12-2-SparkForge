@@ -325,4 +325,4 @@ MonoBehaviour:
     MoveTime: 3
     HealTime: 5
     maxDistance: 4
-    reboundProportion: 0.08
+    reboundProportion: 0.06

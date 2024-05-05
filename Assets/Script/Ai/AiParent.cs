@@ -17,7 +17,7 @@ public class AiParent : MonoBehaviour
     [Header("初始血量")]
     public int initHp; //初始血量
     //怪物死亡降低的浮躁条
-    public int reduceImpetuousBar = 0;
+    //public int reduceImpetuousBar = 0;
     public FSM fsm;
     public virtual void TakeDamege(int damege)
     {
@@ -32,7 +32,21 @@ public class AiParent : MonoBehaviour
             GameManger.Instance.enemyKill++;
 
             //浮躁条数值减少
-            ImpetuousBar.instance.Meditation(reduceImpetuousBar);
+            int temp = PlayerPrefs.GetInt("decreaseImpetuousLevel");
+            ImpetuousBar.instance.KillEnemy((temp + 1) * (temp + 1) / 2);
+        }
+    }
+    public void AllAttackSkill(int damege)
+    {
+        HP -= damege;
+        if (HP <= 0)
+        {
+            ObjectPool.Instance.ReturnCacheGameObject(gameObject);
+            GameManger.Instance.enemyKill++;
+
+            //浮躁条数值减少
+            int temp = PlayerPrefs.GetInt("decreaseImpetuousLevel");
+            ImpetuousBar.instance.KillEnemy((temp + 1) * (temp + 1) / 2);
         }
     }
 

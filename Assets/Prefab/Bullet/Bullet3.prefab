@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9a514e70db4664f962b54a984e2128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 200
+  damage: 160
   destoryTime: 5
   bombGameObject: {fileID: 3290554349890696073, guid: 17d228b06b2321d4493f867c8ae49af9, type: 3}
 --- !u!61 &1184807497530404669

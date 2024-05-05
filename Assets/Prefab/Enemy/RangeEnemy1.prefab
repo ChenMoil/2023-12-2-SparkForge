@@ -219,7 +219,7 @@ MonoBehaviour:
     damage: 30
     createTime: 1
     maxDistance: 3
-    attackInterval: 0.6
+    attackInterval: 0.8
     Bullet: {fileID: 7921606149699312095, guid: 7e5e9a73fc8913c46b9432d3a9c575f7, type: 3}
     BulletSpeed: 5
 --- !u!95 &4914823737626062416

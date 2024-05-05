@@ -130,7 +130,7 @@ MonoBehaviour:
   initHp: 400
   reduceImpetuousBar: 2
   blackboard:
-    speed: 0.5
+    speed: 1.75
     damage: 30
     createTime: 1
     initAttackInterval: 2

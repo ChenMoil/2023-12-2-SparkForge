@@ -111,7 +111,7 @@ public class PlayerControl : MonoBehaviour
         if (isMeditation) { playMove *= meditationSpeed; }
 
         //将速度赋值给刚体
-        playerRigidbody.velocity = playMove * playerSpeed * (1 + 0.1f * Gameover.instance.movespeedLevel);
+        playerRigidbody.velocity = playMove * playerSpeed * (1 + 0.1f * PlayerPrefs.GetInt("moveSpeedLevel"));
 
     }
 

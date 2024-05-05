@@ -138,7 +138,8 @@ public class HealEnemyAI : AiParent
             GameManger.Instance.enemyKill++;
 
             //浮躁条数值减少
-            ImpetuousBar.instance.Meditation(reduceImpetuousBar);
+            int temp = PlayerPrefs.GetInt("decreaseImpetuousLevel");
+            ImpetuousBar.instance.KillEnemy((temp + 1) * (temp + 1) / 2);
         }
     }
 }

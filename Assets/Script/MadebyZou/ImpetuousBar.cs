@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Timers;
@@ -36,7 +37,9 @@ public class ImpetuousBar : MonoBehaviour
     //阶段变化间隙时长
     public float timer;
 
-    // Start is called before the first frame update
+    private float fieldTimer;
+    private float AllAttackTimer;
+    private bool isCalmDown = false;
     void Start()
     {
         maxImpetuousBar = maxImpetuousBar * (1 + Gameover.instance.impetuousLevel * 0.2f);
@@ -56,6 +59,8 @@ public class ImpetuousBar : MonoBehaviour
         ChangeFixAndKillText();
         ImpetuousMultipieChange();
 
+        AllAttackTimer += Time.deltaTime;
+        fieldTimer += Time.deltaTime;
         timer += Time.deltaTime;
     }
 
@@ -139,6 +144,9 @@ public class ImpetuousBar : MonoBehaviour
         {
             PlayerControl.Instance.EnterBeHurtState(0.3f);
         }
+
+        //判断是否发动强制冷静
+        CalmDown();
     }
 
 
@@ -170,9 +178,21 @@ public class ImpetuousBar : MonoBehaviour
     public void Meditation(float meditation)
     {
         PopupText.Create(PlayerControl.Instance.transform.position, (int)meditation, 2);
-        currentImpetuousBar -= meditation;
+        if(currentImpetuousBar >= 0)
+            currentImpetuousBar -= meditation;
 
         impetuousSlider.value = currentImpetuousBar;//UI
+        FieldSkill();
+        AllAttack();
+    }
+    public void KillEnemy(float meditation)
+    {
+        PopupText.Create(PlayerControl.Instance.transform.position, (int)meditation, 2);
+        if (currentImpetuousBar >= 0)
+            currentImpetuousBar -= meditation;
+
+        impetuousSlider.value = currentImpetuousBar;//UI
+        AllAttack();
     }
 
     public void ChangeFixAndKillText()
@@ -181,5 +201,48 @@ public class ImpetuousBar : MonoBehaviour
         float level = 5f;
         fixImgae.color = new Color(impetuousLevel / level, 1 - impetuousLevel / level, 0, 1);
         killText.text = GameManger.Instance.enemyKill.ToString();
+    }
+
+    private void FieldSkill()
+    {
+        int skill = PlayerPrefs.GetInt("shieldLevel");
+        if (fieldTimer >= 3 - 0.2f * skill)
+        {
+            SignUI.instance.DisplayText("额外回血技能触发", 1f, Color.green);
+            fieldTimer = 0;
+            PopupText.Create(PlayerControl.Instance.transform.position, 20 * skill, 2);
+            currentImpetuousBar -= 20 * skill;
+        }
+    }
+    /// <summary>
+    /// 全屏伤害技能
+    /// </summary>
+    private void AllAttack()
+    {
+        if (currentImpetuousBar <= 0 && AllAttackTimer >= (6 - PlayerPrefs.GetInt("fullScreenDamageLevel") / 2))
+        {
+            AllAttackTimer = 0;
+            SignUI.instance.DisplayText("你触发了全屏伤害技能", 1f, Color.red);
+            foreach (AiParent enemy in GameManger.Instance.GetAi.Values)
+            {
+                if (enemy != null && enemy.enabled == true)
+                {
+                    enemy.HP -= PlayerPrefs.GetInt("fullScreenDamageLevel") * 50;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 强制冷静技能
+    /// </summary>
+    private void CalmDown()
+    {
+        if(isCalmDown == false && PlayerPrefs.GetInt("calmdownSkillLevel") == 1 && currentImpetuousBar >= maxImpetuousBar / 2)
+        {
+            SignUI.instance.DisplayText("你触发了强制冷静效果", 1f, Color.green);
+            isCalmDown = true;
+            currentImpetuousBar = 0;
+        }
     }
 }

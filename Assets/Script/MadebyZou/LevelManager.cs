@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     private void FixedUpdate()
     {
         secondTimer60 += Time.deltaTime;
-        if (secondTimer60 >= 20)
+        if (secondTimer60 >= 60)
         {
             secondTimer60 = 0;
             curLevel += 1;
@@ -90,6 +90,6 @@ public class LevelManager : MonoBehaviour
 
         //调用点数面板
         Gameover.instance.gameoverScreen.SetActive(true);
-        Gameover.instance.PointsRemain();
+        //Gameover.instance.PointsRemain();
     }
 }

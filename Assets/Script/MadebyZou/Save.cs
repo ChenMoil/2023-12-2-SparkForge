@@ -1,24 +1,28 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//¿É±»ĞòÁĞ»¯
+//å¯è¢«åºåˆ—åŒ–
 [System.Serializable]
 public class Save
 {
 
-    //ĞèÒª´æ´¢µÄÊı¾İ
+    //éœ€è¦å­˜å‚¨çš„æ•°æ®
 
-    //¸¡ÔêÌõµÄÖµ
+    //æµ®èºæ¡çš„å€¼
     public float currentImpetuousBarValue;
-    //µ±Ç°¹Ø¿¨ÒÑ½øĞĞÊ±¼ä
+    //å½“å‰å…³å¡å·²è¿›è¡Œæ—¶é—´
     public float currentTime;
-    //ÒÑ»ñÈ¡·ÖÊı
+    //å·²è·å–åˆ†æ•°
     public float currentPoints;
-    //µ±Ç°bossÑªÁ¿
+    //å½“å‰bossè¡€é‡
     public float currentBossBloodBar;
-    //ÒÑ»ñµÃÔöÒæĞ§¹û
+    //æ€æ•Œæ•°
+    public int enemyKill;
+    //æ¸¸æˆæ—¶é—´
+    public float gameTime;
+    //å·²è·å¾—å¢ç›Šæ•ˆæœ
 
 }
 

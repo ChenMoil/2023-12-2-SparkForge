@@ -127,7 +127,7 @@ public class EnemySpawn : MonoBehaviour
         if (newLevel == 4)
         {
             dialogue.instance.BossSpawnSign(curBoss, 3f, 12f);
-            StartCoroutine(SpawnBoss(15f));
+            StartCoroutine(SpawnBoss(0f));
         }
     }
 
@@ -178,8 +178,8 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator SpawnBoss(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        //开始生成boss
         LevelManager.instance.curLevel %= 4;
-
         //通过对象池生成新敌人
         GameObject newEnemy = ObjectPool.Instance.RequestCacheGameObejct(BossList[curBoss]);
         curBoss += 1;
