@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -91,5 +92,6 @@ public class LevelManager : MonoBehaviour
         //调用点数面板
         Gameover.instance.gameoverScreen.SetActive(true);
         //Gameover.instance.PointsRemain();
+        SceneManager.LoadScene(2);
     }
 }
