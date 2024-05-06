@@ -14,36 +14,24 @@ public class dialogue : MonoBehaviour
 
     public List<Sprite> Boss0TopImage;
     public List<Sprite> Boss0BottomLeftImage;
-    public void BossSpawnSign(int boss, float signTime, float dialogueTime)
+    public void BossSpawnSign(float signTime, float dialogueTime)
     {
-        List<List<Sprite>> allLists = GetSpriteList(boss);
-        List<Sprite> topImage = allLists[0];
-        StartCoroutine(ShowTopPic(topImage[0], top, 0, signTime));
-        ShowBottomLeftImage(boss, signTime, dialogueTime);
+        StartCoroutine(ShowPic(Boss0TopImage[0], top, 0, signTime));
+        List<Sprite> list = new List<Sprite>();
+        list.Add(Boss0BottomLeftImage[0]);
+        list.Add(Boss0BottomLeftImage[1]);
+        StartCoroutine(ShowBottomLeftImage(list, signTime, dialogueTime));
     }
-    public void BossDeadSign(int boss, float signTime)
+    public void BossDeadSign(float signTime, float dialogueTime)
     {
-        List<List<Sprite>> allLists = GetSpriteList(boss);
-        List<Sprite> topImage = allLists[0];
-        StartCoroutine(ShowTopPic(topImage[1], top, 0, signTime));
+        StartCoroutine(ShowPic(Boss0TopImage[1], top, 0, signTime));
+        List<Sprite> list = new List<Sprite>();
+        list.Add(Boss0BottomLeftImage[2]);
+        list.Add(Boss0BottomLeftImage[3]);
+        list.Add(Boss0BottomLeftImage[4]);
+        StartCoroutine(ShowBottomLeftImage(list, signTime, dialogueTime));
     }
-    private void ShowBottomLeftImage(int boss, float waitTime, float time)
-    {
-        List<List<Sprite>> allLists = GetSpriteList(boss);
-        List<Sprite> BottomLeftImage = allLists[1];
-        StartCoroutine(ShowBottomLeftImage(BottomLeftImage, waitTime, time));
-    }
-    private List<List<Sprite>> GetSpriteList(int boss)
-    {
-        List<List<Sprite>> res = new List<List<Sprite>>();
-        if (boss == 0)
-        {
-            res.Add(Boss0TopImage);
-            res.Add(Boss0BottomLeftImage);
-        }
-        return res;
-    }
-    IEnumerator ShowTopPic(Sprite newSprite,Image image ,float waitTime,float time)
+    IEnumerator ShowPic(Sprite newSprite,Image image ,float waitTime,float time)
     {
         yield return new WaitForSeconds(waitTime);
         //显示
@@ -56,6 +44,7 @@ public class dialogue : MonoBehaviour
     IEnumerator ShowBottomLeftImage(List<Sprite> BottomLeftImage,float waitTime, float time)
     {
         yield return new WaitForSeconds(waitTime);
+        //显示
         BottomLeft.color = Color.white;
         int length = BottomLeftImage.Count;
         float divideTime = time / length;

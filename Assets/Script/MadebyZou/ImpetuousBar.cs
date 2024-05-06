@@ -69,6 +69,7 @@ public class ImpetuousBar : MonoBehaviour
     {      
         if (currentImpetuousBar < maxImpetuousBar / 6f && timer > 3f && impetuousLevel != 0)
         {
+            SignUI.instance.DisplayText("你感觉心如止水", 2f, SignUI.instance.colors[0]);
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
@@ -77,6 +78,7 @@ public class ImpetuousBar : MonoBehaviour
         }
         else if (currentImpetuousBar >= maxImpetuousBar / 6f && currentImpetuousBar < maxImpetuousBar * 1 / 3f && timer > 3f && impetuousLevel != 1)
         {
+            SignUI.instance.DisplayText("你感觉平静", 2f, SignUI.instance.colors[1]);
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
@@ -85,6 +87,7 @@ public class ImpetuousBar : MonoBehaviour
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 1 / 3f && currentImpetuousBar < maxImpetuousBar * 1 /2f && timer > 3f && impetuousLevel != 2)
         {
+            SignUI.instance.DisplayText("你感觉不安", 2f, SignUI.instance.colors[2]);
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
@@ -93,6 +96,7 @@ public class ImpetuousBar : MonoBehaviour
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 1 / 2f && currentImpetuousBar < maxImpetuousBar * 2 / 3f && timer > 3f && impetuousLevel != 3)
         {
+            SignUI.instance.DisplayText("你感觉烦躁", 2f, SignUI.instance.colors[3]);
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
@@ -101,6 +105,7 @@ public class ImpetuousBar : MonoBehaviour
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 2 / 3f && currentImpetuousBar < maxImpetuousBar * 5 / 6f && timer > 3f && impetuousLevel != 4)
         {
+            SignUI.instance.DisplayText("你感觉愤怒", 2f, SignUI.instance.colors[4]);
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 
@@ -109,6 +114,7 @@ public class ImpetuousBar : MonoBehaviour
         }
         else if (currentImpetuousBar >= maxImpetuousBar * 5 / 6f && currentImpetuousBar < maxImpetuousBar && timer > 3f && impetuousLevel != 5)
         {
+            SignUI.instance.DisplayText("你感觉暴怒", 2f, SignUI.instance.colors[5]);
             AudioManager.instance.PlayOneShot(AudioManager.instance.AudioClip[7], 1f, 0, 1f);
             timer = 0f;//重置计时
 

@@ -1,10 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Text = UnityEngine.UI.Text;
 
 public class SignUI : MonoBehaviour
 {
-    private Text text;
+    public List<Color> colors;
+    Text text;
     public static SignUI instance;
     // Start is called before the first frame update
     void Start()
@@ -15,24 +17,24 @@ public class SignUI : MonoBehaviour
         }
         instance.text = instance.GetComponent<Text>();
     }
-    public void DisplayText(string newText, float time, Color color)  //ÌáĞÑÍæ¼ÒµÄUIµÄÕ¹Ê¾(¶ÌÊ±¼äÕ¹Ê¾)
+    public void DisplayText(string newText, float time, Color color)  //æé†’ç©å®¶çš„UIçš„å±•ç¤º(çŸ­æ—¶é—´å±•ç¤º)
     {
-        StopAllCoroutines();  //ÏÈ½áÊøÆäËûĞ­³Ì
+        StopAllCoroutines();  //å…ˆç»“æŸå…¶ä»–åç¨‹
         StartCoroutine(FadeCoroutine(0.3f, time));
         instance.text.text = newText;
         instance.text.color = color;
     }
-    public void DisplayText(string newText, bool permanent, Color color)  //ÌáĞÑÍæ¼ÒµÄUIµÄÕ¹Ê¾(³¤ÆÚÕ¹Ê¾)
+    public void DisplayText(string newText, bool permanent, Color color)  //æé†’ç©å®¶çš„UIçš„å±•ç¤º(é•¿æœŸå±•ç¤º)
     {
         if (permanent)
         {
-            StopAllCoroutines();  //ÏÈ½áÊøÆäËûĞ­³Ì
+            StopAllCoroutines();  //å…ˆç»“æŸå…¶ä»–åç¨‹
             StartCoroutine(FadeCoroutine(0.2f, 10000000f));
             instance.text.text = newText;
             instance.text.color = color;
         }
     }
-    IEnumerator FadeCoroutine(float fadeTime, float sumTime) //ÓÃĞ­³Ì×ö³öµ­Èëµ­³öĞ§¹û
+    IEnumerator FadeCoroutine(float fadeTime, float sumTime) //ç”¨åç¨‹åšå‡ºæ·¡å…¥æ·¡å‡ºæ•ˆæœ
     {
         float waitTime = 0;
         float allTime = sumTime / fadeTime;
@@ -53,5 +55,6 @@ public class SignUI : MonoBehaviour
             yield return null;
             waitTime += Time.deltaTime / fadeTime;
         }
+        instance.text.color = new Color(1,1 ,1,0);
     }
 }

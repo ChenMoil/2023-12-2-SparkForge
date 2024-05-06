@@ -33,11 +33,6 @@ public class GameManger : MonoBehaviour
         if(Gameover.instance != null)
             Gameover.instance.gameoverScreen.SetActive(false);
 
-        PlayerPrefs.SetInt("decreaseImpetuousLevel", 5);
-        PlayerPrefs.SetInt("shieldLevel", 5);
-        PlayerPrefs.SetInt("moveSpeedLevel", 5);
-        PlayerPrefs.SetInt("fullScreenDamageLevel", 5);
-        PlayerPrefs.SetInt("calmdownSkillLevel", 1);
     }
     // Update is called once per frame
     void Update()

@@ -126,7 +126,7 @@ public class EnemySpawn : MonoBehaviour
         //Boss生成
         if (newLevel == 4)
         {
-            dialogue.instance.BossSpawnSign(curBoss, 3f, 12f);
+            dialogue.instance.BossSpawnSign(3f, 6f);
             StartCoroutine(SpawnBoss(0f));
         }
     }

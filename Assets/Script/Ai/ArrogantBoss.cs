@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -322,14 +319,13 @@ public class ArrogantBossAI_SkillTwo : IState
     }
 }
 
-//生成状态
 public class ArrogantBossAI_Dead : IState
 {
     private ArrogantBossBlackboard blackBoard;
 
     private FSM fsm;
     private float timer; //计时器
-    private float deadTime = 1.2f;
+    private float deadTime = 0.75f;
     public ArrogantBossAI_Dead(FSM fsm)
     {
         this.fsm = fsm;
@@ -337,7 +333,7 @@ public class ArrogantBossAI_Dead : IState
     }
     public void OnEnter()
     {
-        dialogue.instance.BossDeadSign(blackBoard.BossID, 3f);
+        dialogue.instance.BossDeadSign(2f, 7.5f);
         blackBoard.animator.SetInteger("CurState", 3);
         timer = 0;
     }
@@ -349,11 +345,11 @@ public class ArrogantBossAI_Dead : IState
 
     public void OnFixedUpdate()
     {
-
     }
 
     public void OnUpdate()
     {
+        this.blackBoard.rigidbody2D.velocity = Vector2.zero;
         timer += Time.deltaTime;
         if (timer > deadTime)
         {
