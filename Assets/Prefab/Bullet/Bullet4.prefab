@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 200
-  destoryTime: 2.5
+  destoryTime: 5
   isPenetrate: 0
 --- !u!58 &7393881707667414625
 CircleCollider2D:

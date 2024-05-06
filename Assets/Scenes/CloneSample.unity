@@ -600,11 +600,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345562518823146667, guid: 1f9eea180bd763a4081ea19cb21a365a, type: 3}
       propertyPath: moveSpeedMultiplier
-      value: 1.5
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 345562518823146667, guid: 1f9eea180bd763a4081ea19cb21a365a, type: 3}
       propertyPath: attackSpeedMultiplier
-      value: 0.6
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3401451096616528005, guid: 1f9eea180bd763a4081ea19cb21a365a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1643,15 +1643,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055874844860215203, guid: a97ee809f47e45d4fbdb7b202d450ccd, type: 3}
       propertyPath: initHp
-      value: 100
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4055874844860215203, guid: a97ee809f47e45d4fbdb7b202d450ccd, type: 3}
       propertyPath: blackboard.castTime
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4055874844860215203, guid: a97ee809f47e45d4fbdb7b202d450ccd, type: 3}
       propertyPath: blackboard.BulletSpeed
-      value: 3
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055874844860215203, guid: a97ee809f47e45d4fbdb7b202d450ccd, type: 3}
+      propertyPath: blackboard.skillOneDamage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055874844860215203, guid: a97ee809f47e45d4fbdb7b202d450ccd, type: 3}
+      propertyPath: blackboard.skillTwoDamage
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4055874844860215203, guid: a97ee809f47e45d4fbdb7b202d450ccd, type: 3}
       propertyPath: blackboard.Bullet.Array.size
@@ -6344,12 +6352,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1015192166261370374, guid: c4ffe81a97f575841951b0553553fcc4, type: 3}
+      propertyPath: attackSpeed.Array.data[0]
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015192166261370374, guid: c4ffe81a97f575841951b0553553fcc4, type: 3}
+      propertyPath: attackSpeed.Array.data[1]
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015192166261370374, guid: c4ffe81a97f575841951b0553553fcc4, type: 3}
       propertyPath: attackSpeed.Array.data[2]
-      value: 0.1
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015192166261370374, guid: c4ffe81a97f575841951b0553553fcc4, type: 3}
+      propertyPath: attackSpeed.Array.data[3]
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1015192166261370374, guid: c4ffe81a97f575841951b0553553fcc4, type: 3}
       propertyPath: attackSpeed.Array.data[4]
-      value: 0.03
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1015192166261370374, guid: c4ffe81a97f575841951b0553553fcc4, type: 3}
       propertyPath: bulletSpeed.Array.data[4]
@@ -7083,7 +7103,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 16971985127154090, guid: 98276f11fcb166a428cd05737a6e1e16, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7900003
+      value: 0.7900004
       objectReference: {fileID: 0}
     - target: {fileID: 16971985127154090, guid: 98276f11fcb166a428cd05737a6e1e16, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7634,7 +7654,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3617072138256760032, guid: b87fb5ce4065f344db22a7ca054051a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7900003
+      value: 0.7900004
       objectReference: {fileID: 0}
     - target: {fileID: 3617072138256760032, guid: b87fb5ce4065f344db22a7ca054051a3, type: 3}
       propertyPath: m_LocalPosition.y
