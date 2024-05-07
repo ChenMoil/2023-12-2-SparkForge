@@ -1,23 +1,23 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ProgressRound : MonoBehaviour
 {
-    //¼ÆÊ±Æ÷
+    //è®¡æ—¶å™¨
     public float timer;
-    //µĞÈËÉú³É½×¶Î
+    //æ•Œäººç”Ÿæˆé˜¶æ®µ
     public int enemyProgress;
-    //µĞÈËÉú³É½×¶ÎÏÔÊ¾¼ÆÊ±Æ÷Ö¸Õë
+    //æ•Œäººç”Ÿæˆé˜¶æ®µæ˜¾ç¤ºè®¡æ—¶å™¨æŒ‡é’ˆ
     public Transform progressPointer;
-    //½×¶Îµ¹¼ÆÊ±Ö¸Õë
+    //é˜¶æ®µå€’è®¡æ—¶æŒ‡é’ˆ
     public Transform countdownPointer;
-    //½×¶Îµ¹¼ÆÊ±ÊÜÇéĞ÷ÌõÓ°Ïì±¶ÂÊ
+    //é˜¶æ®µå€’è®¡æ—¶å—æƒ…ç»ªæ¡å½±å“å€ç‡
     public float timepassMultiple = 1f;
-    //×ÜÊ±³¤
+    //æ€»æ—¶é•¿
     public float totalTime=180f;
-    //·ÃÎÊ
+    //è®¿é—®
     public static ProgressRound instance;
 
     private void Awake()
@@ -40,20 +40,20 @@ public class ProgressRound : MonoBehaviour
         Progress(timer);
     }
 
-    //½×¶Îµ¹¼ÆÊ±¼ÆÊ±Æ÷º¯Êı
+    //é˜¶æ®µå€’è®¡æ—¶è®¡æ—¶å™¨å‡½æ•°
     public void Countdown(float timer)
     {
-        //Ö¸ÕëĞı×ª
+        //æŒ‡é’ˆæ—‹è½¬
         float timerIn = timer % 180;
         float pointerAngle = 180 * (timerIn * timepassMultiple) / totalTime;
         countdownPointer.localRotation = Quaternion.Euler(0, 0, pointerAngle);
       
     }
 
-    //µĞÈËÉú³É½×¶ÎÏÔÊ¾¼ÆÊ±Æ÷º¯Êı
+    //æ•Œäººç”Ÿæˆé˜¶æ®µæ˜¾ç¤ºè®¡æ—¶å™¨å‡½æ•°
     public void Progress(float timer)
     {
-        //µĞÈËÉú³É½×¶Î
+        //æ•Œäººç”Ÿæˆé˜¶æ®µ
         if (timer <= totalTime*1/3)
         {
             enemyProgress = 1;
@@ -67,8 +67,9 @@ public class ProgressRound : MonoBehaviour
             enemyProgress = 3;
         }
 
-        //Ö¸ÕëĞı×ª
-        float pointerAngle = 180 * (timer * timepassMultiple) / totalTime;
+        //æŒ‡é’ˆæ—‹è½¬
+        float timerIn = timer % 540;
+        float pointerAngle = 180 * (timerIn * timepassMultiple) / totalTime;
         progressPointer.localRotation = Quaternion.Euler(0, 0, pointerAngle/3);
     }
 }
